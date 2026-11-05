@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: flowkit-migration
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: flowkit-migration
+    spec:
+      restartPolicy: Never
+      serviceAccountName: flowkit-demo
+      imagePullSecrets:
+        - name: flowkit-demo-registry
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:16.4
+          command:
+            - sh
+            - -ec
+            - |
+              until pg_isready -h postgres -p 5432 -U flowkit_demo -d flowkit_demo; do
+                echo "waiting for postgres:5432"
+                sleep 2
+              done
+      containers:
+        - name: flowkit-migration
+          image: docker.pigstycoders.com/flowkit-demo-dev/flowkit-demo
+          imagePullPolicy: Always
+          command: ["bun", "run", "db:migrate"]
+          envFrom:
+            - configMapRef:
+                name: flowkit-demo-config
+            - secretRef:
+                name: flowkit-demo-runtime
