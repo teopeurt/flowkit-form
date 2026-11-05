@@ -1,0 +1,14 @@
+.git
+.github
+.env
+.env.*
+!.env.example
+.npmrc
+node_modules
+dist
+coverage
+playwright-report
+test-results
+.local-registry
+.superpowers
+*.tsbuildinfo

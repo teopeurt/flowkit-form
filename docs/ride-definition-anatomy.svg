@@ -1,0 +1,325 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 2469" width="1500" height="2469" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<rect width="1500" height="2469" fill="#0b1120"/>
+<text x="40" y="58" font-size="27" font-weight="700" fill="#e8eef8">Anatomy of a FlowKit definition</text>
+<text x="40" y="88" font-size="14.5" fill="#8fa0ba">packages/domain/src/ride/ride.definition.ts  —  what the framework fixes, and what the ride domain names</text>
+<rect x="40" y="115" width="13" height="13" rx="3.5" fill="#38bdf8"/>
+<text x="61" y="126" font-size="13.5" font-weight="600" fill="#e8eef8">FlowKit vocabulary</text>
+<text x="61" y="145" font-size="12.5" fill="#8fa0ba">Fixed by the DSL. Identical in every flow you write.</text>
+<rect x="560" y="115" width="13" height="13" rx="3.5" fill="#fbbf24"/>
+<text x="581" y="126" font-size="13.5" font-weight="600" fill="#e8eef8">Ride vocabulary</text>
+<text x="581" y="145" font-size="12.5" fill="#8fa0ba">Names you choose. Resolved from your own registries.</text>
+<rect x="1080" y="115" width="13" height="13" rx="3.5" fill="#4e5d78"/>
+<text x="1101" y="126" font-size="13.5" font-weight="600" fill="#e8eef8">Elision</text>
+<text x="1101" y="145" font-size="12.5" fill="#8fa0ba">Trimmed for the diagram; the real file has 20 stages.</text>
+<rect x="40" y="196" width="806" height="818" rx="11" fill="#111a2e" stroke="#1e2b44"/>
+<text x="54" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">1</text>
+<text x="86" y="226" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#7f8ea8" xml:space="preserve">export const </tspan><tspan fill="#fbbf24" xml:space="preserve">rideDefinition</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#7f8ea8" xml:space="preserve">FlowDefinition</tspan><tspan fill="#5d6b85" xml:space="preserve"> = </tspan><tspan fill="#38bdf8" xml:space="preserve">defineFlow</tspan><tspan fill="#5d6b85" xml:space="preserve">({</tspan></text>
+<text x="54" y="249" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">2</text>
+<text x="86" y="249" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">  </tspan><tspan fill="#38bdf8" xml:space="preserve">id</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'ride-hail-demo'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">version</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#c4b5fd" xml:space="preserve">1</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">roles</tspan><tspan fill="#5d6b85" xml:space="preserve">: [</tspan><tspan fill="#fbbf24" xml:space="preserve">'rider'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#fbbf24" xml:space="preserve">'driver'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#fbbf24" xml:space="preserve">'support'</tspan><tspan fill="#5d6b85" xml:space="preserve">],</tspan></text>
+<text x="54" y="272" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">3</text>
+<text x="86" y="272" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">  </tspan><tspan fill="#38bdf8" xml:space="preserve">initialStage</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'trip_draft'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">initialStatus</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'draft'</tspan><tspan fill="#5d6b85" xml:space="preserve">,</tspan></text>
+<text x="54" y="295" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">4</text>
+<text x="86" y="295" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">  </tspan><tspan fill="#38bdf8" xml:space="preserve">tracks</tspan><tspan fill="#5d6b85" xml:space="preserve">: {</tspan></text>
+<text x="54" y="318" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">5</text>
+<text x="86" y="318" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">    </tspan><tspan fill="#fbbf24" xml:space="preserve">driver</tspan><tspan fill="#5d6b85" xml:space="preserve">:  { </tspan><tspan fill="#38bdf8" xml:space="preserve">initial</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'unassigned'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">values</tspan><tspan fill="#5d6b85" xml:space="preserve">: [</tspan><tspan fill="#fbbf24" xml:space="preserve">'unassigned','offered','assigned','arrived','released'</tspan><tspan fill="#5d6b85" xml:space="preserve">] },</tspan></text>
+<text x="54" y="341" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">6</text>
+<text x="86" y="341" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">    </tspan><tspan fill="#fbbf24" xml:space="preserve">payment</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#38bdf8" xml:space="preserve">initial</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'none'</tspan><tspan fill="#5d6b85" xml:space="preserve">,       </tspan><tspan fill="#38bdf8" xml:space="preserve">values</tspan><tspan fill="#5d6b85" xml:space="preserve">: [</tspan><tspan fill="#fbbf24" xml:space="preserve">'none','authorized','captured','failed','released'</tspan><tspan fill="#5d6b85" xml:space="preserve">] },</tspan></text>
+<text x="54" y="364" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">7</text>
+<text x="86" y="364" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">  },</tspan></text>
+<text x="54" y="387" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">8</text>
+<text x="86" y="387" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">  </tspan><tspan fill="#38bdf8" xml:space="preserve">stages</tspan><tspan fill="#5d6b85" xml:space="preserve">: {</tspan></text>
+<text x="54" y="410" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">9</text>
+<text x="86" y="410" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">    </tspan><tspan fill="#fbbf24" xml:space="preserve">trip_draft</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#38bdf8" xml:space="preserve">pendingRole</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'rider'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">actions</tspan><tspan fill="#5d6b85" xml:space="preserve">: {</tspan></text>
+<text x="54" y="433" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">10</text>
+<text x="86" y="433" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">      </tspan><tspan fill="#fbbf24" xml:space="preserve">request_ride</tspan><tspan fill="#5d6b85" xml:space="preserve">:  { </tspan><tspan fill="#38bdf8" xml:space="preserve">to</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'fare_quote'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">kind</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#38bdf8" xml:space="preserve">'human'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">policy</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'riderOwnsTrip'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">status</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'pending'</tspan><tspan fill="#5d6b85" xml:space="preserve"> },</tspan></text>
+<text x="54" y="456" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">11</text>
+<text x="86" y="456" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">      </tspan><tspan fill="#fbbf24" xml:space="preserve">discard_draft</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#38bdf8" xml:space="preserve">to</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'abandoned'</tspan><tspan fill="#5d6b85" xml:space="preserve">,  </tspan><tspan fill="#38bdf8" xml:space="preserve">kind</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#38bdf8" xml:space="preserve">'human'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">policy</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'riderOwnsTrip'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">status</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'closed'</tspan><tspan fill="#5d6b85" xml:space="preserve">  },</tspan></text>
+<text x="54" y="479" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">12</text>
+<text x="86" y="479" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">    } },</tspan></text>
+<text x="54" y="502" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">13</text>
+<text x="54" y="525" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">14</text>
+<text x="86" y="525" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">    </tspan><tspan fill="#fbbf24" xml:space="preserve">fare_quote</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#38bdf8" xml:space="preserve">entry</tspan><tspan fill="#5d6b85" xml:space="preserve">: [</tspan></text>
+<text x="54" y="548" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">15</text>
+<text x="86" y="548" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">      { </tspan><tspan fill="#38bdf8" xml:space="preserve">kind</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#38bdf8" xml:space="preserve">'system'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">ref</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'authorizePaymentMethod'</tspan><tspan fill="#5d6b85" xml:space="preserve"> },</tspan></text>
+<text x="54" y="571" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">16</text>
+<text x="86" y="571" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">      { </tspan><tspan fill="#38bdf8" xml:space="preserve">kind</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#38bdf8" xml:space="preserve">'rule'</tspan><tspan fill="#5d6b85" xml:space="preserve">  , </tspan><tspan fill="#38bdf8" xml:space="preserve">ref</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'routeQuote'</tspan><tspan fill="#5d6b85" xml:space="preserve"> },</tspan></text>
+<text x="54" y="594" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">17</text>
+<text x="86" y="594" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">    ], </tspan><tspan fill="#38bdf8" xml:space="preserve">actions</tspan><tspan fill="#5d6b85" xml:space="preserve">: {</tspan></text>
+<text x="54" y="617" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">18</text>
+<text x="86" y="617" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">      </tspan><tspan fill="#fbbf24" xml:space="preserve">offer_quote</tspan><tspan fill="#5d6b85" xml:space="preserve">:     { </tspan><tspan fill="#38bdf8" xml:space="preserve">to</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'rider_confirmation'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">kind</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#38bdf8" xml:space="preserve">'system'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">tracks</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#fbbf24" xml:space="preserve">payment</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'authorized'</tspan><tspan fill="#5d6b85" xml:space="preserve"> } },</tspan></text>
+<text x="54" y="640" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">19</text>
+<text x="86" y="640" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">      </tspan><tspan fill="#fbbf24" xml:space="preserve">decline_payment</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#38bdf8" xml:space="preserve">to</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'payment_failed'</tspan><tspan fill="#5d6b85" xml:space="preserve">,     </tspan><tspan fill="#38bdf8" xml:space="preserve">kind</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#38bdf8" xml:space="preserve">'system'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">tracks</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#fbbf24" xml:space="preserve">payment</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'failed'</tspan><tspan fill="#5d6b85" xml:space="preserve"> },</tspan></text>
+<text x="54" y="663" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">20</text>
+<text x="86" y="663" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">                         </tspan><tspan fill="#38bdf8" xml:space="preserve">notify</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#38bdf8" xml:space="preserve">template</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'ride.payment_failed'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">channels</tspan><tspan fill="#5d6b85" xml:space="preserve">: [</tspan><tspan fill="#fbbf24" xml:space="preserve">'push'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#fbbf24" xml:space="preserve">'inbox'</tspan><tspan fill="#5d6b85" xml:space="preserve">] } },</tspan></text>
+<text x="54" y="686" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">21</text>
+<text x="86" y="686" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">    } },</tspan></text>
+<text x="54" y="709" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">22</text>
+<text x="54" y="732" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">23</text>
+<text x="86" y="732" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">    </tspan><tspan fill="#fbbf24" xml:space="preserve">driver_offer</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#38bdf8" xml:space="preserve">pendingRole</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'driver'</tspan><tspan fill="#5d6b85" xml:space="preserve">,</tspan></text>
+<text x="54" y="755" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">24</text>
+<text x="86" y="755" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">                    </tspan><tspan fill="#38bdf8" xml:space="preserve">sla</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#38bdf8" xml:space="preserve">after</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'15s'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">escalate</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#38bdf8" xml:space="preserve">action</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'decline_timeout'</tspan><tspan fill="#5d6b85" xml:space="preserve"> } }, </tspan><tspan fill="#38bdf8" xml:space="preserve">actions</tspan><tspan fill="#5d6b85" xml:space="preserve">: {</tspan></text>
+<text x="54" y="778" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">25</text>
+<text x="86" y="778" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">      </tspan><tspan fill="#fbbf24" xml:space="preserve">accept_ride</tspan><tspan fill="#5d6b85" xml:space="preserve">:     { </tspan><tspan fill="#38bdf8" xml:space="preserve">to</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'driver_en_route'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">kind</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#38bdf8" xml:space="preserve">'human'</tspan><tspan fill="#5d6b85" xml:space="preserve">,  </tspan><tspan fill="#38bdf8" xml:space="preserve">policy</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'offeredDriver'</tspan><tspan fill="#5d6b85" xml:space="preserve">,</tspan></text>
+<text x="54" y="801" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">26</text>
+<text x="86" y="801" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">                         </tspan><tspan fill="#38bdf8" xml:space="preserve">guards</tspan><tspan fill="#5d6b85" xml:space="preserve">: [</tspan><tspan fill="#fbbf24" xml:space="preserve">'driverOnline'</tspan><tspan fill="#5d6b85" xml:space="preserve">], </tspan><tspan fill="#38bdf8" xml:space="preserve">tracks</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#fbbf24" xml:space="preserve">driver</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'assigned'</tspan><tspan fill="#5d6b85" xml:space="preserve"> } },</tspan></text>
+<text x="54" y="824" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">27</text>
+<text x="86" y="824" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">      </tspan><tspan fill="#fbbf24" xml:space="preserve">decline_timeout</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#38bdf8" xml:space="preserve">to</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'driver_matching'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">kind</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#38bdf8" xml:space="preserve">'system'</tspan><tspan fill="#5d6b85" xml:space="preserve">, </tspan><tspan fill="#38bdf8" xml:space="preserve">tracks</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#fbbf24" xml:space="preserve">driver</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#fbbf24" xml:space="preserve">'unassigned'</tspan><tspan fill="#5d6b85" xml:space="preserve"> } },</tspan></text>
+<text x="54" y="847" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">28</text>
+<text x="86" y="847" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">    } },</tspan></text>
+<text x="54" y="870" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">29</text>
+<text x="54" y="893" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">30</text>
+<text x="86" y="893" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#4e5d78" xml:space="preserve">    // ... 17 more stages ...</tspan></text>
+<text x="54" y="916" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">31</text>
+<text x="54" y="939" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">32</text>
+<text x="86" y="939" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">    </tspan><tspan fill="#fbbf24" xml:space="preserve">completed</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#38bdf8" xml:space="preserve">final</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#c4b5fd" xml:space="preserve">true</tspan><tspan fill="#5d6b85" xml:space="preserve"> },   </tspan><tspan fill="#fbbf24" xml:space="preserve">cancelled</tspan><tspan fill="#5d6b85" xml:space="preserve">: { </tspan><tspan fill="#38bdf8" xml:space="preserve">final</tspan><tspan fill="#5d6b85" xml:space="preserve">: </tspan><tspan fill="#c4b5fd" xml:space="preserve">true</tspan><tspan fill="#5d6b85" xml:space="preserve"> },</tspan></text>
+<text x="54" y="962" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">33</text>
+<text x="86" y="962" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">  },</tspan></text>
+<text x="54" y="985" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38455e" text-anchor="end" transform="translate(18,0)">34</text>
+<text x="86" y="985" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#5d6b85" xml:space="preserve">});</tspan></text>
+<path d="M 844 222 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="222" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="225.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">1</text>
+<path d="M 881 222 H 894 V 236 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="214" width="540" height="108" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="214" width="3" height="108" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="236" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">defineFlow(...)</text>
+<text x="937" y="256" font-size="12.3" fill="#b9c6da">The whole flow is one typed, Zod-validated data</text>
+<text x="937" y="273" font-size="12.3" fill="#b9c6da">structure — data, not control flow. Compiled</text>
+<text x="937" y="290" font-size="12.3" fill="#b9c6da">TypeScript today; the same shape is what Phase 3</text>
+<text x="937" y="307" font-size="12.3" fill="#b9c6da">would load from a database.</text>
+<path d="M 844 245 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="245" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="248.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">2</text>
+<path d="M 881 245 H 894 V 353 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="331" width="540" height="91" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="331" width="3" height="91" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="353" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">id + version</text>
+<text x="937" y="373" font-size="12.3" fill="#b9c6da">An index for finding a definition. NOT what makes</text>
+<text x="937" y="390" font-size="12.3" fill="#b9c6da">replay safe — each run pins a frozen definition</text>
+<text x="937" y="407" font-size="12.3" fill="#b9c6da">snapshot and content hash at start time.</text>
+<path d="M 844 314 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="314" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="317.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">3</text>
+<path d="M 881 314 H 894 V 453 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="431" width="540" height="91" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="431" width="3" height="91" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="453" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">tracks</text>
+<text x="937" y="473" font-size="12.3" fill="#b9c6da">State that runs parallel to the stage. Both the track</text>
+<text x="937" y="490" font-size="12.3" fill="#b9c6da">name and its values are yours; an undeclared value</text>
+<text x="937" y="507" font-size="12.3" fill="#b9c6da">throws InvalidTrackValueError at transition time.</text>
+<path d="M 844 406 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="406" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="409.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">4</text>
+<path d="M 881 406 H 894 V 553 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="531" width="540" height="91" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="531" width="3" height="91" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="553" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">stage + pendingRole</text>
+<text x="937" y="573" font-size="12.3" fill="#b9c6da">A stage is a resting point. pendingRole is who the</text>
+<text x="937" y="590" font-size="12.3" fill="#b9c6da">flow is waiting on — it is what the task-queue</text>
+<text x="937" y="607" font-size="12.3" fill="#b9c6da">projection reads to build someone's inbox.</text>
+<path d="M 844 429 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="429" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="432.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">5</text>
+<path d="M 881 429 H 894 V 653 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="631" width="540" height="91" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="631" width="3" height="91" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="653" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">action + to</text>
+<text x="937" y="673" font-size="12.3" fill="#b9c6da">A named edge out of a stage. Action names must be</text>
+<text x="937" y="690" font-size="12.3" fill="#b9c6da">unique flow-wide; reusing one trips the</text>
+<text x="937" y="707" font-size="12.3" fill="#b9c6da">duplicate-action-source lint.</text>
+<path d="M 844 452 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="452" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="455.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">6</text>
+<path d="M 881 452 H 894 V 753 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="731" width="540" height="91" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="731" width="3" height="91" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="753" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">kind: 'human' + policy</text>
+<text x="937" y="773" font-size="12.3" fill="#b9c6da">Arrives as a command from outside. Every human</text>
+<text x="937" y="790" font-size="12.3" fill="#b9c6da">action must declare an authorization policy or</text>
+<text x="937" y="807" font-size="12.3" fill="#b9c6da">the interpreter refuses to boot.</text>
+<path d="M 844 521 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="521" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="524.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">7</text>
+<path d="M 881 521 H 894 V 853 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="831" width="540" height="91" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="831" width="3" height="91" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="853" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">entry</text>
+<text x="937" y="873" font-size="12.3" fill="#b9c6da">Work that runs on arrival, before anyone is waiting.</text>
+<text x="937" y="890" font-size="12.3" fill="#b9c6da">It re-runs on re-entry, so every activity behind it</text>
+<text x="937" y="907" font-size="12.3" fill="#b9c6da">has to be idempotent.</text>
+<path d="M 844 544 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="544" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="547.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">8</text>
+<path d="M 881 544 H 894 V 953 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="931" width="540" height="91" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="931" width="3" height="91" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="953" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">ref</text>
+<text x="937" y="973" font-size="12.3" fill="#b9c6da">The escape hatch. A name resolved from your registry</text>
+<text x="937" y="990" font-size="12.3" fill="#b9c6da">at runtime — that is how the definition stays</text>
+<text x="937" y="1007" font-size="12.3" fill="#b9c6da">serializable while the logic stays in code.</text>
+<path d="M 844 567 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="567" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="570.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">9</text>
+<path d="M 881 567 H 894 V 1053 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="1031" width="540" height="91" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="1031" width="3" height="91" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="1053" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">kind: 'rule'</text>
+<text x="937" y="1073" font-size="12.3" fill="#b9c6da">A pure function returning a system action name or</text>
+<text x="937" y="1090" font-size="12.3" fill="#b9c6da">undefined. It may only target system actions</text>
+<text x="937" y="1107" font-size="12.3" fill="#b9c6da">declared on this same stage.</text>
+<path d="M 844 613 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="613" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="616.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">10</text>
+<path d="M 881 613 H 894 V 1153 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="1131" width="540" height="74" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="1131" width="3" height="74" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="1153" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">kind: 'system'</text>
+<text x="937" y="1173" font-size="12.3" fill="#b9c6da">Cannot be commanded from outside. Only a rule or an</text>
+<text x="937" y="1190" font-size="12.3" fill="#b9c6da">SLA escalation is allowed to fire one.</text>
+<path d="M 844 659 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="659" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="662.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">11</text>
+<path d="M 881 659 H 894 V 1236 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="1214" width="540" height="74" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="1214" width="3" height="74" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="1236" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">notify</text>
+<text x="937" y="1256" font-size="12.3" fill="#b9c6da">Template and channel names, resolved from your</text>
+<text x="937" y="1273" font-size="12.3" fill="#b9c6da">registries and validated at boot.</text>
+<path d="M 844 751 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="751" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="754.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">12</text>
+<path d="M 881 751 H 894 V 1319 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="1297" width="540" height="74" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="1297" width="3" height="74" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="1319" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">sla</text>
+<text x="937" y="1339" font-size="12.3" fill="#b9c6da">A durable timer that fires an action when nobody acts.</text>
+<text x="937" y="1356" font-size="12.3" fill="#b9c6da">Format is 15s / 2m / 24h — ISO-8601 fails to parse.</text>
+<path d="M 844 797 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="797" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="800.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">13</text>
+<path d="M 881 797 H 894 V 1402 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="1380" width="540" height="91" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="1380" width="3" height="91" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="1402" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">guards</text>
+<text x="937" y="1422" font-size="12.3" fill="#b9c6da">Is this transition legal right now, given facts an</text>
+<text x="937" y="1439" font-size="12.3" fill="#b9c6da">activity fetched? Deliberately separate from policy,</text>
+<text x="937" y="1456" font-size="12.3" fill="#b9c6da">which asks whether this actor may attempt it.</text>
+<path d="M 844 935 H 859" stroke="#1e2b44" stroke-width="1.2" fill="none"/>
+<circle cx="870" cy="935" r="10.5" fill="#0e1626" stroke="#38bdf8" stroke-width="1.3"/>
+<text x="870" y="938.8" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">14</text>
+<path d="M 881 935 H 894 V 1502 H 920" stroke="#1e2b44" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<rect x="920" y="1480" width="540" height="74" rx="9" fill="#0e1626" stroke="#1e2b44"/>
+<rect x="920" y="1480" width="3" height="74" rx="1.5" fill="#38bdf8"/>
+<text x="937" y="1502" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8">final: true</text>
+<text x="937" y="1522" font-size="12.3" fill="#b9c6da">Terminal. Must declare no actions, no entry work and</text>
+<text x="937" y="1539" font-size="12.3" fill="#b9c6da">no SLA, or lint fails.</text>
+<rect x="40" y="1040" width="806" height="233" rx="11" fill="#111a2e" stroke="#1e2b44"/>
+<text x="62" y="1071" font-size="14.5" font-weight="700" fill="#e8eef8">What the validators reject</text>
+<text x="824" y="1071" font-size="11.5" fill="#8fa0ba" text-anchor="end">structural, checked before boot</text>
+<circle cx="68" cy="1096" r="2.6" fill="#38bdf8"/>
+<text x="82" y="1100" font-size="11.8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">unreachable-stage</text>
+<text x="312" y="1100" font-size="12.4" fill="#b9c6da">a stage no action points at</text>
+<circle cx="68" cy="1121" r="2.6" fill="#38bdf8"/>
+<text x="82" y="1125" font-size="11.8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">dead-end-stage</text>
+<text x="312" y="1125" font-size="12.4" fill="#b9c6da">a non-final stage that declares no actions</text>
+<circle cx="68" cy="1146" r="2.6" fill="#38bdf8"/>
+<text x="82" y="1150" font-size="11.8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">final-stage-has-actions</text>
+<text x="312" y="1150" font-size="12.4" fill="#b9c6da">a terminal stage that still declares edges</text>
+<circle cx="68" cy="1171" r="2.6" fill="#38bdf8"/>
+<text x="82" y="1175" font-size="11.8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">duplicate-action-source</text>
+<text x="312" y="1175" font-size="12.4" fill="#b9c6da">the same action name used on two stages</text>
+<circle cx="68" cy="1196" r="2.6" fill="#38bdf8"/>
+<text x="82" y="1200" font-size="11.8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">missing-action-policy</text>
+<text x="312" y="1200" font-size="12.4" fill="#b9c6da">a human action with no authorization policy</text>
+<circle cx="68" cy="1221" r="2.6" fill="#38bdf8"/>
+<text x="82" y="1225" font-size="11.8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">rule-action-not-system</text>
+<text x="312" y="1225" font-size="12.4" fill="#b9c6da">a rule that could return a human action</text>
+<circle cx="68" cy="1246" r="2.6" fill="#38bdf8"/>
+<text x="82" y="1250" font-size="11.8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">invalid-sla-duration</text>
+<text x="312" y="1250" font-size="12.4" fill="#b9c6da">an SLA that is not 15s / 2m / 24h</text>
+<text x="40" y="1625" font-size="20" font-weight="700" fill="#e8eef8">Term for term</text>
+<text x="40" y="1649" font-size="13" fill="#8fa0ba">Left column is FlowKit&#8217;s, and never changes. Right column is this flow&#8217;s, and is entirely replaceable.</text>
+<rect x="40" y="1671" width="1420" height="720" rx="11" fill="#111a2e" stroke="#1e2b44"/>
+<text x="58" y="1697" font-size="11.5" font-weight="700" fill="#8fa0ba" letter-spacing="0.8">FLOWKIT TERM</text>
+<text x="304" y="1697" font-size="11.5" font-weight="700" fill="#8fa0ba" letter-spacing="0.8">WHAT THE DSL MEANS BY IT</text>
+<text x="960" y="1697" font-size="11.5" font-weight="700" fill="#8fa0ba" letter-spacing="0.8">IN THE RIDE FLOW</text>
+<line x1="40" y1="1709" x2="1460" y2="1709" stroke="#1e2b44"/>
+<rect x="41" y="1709" width="1418" height="31" fill="#0f1829"/>
+<text x="58" y="1729" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">id, version</text>
+<text x="304" y="1729" font-size="12.6" fill="#b9c6da">Definition identity — an index, not the replay guarantee</text>
+<text x="960" y="1729" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">'ride-hail-demo', version 1</text>
+<text x="58" y="1760" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">roles</text>
+<text x="304" y="1760" font-size="12.6" fill="#b9c6da">Every actor class the flow knows about</text>
+<text x="960" y="1760" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">rider, driver, support</text>
+<rect x="41" y="1771" width="1418" height="31" fill="#0f1829"/>
+<text x="58" y="1791" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">initialStage</text>
+<text x="304" y="1791" font-size="12.6" fill="#b9c6da">Where every run begins</text>
+<text x="960" y="1791" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">trip_draft</text>
+<text x="58" y="1822" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">stage</text>
+<text x="304" y="1822" font-size="12.6" fill="#b9c6da">A resting point the flow can sit in</text>
+<text x="960" y="1822" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">20 stages, 6 of them final</text>
+<rect x="41" y="1833" width="1418" height="31" fill="#0f1829"/>
+<text x="58" y="1853" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">pendingRole</text>
+<text x="304" y="1853" font-size="12.6" fill="#b9c6da">Who the flow is waiting on right now</text>
+<text x="960" y="1853" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">rider / driver / support</text>
+<text x="58" y="1884" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">action</text>
+<text x="304" y="1884" font-size="12.6" fill="#b9c6da">A named edge out of a stage</text>
+<text x="960" y="1884" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">33 actions, names unique flow-wide</text>
+<rect x="41" y="1895" width="1418" height="31" fill="#0f1829"/>
+<text x="58" y="1915" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">to</text>
+<text x="304" y="1915" font-size="12.6" fill="#b9c6da">The stage that action lands in</text>
+<text x="960" y="1915" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">accept_ride -&gt; driver_en_route</text>
+<text x="58" y="1946" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">kind: 'human'</text>
+<text x="304" y="1946" font-size="12.6" fill="#b9c6da">Commanded from outside; must declare a policy</text>
+<text x="960" y="1946" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">17 actions</text>
+<rect x="41" y="1957" width="1418" height="31" fill="#0f1829"/>
+<text x="58" y="1977" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">kind: 'system'</text>
+<text x="304" y="1977" font-size="12.6" fill="#b9c6da">Fired only by a rule or an SLA escalation</text>
+<text x="960" y="1977" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">16 actions</text>
+<text x="58" y="2008" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">status</text>
+<text x="304" y="2008" font-size="12.6" fill="#b9c6da">A free-form label projected alongside the stage</text>
+<text x="960" y="2008" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">draft, pending, active, closed</text>
+<rect x="41" y="2019" width="1418" height="31" fill="#0f1829"/>
+<text x="58" y="2039" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">tracks</text>
+<text x="304" y="2039" font-size="12.6" fill="#b9c6da">State parallel to the stage, with validated values</text>
+<text x="960" y="2039" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">driver custody, payment position</text>
+<text x="58" y="2070" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">entry</text>
+<text x="304" y="2070" font-size="12.6" fill="#b9c6da">Steps that run on arrival at a stage</text>
+<text x="960" y="2070" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">on fare_quote, driver_matching, +3</text>
+<rect x="41" y="2081" width="1418" height="31" fill="#0f1829"/>
+<text x="58" y="2101" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">ref (kind system)</text>
+<text x="304" y="2101" font-size="12.6" fill="#b9c6da">Activity name resolved from your registry; I/O allowed</text>
+<text x="960" y="2101" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">8 system steps</text>
+<text x="58" y="2132" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">ref (kind rule)</text>
+<text x="304" y="2132" font-size="12.6" fill="#b9c6da">Pure fn returning a system action name or undefined</text>
+<text x="960" y="2132" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">5 rules: routeQuote, routeDispatch, ...</text>
+<rect x="41" y="2143" width="1418" height="31" fill="#0f1829"/>
+<text x="58" y="2163" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">policy</text>
+<text x="304" y="2163" font-size="12.6" fill="#b9c6da">May this actor attempt this action?</text>
+<text x="960" y="2163" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">riderOwnsTrip, offeredDriver, +3</text>
+<text x="58" y="2194" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">guards</text>
+<text x="304" y="2194" font-size="12.6" fill="#b9c6da">Is this transition legal given current facts?</text>
+<text x="960" y="2194" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">driverOnline, riderOnboard, +1</text>
+<rect x="41" y="2205" width="1418" height="31" fill="#0f1829"/>
+<text x="58" y="2225" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">sla.after</text>
+<text x="304" y="2225" font-size="12.6" fill="#b9c6da">Durable timer armed on entry (15s / 2m / 24h)</text>
+<text x="960" y="2225" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">6 stages, 15s to 24h</text>
+<text x="58" y="2256" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">sla.escalate.action</text>
+<text x="304" y="2256" font-size="12.6" fill="#b9c6da">System action fired when the timer wins</text>
+<text x="960" y="2256" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">decline_timeout, expire_quote, +4</text>
+<rect x="41" y="2267" width="1418" height="31" fill="#0f1829"/>
+<text x="58" y="2287" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">notify</text>
+<text x="304" y="2287" font-size="12.6" fill="#b9c6da">Template + channel names, validated at boot</text>
+<text x="960" y="2287" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">10 templates over 3 channels</text>
+<text x="58" y="2318" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">final</text>
+<text x="304" y="2318" font-size="12.6" fill="#b9c6da">Terminal stage: no actions, no entry, no SLA</text>
+<text x="960" y="2318" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">completed, cancelled, +4</text>
+<rect x="41" y="2329" width="1418" height="31" fill="#0f1829"/>
+<text x="58" y="2349" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">subject</text>
+<text x="304" y="2349" font-size="12.6" fill="#b9c6da">The domain record the flow is about (your schema)</text>
+<text x="960" y="2349" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">RideRequest, a strict zod object</text>
+<text x="58" y="2380" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#38bdf8">facts</text>
+<text x="304" y="2380" font-size="12.6" fill="#b9c6da">Runtime data an activity supplies to guards</text>
+<text x="960" y="2380" font-size="12.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">onlineDriverIds, pickupVerified</text>
+<text x="40" y="2439" font-size="11.8" fill="#4e5d78">Verified against @naakwu/flowkit-core and @naakwu/flowkit-temporal 0.2.0 — lintFlow, lintInterpreterFlow, validateRegistryRefs and validateFlowkit all return [] for this definition.</text>
+</svg>

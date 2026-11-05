@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flowkit-notify
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: flowkit-notify
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: flowkit-notify
+        app.kubernetes.io/part-of: flowkit-demo
+    spec:
+      serviceAccountName: flowkit-demo
+      imagePullSecrets:
+        - name: flowkit-demo-registry
+      containers:
+        - name: flowkit-notify
+          image: docker.pigstycoders.com/flowkit-demo-dev/flowkit-demo
+          imagePullPolicy: Always
+          command: ["bun", "run", "apps/notify-worker/src/delivery.worker.ts"]
+          envFrom:
+            - configMapRef:
+                name: flowkit-demo-config
+            - secretRef:
+                name: flowkit-demo-runtime
