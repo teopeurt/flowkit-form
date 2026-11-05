@@ -1,0 +1,10 @@
+config:
+  aws:region: us-east-1
+  flowkitform:vpcId: vpc-REPLACE_ME
+  flowkitform:privateSubnetIds:
+    - subnet-REPLACE_ME_A
+    - subnet-REPLACE_ME_B
+  flowkitform:apiImageUri: 000000000000.dkr.ecr.us-east-1.amazonaws.com/flowkitform-api:dev
+  flowkitform:workerImageUri: 000000000000.dkr.ecr.us-east-1.amazonaws.com/flowkitform-worker:dev
+  flowkitform:temporalAddress: REPLACE_ME.tmprl.cloud:7233
+  flowkitform:temporalNamespace: REPLACE_ME.REPLACE_ME

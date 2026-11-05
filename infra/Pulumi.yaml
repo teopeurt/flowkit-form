@@ -1,0 +1,7 @@
+name: flowkitform
+runtime:
+  name: nodejs
+  options:
+    typescript: false
+description: FlowKitForm serverless deployment on AWS
+main: index.ts
