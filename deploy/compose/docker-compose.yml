@@ -1,0 +1,114 @@
+services:
+  postgres:
+    image: postgres:16.4-alpine
+    environment:
+      POSTGRES_DB: flowkit_demo
+      POSTGRES_USER: flowkit_demo
+      POSTGRES_PASSWORD: flowkit_demo
+    ports: ["${FLOWKIT_DEMO_POSTGRES_PORT:-5441}:5432"]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U flowkit_demo -d flowkit_demo"], interval: 2s, timeout: 2s, retries: 20 }
+    volumes: [flowkit_demo_postgres:/var/lib/postgresql/data]
+  temporal:
+    image: temporalio/auto-setup:1.26.2
+    environment: { DB: postgres12, DB_PORT: "5432", POSTGRES_USER: flowkit_demo, POSTGRES_PWD: flowkit_demo, POSTGRES_SEEDS: postgres }
+    depends_on: { postgres: { condition: service_healthy } }
+    ports: ["${FLOWKIT_DEMO_TEMPORAL_PORT:-7233}:7233"]
+  temporal-namespace:
+    image: temporalio/admin-tools:1.26.2
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_CLI_ADDRESS: temporal:7233
+    depends_on: { temporal: { condition: service_started } }
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - 'until temporal operator namespace describe --namespace flowkit-demo >/dev/null 2>&1; do temporal operator namespace create --namespace flowkit-demo >/dev/null 2>&1 || true; sleep 2; done'
+  mailpit:
+    image: axllent/mailpit:v1.21.8
+    ports: ["${FLOWKIT_DEMO_MAILPIT_HTTP_PORT:-8025}:8025", "${FLOWKIT_DEMO_MAILPIT_SMTP_PORT:-1025}:1025"]
+  migration:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+      secrets: [npmrc]
+    environment:
+      NODE_ENV: development
+      FLOWKIT_DEMO_ALLOW_SEED: "true"
+      FLOWKIT_DEMO_MIGRATION_APPROVED: "true"
+      DATABASE_URL: postgresql://flowkit_demo:flowkit_demo@postgres:5432/flowkit_demo
+      BETTER_AUTH_SECRET: flowkit-demo-compose-secret-change-me-32chars
+    depends_on: { postgres: { condition: service_healthy } }
+    command: ["bun", "run", "db:migrate"]
+  seed:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+      secrets: [npmrc]
+    environment:
+      NODE_ENV: development
+      FLOWKIT_DEMO_ALLOW_SEED: "true"
+      DATABASE_URL: postgresql://flowkit_demo:flowkit_demo@postgres:5432/flowkit_demo
+      BETTER_AUTH_SECRET: flowkit-demo-compose-secret-change-me-32chars
+    depends_on: { migration: { condition: service_completed_successfully } }
+    command: ["bun", "run", "db:seed"]
+  api:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+      secrets: [npmrc]
+    environment:
+      NODE_ENV: development
+      FLOWKIT_DEMO_ALLOW_SEED: "true"
+      FLOWKIT_DEMO_PERSISTENCE: "true"
+      DATABASE_URL: postgresql://flowkit_demo:flowkit_demo@postgres:5432/flowkit_demo
+      BETTER_AUTH_SECRET: flowkit-demo-compose-secret-change-me-32chars
+      BETTER_AUTH_URL: ${FLOWKIT_DEMO_WEB_URL:-http://localhost:3012}
+      MAILPIT_URL: ${FLOWKIT_DEMO_MAILPIT_URL:-http://localhost:8025}
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_NAMESPACE: flowkit-demo
+      TEMPORAL_TASK_QUEUE: flowkit-demo
+    depends_on: { seed: { condition: service_completed_successfully }, temporal-namespace: { condition: service_completed_successfully } }
+    ports: ["${FLOWKIT_DEMO_API_PORT:-3011}:3011"]
+    command: ["bun", "run", "apps/api/src/main.ts"]
+  web:
+    build:
+      context: ../..
+      dockerfile: deploy/docker/web.Dockerfile
+      secrets: [npmrc]
+    depends_on: { api: { condition: service_started } }
+    ports: ["${FLOWKIT_DEMO_WEB_PORT:-3012}:8080"]
+  worker:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+      secrets: [npmrc]
+    environment:
+      NODE_ENV: development
+      FLOWKIT_DEMO_PERSISTENCE: "true"
+      DATABASE_URL: postgresql://flowkit_demo:flowkit_demo@postgres:5432/flowkit_demo
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_NAMESPACE: flowkit-demo
+      TEMPORAL_TASK_QUEUE: flowkit-demo
+      BETTER_AUTH_SECRET: flowkit-demo-compose-secret-change-me-32chars
+    depends_on: { seed: { condition: service_completed_successfully }, temporal-namespace: { condition: service_completed_successfully } }
+    command: ["bun", "run", "apps/worker/src/main.ts"]
+  notify:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+      secrets: [npmrc]
+    environment:
+      NODE_ENV: development
+      FLOWKIT_DEMO_PERSISTENCE: "true"
+      DATABASE_URL: postgresql://flowkit_demo:flowkit_demo@postgres:5432/flowkit_demo
+      BETTER_AUTH_SECRET: flowkit-demo-compose-secret-change-me-32chars
+      SMTP_HOST: mailpit
+      SMTP_PORT: "1025"
+    depends_on: { seed: { condition: service_completed_successfully }, api: { condition: service_started }, mailpit: { condition: service_started } }
+    restart: unless-stopped
+    command: ["bun", "run", "apps/notify-worker/src/delivery.worker.ts"]
+volumes:
+  flowkit_demo_postgres:
+
+secrets:
+  npmrc:
+    file: ${FLOWKIT_NPMRC_PATH:-../../.npmrc}

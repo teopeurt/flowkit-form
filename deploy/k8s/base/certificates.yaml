@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: flowkit-demo-k3s-tls
+spec:
+  secretName: flowkit-demo-k3s-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - flowkit.k3s.naakwu.app
+    - mail.flowkit.k3s.naakwu.app
+    - temporal.flowkit.k3s.naakwu.app

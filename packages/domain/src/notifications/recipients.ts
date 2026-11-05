@@ -1,0 +1,1 @@
+export function resolveDemoRecipient(userId: string, channel: string) { return { key: userId, routes: [{ channel, canonicalKey: userId, address: channel === 'email' ? `${userId}@example.test` : userId }] }; }
