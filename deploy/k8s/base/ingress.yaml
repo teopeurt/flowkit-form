@@ -1,0 +1,69 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: ops-ingress-auth
+spec:
+  basicAuth:
+    secret: flowkit-demo-basic-auth
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flowkit-demo
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: flowkit-demo-k3s-tls
+      hosts:
+        - flowkit.k3s.naakwu.app
+  rules:
+    - host: flowkit.k3s.naakwu.app
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: flowkit-api
+                port:
+                  name: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flowkit-demo-ops
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.middlewares: flowkit-demo-dev-ops-ingress-auth@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: flowkit-demo-k3s-tls
+      hosts:
+        - mail.flowkit.k3s.naakwu.app
+        - temporal.flowkit.k3s.naakwu.app
+  rules:
+    - host: mail.flowkit.k3s.naakwu.app
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mailpit
+                port:
+                  name: http
+    - host: temporal.flowkit.k3s.naakwu.app
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: temporal-web
+                port:
+                  name: http

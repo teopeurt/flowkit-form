@@ -1,0 +1,10 @@
+ALTER TABLE leave_requests ADD COLUMN IF NOT EXISTS flow_id text UNIQUE;
+ALTER TABLE leave_requests ADD COLUMN IF NOT EXISTS definition_hash text;
+ALTER TABLE leave_transitions ADD COLUMN IF NOT EXISTS run_key text;
+ALTER TABLE notification_outbox ADD COLUMN IF NOT EXISTS provider_message_id text;
+ALTER TABLE notification_outbox ADD COLUMN IF NOT EXISTS lease_owner text;
+ALTER TABLE notification_outbox ADD COLUMN IF NOT EXISTS lease_expires_at timestamptz;
+ALTER TABLE notification_outbox ADD COLUMN IF NOT EXISTS delivered_at timestamptz;
+ALTER TABLE notification_outbox ADD COLUMN IF NOT EXISTS last_error_code text;
+ALTER TABLE notification_outbox ADD COLUMN IF NOT EXISTS last_error_message text;
+CREATE UNIQUE INDEX IF NOT EXISTS leave_transition_operation_key_idx ON leave_transitions(operation_key);
