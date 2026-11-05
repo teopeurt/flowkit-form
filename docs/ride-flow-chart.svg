@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1470 1796" width="1470" height="1796" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<defs>
+<marker id="ah-7c8ba3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7c8ba3"/></marker>
+<marker id="ah-fb7185" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb7185"/></marker>
+<marker id="ah-a78bfa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+</defs>
+<rect width="1470" height="1796" fill="#0b1120"/>
+<text x="44" y="56" font-size="27" font-weight="700" fill="#e8eef8">ride-hail-demo &#8212; stage graph</text>
+<text x="44" y="86" font-size="14.5" fill="#8fa0ba">20 stages, 33 actions, 6 terminals. Every arrow is an action declared on the stage it leaves; the label is its name.</text>
+<rect x="44" y="121" width="17" height="15" rx="4" fill="#1e1a0f" stroke="#fbbf24" stroke-width="1.7"/>
+<text x="70" y="134" font-size="12.8" font-weight="600" fill="#e8eef8">rider holds it</text>
+<text x="70" y="152" font-size="11.4" fill="#8fa0ba">pendingRole: rider</text>
+<rect x="220" y="121" width="17" height="15" rx="4" fill="#0d1c2c" stroke="#38bdf8" stroke-width="1.7"/>
+<text x="246" y="134" font-size="12.8" font-weight="600" fill="#e8eef8">driver holds it</text>
+<text x="246" y="152" font-size="11.4" fill="#8fa0ba">pendingRole: driver</text>
+<rect x="400" y="121" width="17" height="15" rx="4" fill="#1a1229" stroke="#c084fc" stroke-width="1.7"/>
+<text x="426" y="134" font-size="12.8" font-weight="600" fill="#e8eef8">support holds it</text>
+<text x="426" y="152" font-size="11.4" fill="#8fa0ba">pendingRole: support</text>
+<rect x="590" y="121" width="17" height="15" rx="4" fill="#0b2022" stroke="#2dd4bf" stroke-width="1.7"/>
+<text x="616" y="134" font-size="12.8" font-weight="600" fill="#e8eef8">automatic</text>
+<text x="616" y="152" font-size="11.4" fill="#8fa0ba">entry steps run, a rule picks the exit</text>
+<rect x="846" y="121" width="17" height="15" rx="4" fill="#161f2e" stroke="#7c8ba3" stroke-width="1.7"/>
+<text x="872" y="134" font-size="12.8" font-weight="600" fill="#e8eef8">terminal</text>
+<text x="872" y="152" font-size="11.4" fill="#8fa0ba">final: true — no actions, no SLA</text>
+<path d="M 1070 128 H 1102" stroke="#7c8ba3" stroke-width="2" marker-end="url(#ah-7c8ba3)"/>
+<text x="1070" y="150" font-size="11.4" fill="#8fa0ba">progress</text>
+<path d="M 1180 128 H 1212" stroke="#fb7185" stroke-width="2" marker-end="url(#ah-fb7185)"/>
+<text x="1180" y="150" font-size="11.4" fill="#8fa0ba">abort / refund</text>
+<path d="M 1330 128 H 1362" stroke="#a78bfa" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ah-a78bfa)"/>
+<text x="1330" y="150" font-size="11.4" fill="#8fa0ba">loop back</text>
+<text x="1070" y="168" font-size="11" fill="#5b6b85">dashed = fired by an SLA timer, not by a person</text>
+<path d="M 720.0 307.0 V 360.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 720.0 427.0 V 480.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 720.0 547.0 V 600.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 720.0 667.0 V 720.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 720.0 787.0 V 840.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 720.0 907.0 V 960.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 720.0 1027.0 V 1080.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 720.0 1147.0 V 1200.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 720.0 1267.0 V 1320.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 720.0 1387.0 V 1530.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 720.0 1597.0 V 1646.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 609.0 278.0 H 348.0" fill="none" stroke="#fb7185" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-fb7185)"/>
+<path d="M 609.0 398.0 H 348.0" fill="none" stroke="#fb7185" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-fb7185)"/>
+<path d="M 609.0 518.0 H 348.0" fill="none" stroke="#fb7185" stroke-width="1.7" stroke-dasharray="6 5" stroke-linejoin="round" marker-end="url(#ah-fb7185)"/>
+<path d="M 609.0 638.0 H 348.0" fill="none" stroke="#fb7185" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-fb7185)"/>
+<path d="M 609.0 878.0 H 452 V 918.0 H 382.35" fill="none" stroke="#fb7185" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-fb7185)"/>
+<path d="M 609.0 998.0 H 404 V 932 H 382.35" fill="none" stroke="#fb7185" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-fb7185)"/>
+<path d="M 250.0 947.0 V 1116.0" fill="none" stroke="#fb7185" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-fb7185)"/>
+<path d="M 609.0 536 H 560 V 1136 H 348.0" fill="none" stroke="#fb7185" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-fb7185)"/>
+<path d="M 609.0 776 H 512 V 1154 H 348.0" fill="none" stroke="#fb7185" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-fb7185)"/>
+<path d="M 831.0 742 H 990 V 648 H 840.0" fill="none" stroke="#a78bfa" stroke-width="1.7" stroke-dasharray="6 5" stroke-linejoin="round" marker-end="url(#ah-a78bfa)"/>
+<path d="M 831.0 892 H 1090 V 628 H 840.0" fill="none" stroke="#a78bfa" stroke-width="1.7" stroke-dasharray="6 5" stroke-linejoin="round" marker-end="url(#ah-a78bfa)"/>
+<path d="M 831.0 1133 H 1071.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 1080.0 1103 H 840.0" fill="none" stroke="#a78bfa" stroke-width="1.7" stroke-dasharray="6 5" stroke-linejoin="round" marker-end="url(#ah-a78bfa)"/>
+<path d="M 1180.0 1147.0 V 1238.0 H 840.0" fill="none" stroke="#7c8ba3" stroke-width="1.7" stroke-dasharray="6 5" stroke-linejoin="round" marker-end="url(#ah-7c8ba3)"/>
+<path d="M 831.0 1346 H 1140 V 1429.0 H 1180.0" fill="none" stroke="#fb7185" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-fb7185)"/>
+<path d="M 1080.0 1474 H 1000 V 1374 H 840.0" fill="none" stroke="#a78bfa" stroke-width="1.7" stroke-dasharray="6 5" stroke-linejoin="round" marker-end="url(#ah-a78bfa)"/>
+<path d="M 1180.0 1487.0 V 1568.0 H 840.0" fill="none" stroke="#fb7185" stroke-width="1.7" stroke-dasharray="6 5" stroke-linejoin="round" marker-end="url(#ah-fb7185)"/>
+<path d="M 609.0 1254 H 555 V 1582 H 600.0" fill="none" stroke="#fb7185" stroke-width="1.7" stroke-linejoin="round" marker-end="url(#ah-fb7185)"/>
+<rect x="609.0" y="249.0" width="222" height="58" rx="10" fill="#1e1a0f" stroke="#fbbf24" stroke-width="1.7"/>
+<text x="720" y="274" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">trip_draft</text>
+<text x="720" y="292" font-size="10.6" fill="#fbbf24" fill-opacity="0.9" text-anchor="middle">rider</text>
+<rect x="161.0" y="255.0" width="178" height="46" rx="10" fill="#161f2e" stroke="#7c8ba3" stroke-width="2.1"/>
+<text x="250" y="283" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">abandoned</text>
+<rect x="609.0" y="369.0" width="222" height="58" rx="10" fill="#0b2022" stroke="#2dd4bf" stroke-width="1.7"/>
+<text x="720" y="394" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">fare_quote</text>
+<text x="720" y="412" font-size="10.6" fill="#2dd4bf" fill-opacity="0.9" text-anchor="middle">entry + rule</text>
+<rect x="161.0" y="375.0" width="178" height="46" rx="10" fill="#161f2e" stroke="#7c8ba3" stroke-width="2.1"/>
+<text x="250" y="403" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">payment_failed</text>
+<rect x="609.0" y="489.0" width="222" height="58" rx="10" fill="#1e1a0f" stroke="#fbbf24" stroke-width="1.7"/>
+<text x="720" y="514" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">rider_confirmation</text>
+<text x="720" y="532" font-size="10.6" fill="#fbbf24" fill-opacity="0.9" text-anchor="middle">rider</text>
+<rect x="783.0" y="479.0" width="46" height="19" rx="9.5" fill="#0b1120" stroke="#fbbf24"/>
+<text x="806.0" y="493.0" font-size="10.3" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24" text-anchor="middle">2m</text>
+<rect x="161.0" y="495.0" width="178" height="46" rx="10" fill="#161f2e" stroke="#7c8ba3" stroke-width="2.1"/>
+<text x="250" y="523" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">expired</text>
+<rect x="609.0" y="609.0" width="222" height="58" rx="10" fill="#0b2022" stroke="#2dd4bf" stroke-width="1.7"/>
+<text x="720" y="634" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">driver_matching</text>
+<text x="720" y="652" font-size="10.6" fill="#2dd4bf" fill-opacity="0.9" text-anchor="middle">entry + rule</text>
+<rect x="161.0" y="615.0" width="178" height="46" rx="10" fill="#161f2e" stroke="#7c8ba3" stroke-width="2.1"/>
+<text x="250" y="643" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">unfulfilled</text>
+<rect x="609.0" y="729.0" width="222" height="58" rx="10" fill="#0d1c2c" stroke="#38bdf8" stroke-width="1.7"/>
+<text x="720" y="754" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">driver_offer</text>
+<text x="720" y="772" font-size="10.6" fill="#38bdf8" fill-opacity="0.9" text-anchor="middle">driver</text>
+<rect x="783.0" y="719.0" width="46" height="19" rx="9.5" fill="#0b1120" stroke="#fbbf24"/>
+<text x="806.0" y="733.0" font-size="10.3" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24" text-anchor="middle">15s</text>
+<rect x="609.0" y="849.0" width="222" height="58" rx="10" fill="#0d1c2c" stroke="#38bdf8" stroke-width="1.7"/>
+<text x="720" y="874" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">driver_en_route</text>
+<text x="720" y="892" font-size="10.6" fill="#38bdf8" fill-opacity="0.9" text-anchor="middle">driver</text>
+<rect x="126.65" y="889.0" width="246.7" height="58" rx="10" fill="#0b2022" stroke="#2dd4bf" stroke-width="1.7"/>
+<text x="250" y="914" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">cancellation_fee_assessment</text>
+<text x="250" y="932" font-size="10.6" fill="#2dd4bf" fill-opacity="0.9" text-anchor="middle">entry + rule</text>
+<rect x="609.0" y="969.0" width="222" height="58" rx="10" fill="#0d1c2c" stroke="#38bdf8" stroke-width="1.7"/>
+<text x="720" y="994" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">driver_arrived</text>
+<text x="720" y="1012" font-size="10.6" fill="#38bdf8" fill-opacity="0.9" text-anchor="middle">driver</text>
+<rect x="783.0" y="959.0" width="46" height="19" rx="9.5" fill="#0b1120" stroke="#fbbf24"/>
+<text x="806.0" y="973.0" font-size="10.3" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24" text-anchor="middle">5m</text>
+<rect x="161.0" y="1125.0" width="178" height="46" rx="10" fill="#161f2e" stroke="#7c8ba3" stroke-width="2.1"/>
+<text x="250" y="1153" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">cancelled</text>
+<rect x="609.0" y="1089.0" width="222" height="58" rx="10" fill="#0d1c2c" stroke="#38bdf8" stroke-width="1.7"/>
+<text x="720" y="1114" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">trip_in_progress</text>
+<text x="720" y="1132" font-size="10.6" fill="#38bdf8" fill-opacity="0.9" text-anchor="middle">driver</text>
+<rect x="1080.0" y="1089.0" width="200" height="58" rx="10" fill="#1a1229" stroke="#c084fc" stroke-width="1.7"/>
+<text x="1180" y="1114" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">support_review</text>
+<text x="1180" y="1132" font-size="10.6" fill="#c084fc" fill-opacity="0.9" text-anchor="middle">support</text>
+<rect x="1232.0" y="1079.0" width="46" height="19" rx="9.5" fill="#0b1120" stroke="#fbbf24"/>
+<text x="1255.0" y="1093.0" font-size="10.3" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24" text-anchor="middle">10m</text>
+<rect x="609.0" y="1209.0" width="222" height="58" rx="10" fill="#0b2022" stroke="#2dd4bf" stroke-width="1.7"/>
+<text x="720" y="1234" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">fare_finalization</text>
+<text x="720" y="1252" font-size="10.6" fill="#2dd4bf" fill-opacity="0.9" text-anchor="middle">entry + rule</text>
+<rect x="609.0" y="1329.0" width="222" height="58" rx="10" fill="#0b2022" stroke="#2dd4bf" stroke-width="1.7"/>
+<text x="720" y="1354" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">payment_settlement</text>
+<text x="720" y="1372" font-size="10.6" fill="#2dd4bf" fill-opacity="0.9" text-anchor="middle">entry + rule</text>
+<rect x="1080.0" y="1429.0" width="200" height="58" rx="10" fill="#1e1a0f" stroke="#fbbf24" stroke-width="1.7"/>
+<text x="1180" y="1454" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">payment_recovery</text>
+<text x="1180" y="1472" font-size="10.6" fill="#fbbf24" fill-opacity="0.9" text-anchor="middle">rider</text>
+<rect x="1232.0" y="1419.0" width="46" height="19" rx="9.5" fill="#0b1120" stroke="#fbbf24"/>
+<text x="1255.0" y="1433.0" font-size="10.3" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24" text-anchor="middle">24h</text>
+<rect x="609.0" y="1539.0" width="222" height="58" rx="10" fill="#1e1a0f" stroke="#fbbf24" stroke-width="1.7"/>
+<text x="720" y="1564" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">rating</text>
+<text x="720" y="1582" font-size="10.6" fill="#fbbf24" fill-opacity="0.9" text-anchor="middle">rider</text>
+<rect x="783.0" y="1529.0" width="46" height="19" rx="9.5" fill="#0b1120" stroke="#fbbf24"/>
+<text x="806.0" y="1543.0" font-size="10.3" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24" text-anchor="middle">24h</text>
+<rect x="631.0" y="1655.0" width="178" height="46" rx="10" fill="#161f2e" stroke="#7c8ba3" stroke-width="2.1"/>
+<text x="720" y="1683" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#e8eef8" text-anchor="middle">completed</text>
+<rect x="800.1" y="326.6" width="91.80000000000001" height="22.8" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="846" y="340.6" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">request_ride</text>
+<rect x="775.5" y="439.7" width="141.0" height="36.6" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="846" y="453.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">offer_quote</text>
+<text x="846" y="467.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">payment &gt; authorized</text>
+<rect x="800.1" y="566.6" width="91.80000000000001" height="22.8" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="846" y="580.6" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">confirm_ride</text>
+<rect x="787.8" y="679.7" width="116.4" height="36.6" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="846" y="693.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">offer_ride</text>
+<text x="846" y="707.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">driver &gt; offered</text>
+<rect x="781.65" y="792.8" width="128.7" height="50.400000000000006" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="846" y="806.8" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">accept_ride</text>
+<text x="846" y="820.5999999999999" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">guard driverOnline</text>
+<text x="846" y="834.4" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">driver &gt; assigned</text>
+<rect x="787.8" y="919.7" width="116.4" height="36.6" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="846" y="933.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">arrive_at_pickup</text>
+<text x="846" y="947.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">driver &gt; arrived</text>
+<rect x="781.65" y="1039.7" width="128.7" height="36.6" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="846" y="1053.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">start_trip</text>
+<text x="846" y="1067.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">guard riderOnboard</text>
+<rect x="797.025" y="1166.6" width="97.95" height="22.8" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="846" y="1180.6" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">complete_trip</text>
+<rect x="800.1" y="1286.6" width="91.80000000000001" height="22.8" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="846" y="1300.6" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">capture_fare</text>
+<rect x="781.65" y="1449.8" width="128.7" height="50.400000000000006" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="846" y="1463.8" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">settle_payment</text>
+<text x="846" y="1477.6" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">driver &gt; released</text>
+<text x="846" y="1491.3999999999999" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">payment &gt; captured</text>
+<rect x="784.725" y="1604.7" width="122.55000000000001" height="36.6" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="846" y="1618.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">submit_rating</text>
+<text x="846" y="1632.5" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">skip_rating   24h</text>
+<rect x="425.025" y="240.6" width="97.95" height="22.8" rx="5" fill="#0b1120" stroke="#fb7185" stroke-opacity="0.45"/>
+<text x="474.0" y="254.6" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">discard_draft</text>
+<rect x="415.8" y="353.7" width="116.4" height="36.6" rx="5" fill="#0b1120" stroke="#fb7185" stroke-opacity="0.45"/>
+<text x="474.0" y="367.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">decline_payment</text>
+<text x="474.0" y="381.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">payment &gt; failed</text>
+<rect x="409.65" y="473.7" width="128.7" height="36.6" rx="5" fill="#0b1120" stroke="#fb7185" stroke-opacity="0.45"/>
+<text x="474.0" y="487.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">expire_quote   2m</text>
+<text x="474.0" y="501.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">payment &gt; released</text>
+<rect x="344.5" y="646.7" width="141.0" height="36.6" rx="5" fill="#0b1120" stroke="#fb7185" stroke-opacity="0.45"/>
+<text x="415" y="660.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">no_drivers_available</text>
+<text x="415" y="674.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">payment &gt; released</text>
+<rect x="396.425" y="850.6" width="147.15" height="22.8" rx="5" fill="#0b1120" stroke="#fb7185" stroke-opacity="0.45"/>
+<text x="470" y="864.6" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">rider_cancel_en_route</text>
+<rect x="343.35" y="956.7" width="153.3" height="36.6" rx="5" fill="#0b1120" stroke="#fb7185" stroke-opacity="0.45"/>
+<text x="420" y="970.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">rider_cancel_at_pickup</text>
+<text x="420" y="984.5" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">report_no_show   5m</text>
+<rect x="151.825" y="1010.8" width="196.35000000000002" height="50.400000000000006" rx="5" fill="#0b1120" stroke="#fb7185" stroke-opacity="0.45"/>
+<text x="250" y="1024.8" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">charge_cancellation_fee</text>
+<text x="250" y="1038.6" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">waive_cancellation_fee</text>
+<text x="250" y="1052.3999999999999" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">payment &gt; captured | released</text>
+<rect x="495.65" y="566.7" width="128.7" height="36.6" rx="5" fill="#0b1120" stroke="#fb7185" stroke-opacity="0.45"/>
+<text x="560" y="580.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">cancel_quote</text>
+<text x="560" y="594.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">payment &gt; released</text>
+<rect x="444.575" y="781.7" width="134.85000000000002" height="36.6" rx="5" fill="#0b1120" stroke="#fb7185" stroke-opacity="0.45"/>
+<text x="512" y="795.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">cancel_during_match</text>
+<text x="512" y="809.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">payment &gt; released</text>
+<rect x="916.425" y="672.8" width="147.15" height="50.400000000000006" rx="5" fill="#0b1120" stroke="#a78bfa" stroke-opacity="0.45"/>
+<text x="990" y="686.8" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#a78bfa" text-anchor="middle">decline_ride</text>
+<text x="990" y="700.5999999999999" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#a78bfa" text-anchor="middle">decline_timeout   15s</text>
+<text x="990" y="714.4" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">driver &gt; unassigned</text>
+<rect x="1013.35" y="755.7" width="153.3" height="36.6" rx="5" fill="#0b1120" stroke="#a78bfa" stroke-opacity="0.45"/>
+<text x="1090" y="769.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#a78bfa" text-anchor="middle">driver_cancel_en_route</text>
+<text x="1090" y="783.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">driver &gt; unassigned</text>
+<rect x="929.875" y="1133.6" width="110.25" height="22.8" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="985" y="1147.6" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">report_incident</text>
+<rect x="967.175" y="1061.6" width="85.65" height="22.8" rx="5" fill="#0b1120" stroke="#a78bfa" stroke-opacity="0.45"/>
+<text x="1010" y="1075.6" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#a78bfa" text-anchor="middle">resume_trip</text>
+<rect x="1109.5" y="1191.6" width="141.0" height="22.8" rx="5" fill="#0b1120" stroke="#7c8ba3" stroke-opacity="0.45"/>
+<text x="1180" y="1205.6" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#7c8ba3" text-anchor="middle">terminate_trip   10m</text>
+<rect x="1081.8" y="1371.7" width="116.4" height="36.6" rx="5" fill="#0b1120" stroke="#fb7185" stroke-opacity="0.45"/>
+<text x="1140" y="1385.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">retry_settlement</text>
+<text x="1140" y="1399.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">payment &gt; failed</text>
+<rect x="901.425" y="1422.6" width="147.15" height="22.8" rx="5" fill="#0b1120" stroke="#a78bfa" stroke-opacity="0.45"/>
+<text x="975" y="1436.6" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#a78bfa" text-anchor="middle">update_payment_method</text>
+<rect x="1109.5" y="1503.7" width="141.0" height="36.6" rx="5" fill="#0b1120" stroke="#fb7185" stroke-opacity="0.45"/>
+<text x="1180" y="1517.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">write_off_fare   24h</text>
+<text x="1180" y="1531.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">payment &gt; released</text>
+<rect x="490.65" y="1311.7" width="128.7" height="36.6" rx="5" fill="#0b1120" stroke="#fb7185" stroke-opacity="0.45"/>
+<text x="555" y="1325.7" font-size="11.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fb7185" text-anchor="middle">waive_fare</text>
+<text x="555" y="1339.5" font-size="9.9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#5b6b85" text-anchor="middle">payment &gt; released</text>
+<rect x="56" y="1228" width="418" height="172" rx="11" fill="#111a2e" stroke="#1e2b44"/>
+<text x="76" y="1258" font-size="14.5" font-weight="700" fill="#e8eef8">tracks</text>
+<text x="76" y="1278" font-size="11.5" fill="#8fa0ba">State parallel to the stage. Grey text on an edge is a track write.</text>
+<text x="76" y="1312" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">driver</text>
+<text x="76" y="1329" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#b9c6da">unassigned &gt; offered &gt; assigned &gt; arrived &gt; released</text>
+<text x="76" y="1348" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#fbbf24">payment</text>
+<text x="76" y="1365" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#b9c6da">none &gt; authorized &gt; captured | failed | released</text>
+<text x="76" y="1387" font-size="10.7" fill="#5b6b85">Undeclared value = InvalidTrackValueError, thrown at transition time.</text>
+<text x="44" y="1764" font-size="11.8" fill="#5b6b85">packages/domain/src/ride/ride.definition.ts &#8212; lintFlow, lintInterpreterFlow, validateRegistryRefs and validateFlowkit all return [] for this graph.</text>
+</svg>

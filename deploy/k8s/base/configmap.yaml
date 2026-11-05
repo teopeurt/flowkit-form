@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flowkit-demo-config
+data:
+  NODE_ENV: development
+  FLOWKIT_DEMO_PORT: "3011"
+  FLOWKIT_DEMO_ALLOW_SEED: "true"
+  FLOWKIT_DEMO_PERSISTENCE: "true"
+  TEMPORAL_ADDRESS: temporal-frontend:7233
+  TEMPORAL_NAMESPACE: flowkit-demo
+  TEMPORAL_TASK_QUEUE: flowkit-demo
+  SMTP_HOST: mailpit
+  SMTP_PORT: "1025"
+  SMTP_FROM: notifications@flowkit-demo.test
+  MAILPIT_URL: https://mail.flowkit.k3s.naakwu.app
+  BETTER_AUTH_URL: https://flowkit.k3s.naakwu.app
