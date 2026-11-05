@@ -1,9 +1,17 @@
-# FlowKit Demo
+# FlowKitForm
 
-FlowKit Demo is a clone-and-customize reference application for a tenant-safe approval workflow.
-It is an application monorepo, not a copy of the FlowKit framework: the six framework packages are
-consumed through their public `@naakwu/flowkit-*` exports, while this repository owns its domain,
-database, API, workers, and browser experience.
+FlowKitForm is an open-source document management platform for storing, processing, and governing
+documents through durable, auditable workflows, built on the FlowKit workflow framework. It is
+designed to run headless through its Document and workflow APIs and with a reference web client.
+Read the [specification](docs/spec.md) for scope and goals, and the [roadmap](docs/roadmap.md) for
+what exists today and what is planned.
+
+**Status:** specification draft v0.1. The code in this repository is still the FlowKit Demo
+starting point, a tenant-safe approval-workflow application. It is an application monorepo, not a
+copy of the FlowKit framework: the six framework packages are consumed through their public
+`@naakwu/flowkit-*` exports, while this repository owns its domain, database, API, workers, and
+browser experience. The document-management features in the specification are not implemented yet;
+the sections below describe running and customizing the current application.
 
 ## Current package availability
 
