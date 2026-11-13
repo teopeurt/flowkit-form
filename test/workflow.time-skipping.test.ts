@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test';
-import type { RuleContext } from '@naakwu/flowkit-temporal';
+import type { RuleContext } from '@teopeurt/flowkit-temporal';
 
 import { leaveRules } from '@flowkit-demo/domain';
 

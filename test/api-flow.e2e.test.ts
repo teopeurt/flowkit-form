@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { afterAll, beforeAll, describe, expect, it } from 'bun:test';
-import type { AuthenticatedPrincipal } from '@naakwu/flowkit-auth';
+import type { AuthenticatedPrincipal } from '@teopeurt/flowkit-auth';
 
 import { FlowController } from '../apps/api/src/flow.controller';
 import { NotificationsController } from '../apps/api/src/notifications.controller';

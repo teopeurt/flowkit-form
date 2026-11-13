@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from 'bun:test';
-import type { FlowkitActivityRegistry, RecordTransitionInput, ResolveActionContextInput } from '@naakwu/flowkit-temporal';
-import { publishDefinition } from '@naakwu/flowkit-temporal';
+import type { FlowkitActivityRegistry, RecordTransitionInput, ResolveActionContextInput } from '@teopeurt/flowkit-temporal';
+import { publishDefinition } from '@teopeurt/flowkit-temporal';
 import { TestWorkflowEnvironment } from '@temporalio/testing';
 import { Worker } from '@temporalio/worker';
 import { enrolmentDefinition } from '@flowkit-demo/domain';

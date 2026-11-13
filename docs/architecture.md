@@ -12,7 +12,7 @@ apps/notify-worker    durable outbox delivery to inbox and SMTP
 packages/domain       replaceable definitions, roles, registries, types, and templates
 packages/database     schema, migrations, tenant-scoped repositories, and transactions
 packages/ui           neutral tokens and reusable accessible components
-@naakwu/flowkit-*     installed framework contracts only
+@teopeurt/flowkit-*     installed framework contracts only
 ```
 
 Use the framework only through package exports. Do not edit `node_modules`, import package source,

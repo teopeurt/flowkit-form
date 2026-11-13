@@ -1,4 +1,3 @@
-import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 import { assertDisposableLocalDatabase } from './lib/local-database-guard';
@@ -11,49 +10,6 @@ import {
 
 const ROOT = resolve(import.meta.dir, '..');
 const DEFAULT_DATABASE_URL = 'postgresql://flowkit_demo:flowkit_demo@localhost:5441/flowkit_demo';
-
-interface RegistryConfigInput {
-  npmrc: string;
-  environment: Record<string, string | undefined>;
-}
-
-export function validatePackageRegistryConfig(input: RegistryConfigInput): void {
-  const lines = input.npmrc
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter((line) => line && !line.startsWith('#') && !line.startsWith(';'));
-  const assignments = lines.map((line) => {
-    const separator = line.indexOf('=');
-    return separator < 0
-      ? { key: line, value: '' }
-      : { key: line.slice(0, separator).trim(), value: line.slice(separator + 1).trim() };
-  });
-  const values = (key: string) => assignments.filter((entry) => entry.key.toLowerCase() === key.toLowerCase()).map((entry) => entry.value);
-
-  const registries = values('@naakwu:registry');
-  if (registries.length === 0 || registries[0] !== 'https://npm.pkg.github.com') {
-    throw new Error('.npmrc must configure the exact @naakwu GitHub Packages registry.');
-  }
-  const tokens = values('//npm.pkg.github.com/:_authToken');
-  if (tokens.length === 0 || tokens[0] !== '${NODE_AUTH_TOKEN}') {
-    throw new Error('.npmrc must read the registry credential from the NODE_AUTH_TOKEN variable.');
-  }
-  const authSettings = values('always-auth');
-  if (authSettings.length === 0 || authSettings[0] !== 'true') {
-    throw new Error('.npmrc must enable always-auth for the private package scope.');
-  }
-  if (registries.length !== 1 || tokens.length !== 1 || authSettings.length !== 1) {
-    throw new Error('Package registry security settings must appear exactly once.');
-  }
-  const inlineTokens = assignments.filter((entry) => /(?:_authToken|:_authToken)$/i.test(entry.key)
-    && !(entry.key === '//npm.pkg.github.com/:_authToken' && entry.value === '${NODE_AUTH_TOKEN}'));
-  if (inlineTokens.length > 0) throw new Error('Inline package registry tokens are forbidden.');
-
-  const token = input.environment.NODE_AUTH_TOKEN;
-  if (!token || token === 'replace-with-github-packages-read-token') {
-    throw new Error('NODE_AUTH_TOKEN is required and must contain a GitHub Packages read credential.');
-  }
-}
 
 async function runRequired(command: readonly string[], environment: Record<string, string | undefined>): Promise<void> {
   const child = spawnRedactedChild({
@@ -107,9 +63,6 @@ async function main(): Promise<number> {
     throw new Error('The local development orchestrator requires NODE_ENV=development.');
   }
   if (!Bun.which('docker')) throw new Error('Docker is required for the local dependency stack.');
-
-  const npmrc = await readFile(resolve(ROOT, '.npmrc'), 'utf8');
-  validatePackageRegistryConfig({ npmrc, environment: process.env });
 
   await runRequired(
     ['docker', 'compose', '-p', 'flowkit_demo', '-f', 'docker-compose.yml', 'up', '-d', '--wait'],

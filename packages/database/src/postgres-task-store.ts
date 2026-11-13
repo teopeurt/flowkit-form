@@ -14,7 +14,7 @@ import type {
   TaskReference,
   TaskReleaseCommand,
   TaskStore,
-} from '@naakwu/flowkit-tasks';
+} from '@teopeurt/flowkit-tasks';
 import type { Sql, TransactionSql } from 'postgres';
 
 import { createDemoDatabaseClient } from './client';
@@ -214,7 +214,7 @@ export class PostgresTaskStore {
     return result;
   }
 
-  async claim(scope: TenantScope, command: import('@naakwu/flowkit-tasks').TaskClaimCommand) {
+  async claim(scope: TenantScope, command: import('@teopeurt/flowkit-tasks').TaskClaimCommand) {
     requireTenantScope(scope);
     return this.sql.begin(async (tx) => {
       const [row] = await tx<TaskRow[]>`

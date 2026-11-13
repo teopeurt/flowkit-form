@@ -1,4 +1,4 @@
-import { createFlowkitWorkflow } from '@naakwu/flowkit-temporal/workflow';
+import { createFlowkitWorkflow } from '@teopeurt/flowkit-temporal/workflow';
 import {
   enrolmentGuards,
   enrolmentPolicies,

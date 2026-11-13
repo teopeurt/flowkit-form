@@ -1,6 +1,6 @@
 import { afterAll, afterEach, describe, expect, it } from 'bun:test';
-import { buildInitialState, type FlowState } from '@naakwu/flowkit-core';
-import { planTaskProjection, type FlowTask } from '@naakwu/flowkit-tasks';
+import { buildInitialState, type FlowState } from '@teopeurt/flowkit-core';
+import { planTaskProjection, type FlowTask } from '@teopeurt/flowkit-tasks';
 
 import { PostgresTaskStore } from '@flowkit-demo/database';
 import { leaveDefinition } from '@flowkit-demo/domain';

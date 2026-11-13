@@ -11,7 +11,7 @@ import {
   Res,
   UnauthorizedException,
 } from '@nestjs/common';
-import { AuthError } from '@naakwu/flowkit-auth';
+import { AuthError } from '@teopeurt/flowkit-auth';
 import { fromNodeHeaders, toNodeHandler } from 'better-auth/node';
 import type { Request, Response } from 'express';
 

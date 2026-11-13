@@ -13,11 +13,9 @@ The hosted registry and k3s are used only when explicitly selecting the opt-in
 mode `TILT_MODE=flowkit-k3s` documented below. The legacy `TILT_MODE=k3s`
 mode is retired and no longer selects a working workflow.
 
-All application and web image dependency installs receive GitHub Packages
-credentials as an ephemeral BuildKit `npmrc` secret. The credential is never a
-build argument or image layer. Compose defaults to the repository-root `.npmrc`;
-Tilt defaults to `$HOME/.npmrc`. Set `FLOWKIT_NPMRC_PATH` to override either
-default; Compose and Tilt pass only that file as the secret.
+Application and web image dependency installs use the public `@teopeurt/flowkit-*`
+packages from npmjs.org. No registry credential, build secret, or build argument
+is needed.
 
 ## FlowKit demo mode
 

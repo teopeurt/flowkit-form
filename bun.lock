@@ -7,18 +7,18 @@
       "dependencies": {
         "@flowkit-demo/database": "workspace:*",
         "@flowkit-demo/domain": "workspace:*",
-        "@naakwu/flowkit-auth": "0.2.0",
-        "@naakwu/flowkit-consumer": "0.2.0",
-        "@naakwu/flowkit-core": "0.2.0",
-        "@naakwu/flowkit-notify": "0.2.0",
-        "@naakwu/flowkit-tasks": "0.2.0",
-        "@naakwu/flowkit-temporal": "0.2.0",
         "@nestjs/common": "11.1.9",
         "@nestjs/core": "11.1.9",
         "@nestjs/platform-express": "11.1.9",
         "@temporalio/client": "1.16.2",
         "@temporalio/worker": "1.16.2",
         "@temporalio/workflow": "1.16.2",
+        "@teopeurt/flowkit-auth": "1.2.0",
+        "@teopeurt/flowkit-consumer": "1.2.0",
+        "@teopeurt/flowkit-core": "1.2.0",
+        "@teopeurt/flowkit-notify": "1.2.0",
+        "@teopeurt/flowkit-tasks": "1.2.0",
+        "@teopeurt/flowkit-temporal": "1.2.0",
         "better-auth": "1.3.34",
         "drizzle-orm": "^0.44.4",
         "express": "5.1.0",
@@ -269,18 +269,6 @@
 
     "@lukeed/csprng": ["@lukeed/csprng@1.1.0", "", {}, "sha512-Z7C/xXCiGWsg0KuKsHTKJxbWhpI3Vs5GwLfOean7MGyVFGqdRgBbAjOCh6u4bbjPc/8MJ2pZmK/0DLdCbivLDA=="],
 
-    "@naakwu/flowkit-auth": ["@naakwu/flowkit-auth@0.2.0", "", { "dependencies": { "zod": "^3.25.42" }, "peerDependencies": { "@nestjs/common": "^11.1.9", "@nestjs/core": "^11.1.9", "better-auth": "1.3.34", "reflect-metadata": "^0.2.0" } }, "sha1-gH9IIgp9kSUsDRvc6nno6cWqGUU="],
-
-    "@naakwu/flowkit-consumer": ["@naakwu/flowkit-consumer@0.2.0", "", { "dependencies": { "@naakwu/flowkit-core": "^0.2.0", "@naakwu/flowkit-tasks": "^0.2.0" } }, "sha1-SmjMBQhSzmta1k7Rl8OMvJ2CNW4="],
-
-    "@naakwu/flowkit-core": ["@naakwu/flowkit-core@0.2.0", "", { "dependencies": { "zod": "^3.25.42" } }, "sha1-DBaApGJ9hpnYp7QF+HifAuQQ2jg="],
-
-    "@naakwu/flowkit-notify": ["@naakwu/flowkit-notify@0.2.0", "", { "dependencies": { "@noble/hashes": "^2.0.1", "zod": "^3.25.42" } }, "sha1-PB3Gdi5ogITaibiCuWTBn7crEFA="],
-
-    "@naakwu/flowkit-tasks": ["@naakwu/flowkit-tasks@0.2.0", "", { "dependencies": { "@naakwu/flowkit-core": "^0.2.0", "@noble/hashes": "^2.0.1", "zod": "^3.25.42" } }, "sha1-qxBeQcDOTenzBZhsP5O2DyH01Lo="],
-
-    "@naakwu/flowkit-temporal": ["@naakwu/flowkit-temporal@0.2.0", "", { "dependencies": { "@naakwu/flowkit-consumer": "^0.2.0", "@naakwu/flowkit-core": "^0.2.0", "@noble/hashes": "^2.0.1", "@temporalio/workflow": "1.16.2" } }, "sha1-u4hNObxKiKR34oINl1/vC0Ga5Cs="],
-
     "@napi-rs/lzma-linux-x64-gnu": ["@napi-rs/lzma-linux-x64-gnu@1.5.1", "", { "os": "linux", "cpu": "x64" }, "sha512-oTXEIha4SsuXdTA4Iyskj0kpdx2yVXdhd75c2v3xGrHFfVMsbhTPZU/nMPL4sWKo4pBHm3aucLaqGlF696dTyQ=="],
 
     "@nestjs/common": ["@nestjs/common@11.1.9", "", { "dependencies": { "file-type": "21.1.0", "iterare": "1.2.1", "load-esm": "1.0.3", "tslib": "2.8.1", "uid": "2.0.2" }, "peerDependencies": { "class-transformer": ">=0.4.1", "class-validator": ">=0.13.2", "reflect-metadata": "^0.1.12 || ^0.2.0", "rxjs": "^7.1.0" }, "optionalPeers": ["class-transformer", "class-validator"] }, "sha512-zDntUTReRbAThIfSp3dQZ9kKqI+LjgLp5YZN5c1bgNRDuoeLySAoZg46Bg1a+uV8TMgIRziHocglKGNzr6l+bQ=="],
@@ -444,6 +432,18 @@
     "@temporalio/worker": ["@temporalio/worker@1.16.2", "", { "dependencies": { "@grpc/grpc-js": "^1.12.4", "@swc/core": "^1.3.102", "@temporalio/activity": "1.16.2", "@temporalio/client": "1.16.2", "@temporalio/common": "1.16.2", "@temporalio/core-bridge": "1.16.2", "@temporalio/nexus": "1.16.2", "@temporalio/proto": "1.16.2", "@temporalio/workflow": "1.16.2", "abort-controller": "^3.0.0", "heap-js": "^2.6.0", "memfs": "^4.6.0", "nexus-rpc": "^0.0.2", "proto3-json-serializer": "^2.0.0", "protobufjs": "^7.2.5", "rxjs": "^7.8.1", "source-map": "^0.7.4", "source-map-loader": "^4.0.2", "supports-color": "^8.1.1", "swc-loader": "^0.2.3", "unionfs": "^4.5.1", "webpack": "^5.104.1" } }, "sha512-kdLwWOn/vEDgaUV7OBqjq6ZIMFDJqGOGHmSzZ8j7PLrGrKJ521yai29/2VeqAL6JKQBxCllRNNhocdQBQfZDtg=="],
 
     "@temporalio/workflow": ["@temporalio/workflow@1.16.2", "", { "dependencies": { "@temporalio/common": "1.16.2", "@temporalio/proto": "1.16.2", "nexus-rpc": "^0.0.2" } }, "sha512-EESJV9CsRSpLgebrzMY9FOMrDD1BHrXvaDB+++69eYNvH5nWNS94zfVzpPZpUoRRRLfNvSJd3jSXV/pH1HwLiQ=="],
+
+    "@teopeurt/flowkit-auth": ["@teopeurt/flowkit-auth@1.2.0", "", { "dependencies": { "zod": "^3.25.42" }, "peerDependencies": { "@nestjs/common": "^11.1.9", "@nestjs/core": "^11.1.9", "better-auth": "1.3.34", "reflect-metadata": "^0.2.0" } }, "sha512-ofSe4nSHXm2mf0qrTgmLYu3KjzujS6TAteinU3YmFT92oj/pqr2TeABXSFc7b3HCf0+lofcbpHT0b3yKEsKrRQ=="],
+
+    "@teopeurt/flowkit-consumer": ["@teopeurt/flowkit-consumer@1.2.0", "", { "dependencies": { "@teopeurt/flowkit-core": "^1.2.0", "@teopeurt/flowkit-tasks": "^1.2.0" } }, "sha512-ijHsUjio7vOJN2RLQHoBu/NRbNRJoAONmXIdyJTLmJdkwXfzdkZtdOMxjDhnxXjKgLdpcbxbA3aRUdTEiFOZjQ=="],
+
+    "@teopeurt/flowkit-core": ["@teopeurt/flowkit-core@1.2.0", "", { "dependencies": { "zod": "^3.25.42" } }, "sha512-Ml4rWScRjk0cni6D3gzp+7m44GOQ+HeMHxrHqaky6aaSXJ/F5iVUXwx4ajB444WDTE/ZQ64ZLwJeGpok7b95TQ=="],
+
+    "@teopeurt/flowkit-notify": ["@teopeurt/flowkit-notify@1.2.0", "", { "dependencies": { "@noble/hashes": "^2.0.1", "zod": "^3.25.42" } }, "sha512-YXBAH1JhGmWAHpI6igxoMADEqzmeXncMofd1RXXNuMnXTLcHuaLDq0zfPV+1P5o/JzLhn//jaVhD69hjtoEifQ=="],
+
+    "@teopeurt/flowkit-tasks": ["@teopeurt/flowkit-tasks@1.2.0", "", { "dependencies": { "@noble/hashes": "^2.0.1", "@teopeurt/flowkit-core": "^1.2.0", "zod": "^3.25.42" } }, "sha512-9nQWj9O6iRXlOOcMwJt5+4DpE8bsrlPVT/vWOej6ilEAWMh4I70VwYJztIji6GDTRn/cwnE2KqlVMv84pWLi0A=="],
+
+    "@teopeurt/flowkit-temporal": ["@teopeurt/flowkit-temporal@1.2.0", "", { "dependencies": { "@noble/hashes": "^2.0.1", "@temporalio/workflow": "1.16.2", "@teopeurt/flowkit-consumer": "^1.2.0", "@teopeurt/flowkit-core": "^1.2.0" } }, "sha512-FGTeaG0BiAsJlu/t9kMli1mAGrqwujM874vEABi+v9o877qC2WM4j2APbtivBT5F/TuABP+UrR4lv5HSAiqIyQ=="],
 
     "@testing-library/dom": ["@testing-library/dom@10.4.1", "", { "dependencies": { "@babel/code-frame": "^7.10.4", "@babel/runtime": "^7.12.5", "@types/aria-query": "^5.0.1", "aria-query": "5.3.0", "dom-accessibility-api": "^0.5.9", "lz-string": "^1.5.0", "picocolors": "1.1.1", "pretty-format": "^27.0.2" } }, "sha512-o4PXJQidqJl82ckFaXUeoAW+XysPLauYI43Abki5hABd853iMhitooc6znOnczgbTYmEP6U6/y1ZyKAIsvMKGg=="],
 

@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 
-import type { ClaimedDelivery, JsonValue, NotificationDeliveryEnvelope, NotificationOutboxStore } from '@naakwu/flowkit-notify';
+import type { ClaimedDelivery, JsonValue, NotificationDeliveryEnvelope, NotificationOutboxStore } from '@teopeurt/flowkit-notify';
 import type { Sql, TransactionSql } from 'postgres';
 
 import { createDemoDatabaseClient } from './client';

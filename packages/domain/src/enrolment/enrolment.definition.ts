@@ -1,4 +1,4 @@
-import { defineFlow, type FlowDefinition } from '@naakwu/flowkit-core';
+import { defineFlow, type FlowDefinition } from '@teopeurt/flowkit-core';
 
 /**
  * Worker enrolment and standing, modelled as one durable flow per worker profile.

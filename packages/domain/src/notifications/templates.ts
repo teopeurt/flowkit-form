@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createTemplateRegistry, template } from '@naakwu/flowkit-notify';
+import { createTemplateRegistry, template } from '@teopeurt/flowkit-notify';
 
 const leaveData = z.object({ requestId: z.string(), stage: z.string(), employeeName: z.string() }).strict();
 export const notificationTemplates = createTemplateRegistry([

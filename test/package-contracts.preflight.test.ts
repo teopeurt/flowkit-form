@@ -3,7 +3,7 @@ import manifest from '../package-contracts.json';
 
 describe('public Flowkit package contract', () => {
   it('documents the consumer facade as the demo command boundary', () => {
-    expect(manifest['@naakwu/flowkit-consumer']).toEqual({ entrypoints: ['.'], symbols: ['createFlowkitConsumer'] });
+    expect(manifest['@teopeurt/flowkit-consumer']).toEqual({ entrypoints: ['.'], symbols: ['createFlowkitConsumer'] });
   });
 
   it('imports every documented entry point and symbol', async () => {

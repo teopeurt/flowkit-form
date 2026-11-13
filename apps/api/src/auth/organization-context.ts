@@ -3,7 +3,7 @@ import {
   freezePrincipal,
   type AuthenticatedPrincipal,
   type IdentityProof,
-} from '@naakwu/flowkit-auth';
+} from '@teopeurt/flowkit-auth';
 
 import { createDemoDatabaseClient } from '@flowkit-demo/database';
 import { roleRegistry, type DemoRole } from '@flowkit-demo/domain';

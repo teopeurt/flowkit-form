@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'bun:test';
-import { buildInitialState, lintFlow, lintInterpreterFlow, transition, validateRegistryRefs, type FlowState } from '@naakwu/flowkit-core';
-import { publishDefinition, validateFlowkit, verifyPublishedDefinition } from '@naakwu/flowkit-temporal';
+import { buildInitialState, lintFlow, lintInterpreterFlow, transition, validateRegistryRefs, type FlowState } from '@teopeurt/flowkit-core';
+import { publishDefinition, validateFlowkit, verifyPublishedDefinition } from '@teopeurt/flowkit-temporal';
 import { MAX_DISPATCH_ATTEMPTS, rideChannels, rideDefinition, rideGuards, ridePolicies, rideRules, rideSystemSteps, rideTemplates } from '@flowkit-demo/domain';
 
 /** Interpreter boot shape: rules are pure, system steps are declared I/O refs. */

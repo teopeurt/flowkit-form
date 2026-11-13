@@ -1,6 +1,6 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 
-import type { AuthenticatedPrincipal } from '@naakwu/flowkit-auth';
+import type { AuthenticatedPrincipal } from '@teopeurt/flowkit-auth';
 
 import { OrganizationContextGuard } from './auth/auth.module';
 import { FlowkitDemoConsumer } from './flow/flowkit-demo.consumer';

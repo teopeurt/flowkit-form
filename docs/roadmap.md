@@ -4,12 +4,12 @@ This tracks how the repository gets from its starting point to the [FlowKitForm 
 
 ## Starting point
 
-The repository began as a copy of the FlowKit Demo reference application. It already provides the platform pieces the spec reuses, built on the six `@naakwu/flowkit-*` packages (consumed only through their public exports):
+The repository began as a copy of the FlowKit Demo reference application. It already provides the platform pieces the spec reuses, built on the six `@teopeurt/flowkit-*` packages (consumed only through their public exports):
 
 | Spec need | Already in the repository |
 | --- | --- |
-| Durable workflows (§5.2, §10) | Temporal worker, `apps/worker`, interpreter from `@naakwu/flowkit-temporal` |
-| Human tasks, maker-checker (§5.2, §9) | `@naakwu/flowkit-tasks` claims and maker-checker; guards in `packages/domain` |
+| Durable workflows (§5.2, §10) | Temporal worker, `apps/worker`, interpreter from `@teopeurt/flowkit-temporal` |
+| Human tasks, maker-checker (§5.2, §9) | `@teopeurt/flowkit-tasks` claims and maker-checker; guards in `packages/domain` |
 | Notifications (`notify` step) | `apps/notify-worker`, outbox and inbox adapters |
 | AuthN/AuthZ, roles (§9) | BetterAuth, organization membership, roles in `packages/domain` |
 | Tenant isolation (§9) | Tenant-scoped repositories in `packages/database`, isolation tests |

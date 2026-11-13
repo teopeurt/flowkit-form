@@ -3,8 +3,8 @@ import { randomUUID } from 'node:crypto';
 import { BadRequestException, Body, Controller, ForbiddenException, Get, NotFoundException, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { ZodError } from 'zod';
 
-import type { AuthenticatedPrincipal } from '@naakwu/flowkit-auth';
-import type { FlowkitConsumerView } from '@naakwu/flowkit-consumer';
+import type { AuthenticatedPrincipal } from '@teopeurt/flowkit-auth';
+import type { FlowkitConsumerView } from '@teopeurt/flowkit-consumer';
 
 import { OrganizationContextGuard } from './auth/auth.module';
 import type { LeaveRequestRow, TenantScope } from '@flowkit-demo/database';

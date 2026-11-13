@@ -1,4 +1,4 @@
-import type { NotificationChannelAdapter, NotificationDeliveryEnvelope } from '@naakwu/flowkit-notify';
+import type { NotificationChannelAdapter, NotificationDeliveryEnvelope } from '@teopeurt/flowkit-notify';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 

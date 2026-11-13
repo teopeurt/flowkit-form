@@ -1,4 +1,4 @@
-import { defineRoleRegistry } from '@naakwu/flowkit-auth/roles';
+import { defineRoleRegistry } from '@teopeurt/flowkit-auth/roles';
 
 export const roleRegistry = defineRoleRegistry({
   employee: { label: 'Employee', permissions: ['leave.create', 'leave.view_own', 'leave.submit', 'task.view_own'], scopes: ['organization'], kind: 'external', provisioning: 'invite_only' },

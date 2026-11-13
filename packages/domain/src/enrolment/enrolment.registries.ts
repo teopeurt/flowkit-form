@@ -1,5 +1,5 @@
-import type { PredicateContext } from '@naakwu/flowkit-core';
-import type { FlowkitPureRegistries, RuleContext } from '@naakwu/flowkit-temporal';
+import type { PredicateContext } from '@teopeurt/flowkit-core';
+import type { FlowkitPureRegistries, RuleContext } from '@teopeurt/flowkit-temporal';
 
 /** Registrations an agent completes under supervision before operating independently. */
 export const SUPERVISED_REGISTRATION_QUOTA = 5;
@@ -23,7 +23,7 @@ export const enrolmentGuards = {
   /**
    * Four eyes on a rejection. The kernel does not know who acted previously, so the proposer's id
    * is supplied as a fact by `resolveActionContext` and compared here. In the runtime consumer this
-   * fact is produced by `evaluateMakerChecker` from `@naakwu/flowkit-tasks` rather than by a bespoke
+   * fact is produced by `evaluateMakerChecker` from `@teopeurt/flowkit-tasks` rather than by a bespoke
    * query — see `docs/worker-enrolment-spec.md` §8, KF-2.
    */
   independentRejectionChecker: ({ actor, facts }: PredicateContext) =>

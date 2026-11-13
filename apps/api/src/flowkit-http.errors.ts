@@ -2,8 +2,8 @@ import {
   AuthorizationRejectionError,
   GuardRejectionError,
   InvalidTransitionError,
-} from '@naakwu/flowkit-core';
-import { FlowkitTaskError } from '@naakwu/flowkit-tasks';
+} from '@teopeurt/flowkit-core';
+import { FlowkitTaskError } from '@teopeurt/flowkit-tasks';
 import {
   BadRequestException,
   ConflictException,
