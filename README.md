@@ -6,7 +6,7 @@ designed to run headless through its Document and workflow APIs and with a refer
 Read the [specification](docs/spec.md) for scope and goals, and the [roadmap](docs/roadmap.md) for
 what exists today and what is planned.
 
-**Status:** specification draft v0.1. The code in this repository is still the FlowKit Demo
+**Status:** specification draft v0.2. The code in this repository is still the FlowKit Demo
 starting point, a tenant-safe approval-workflow application. It is an application monorepo, not a
 copy of the FlowKit framework: the six framework packages are consumed through their public
 `@teopeurt/flowkit-*` exports, while this repository owns its domain, database, API, workers, and
