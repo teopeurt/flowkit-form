@@ -57,7 +57,7 @@ interpreter.
 3. **G3 — Surface framework gaps as evidence, not opinion.** Where the ride cannot be expressed
    cleanly, record the specific interpreter behaviour responsible with a proposed contract change.
 4. **G4 — Stay inside the consumer boundary.** No edits to `node_modules`, no framework source
-   imports, no parallel copy of a `@naakwu/flowkit-*` package.
+   imports, no parallel copy of a `@teopeurt/flowkit-*` package.
 5. **G5 — Preserve the tenant invariant.** Every subject, task, transition, and notification stays
    organization-scoped, matching `docs/architecture.md`.
 
@@ -441,7 +441,7 @@ from the code in this repository.
 
 ### FK-1 — Rules cannot observe entry-step output *(blocking R4)*
 
-`runEntry` in `@naakwu/flowkit-temporal@0.2.0` evaluates rules with a hard-coded empty fact set:
+`runEntry` in `@teopeurt/flowkit-temporal@0.2.0` evaluates rules with a hard-coded empty fact set:
 
 ```ts
 const action = config.registries.rules?.[step.ref]?.run({

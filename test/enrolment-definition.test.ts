@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'bun:test';
-import { buildInitialState, getDeclaredActions, lintFlow, lintInterpreterFlow, transition, validateRegistryRefs, type FlowState } from '@naakwu/flowkit-core';
-import { publishDefinition, validateFlowkit, verifyPublishedDefinition } from '@naakwu/flowkit-temporal';
+import { buildInitialState, getDeclaredActions, lintFlow, lintInterpreterFlow, transition, validateRegistryRefs, type FlowState } from '@teopeurt/flowkit-core';
+import { publishDefinition, validateFlowkit, verifyPublishedDefinition } from '@teopeurt/flowkit-temporal';
 import { SUPERVISED_REGISTRATION_QUOTA, enrolmentChannels, enrolmentDefinition, enrolmentGuards, enrolmentPolicies, enrolmentRules, enrolmentSystemSteps, enrolmentTemplates } from '@flowkit-demo/domain';
 
 /** Interpreter boot shape: rules are pure, system steps are declared I/O refs. */

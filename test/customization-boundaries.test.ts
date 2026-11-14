@@ -28,7 +28,7 @@ describe('customization-guide boundaries', () => {
     const guide = await readFile(resolve(root, 'docs/customizing.md'), 'utf8');
 
     expect(guide).toContain('node_modules');
-    expect(guide).toContain('@naakwu/flowkit-');
+    expect(guide).toContain('@teopeurt/flowkit-');
     expect(guide).toContain('request-body organization IDs are never authoritative');
     expect(guide).toContain('non-disclosing not-found');
     expect(guide).toContain('tenant predicates');

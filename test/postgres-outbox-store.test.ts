@@ -1,5 +1,5 @@
 import { afterAll, afterEach, describe, expect, it } from 'bun:test';
-import type { NotificationDeliveryEnvelope } from '@naakwu/flowkit-notify';
+import type { NotificationDeliveryEnvelope } from '@teopeurt/flowkit-notify';
 
 import { PostgresOutboxStore, readDelivery } from '@flowkit-demo/database';
 import { durableTestDatabase } from './durable-test-database';

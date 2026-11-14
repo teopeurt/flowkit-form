@@ -71,7 +71,7 @@ already-running, explicitly approved disposable stack; it does not create one.
 
 ## Rules that do not change
 
-Do not edit `node_modules`, copy `@naakwu/flowkit-` implementation, or import framework source.
+Do not edit `node_modules`, copy `@teopeurt/flowkit-` implementation, or import framework source.
 Use released package artifacts when they are available, and follow
 [local-package-overrides.md](local-package-overrides.md) only for temporary pre-publication testing.
 Every new data access path must carry tenant predicates, and every identity decision must come from

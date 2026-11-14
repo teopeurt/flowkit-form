@@ -1,5 +1,5 @@
-import type { PredicateContext } from '@naakwu/flowkit-core';
-import type { FlowkitPureRegistries, RuleContext } from '@naakwu/flowkit-temporal';
+import type { PredicateContext } from '@teopeurt/flowkit-core';
+import type { FlowkitPureRegistries, RuleContext } from '@teopeurt/flowkit-temporal';
 
 /** Dispatch gives up after this many refused or timed-out offers. */
 export const MAX_DISPATCH_ATTEMPTS = 5;

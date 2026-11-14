@@ -1,5 +1,5 @@
-import type { FlowCommand, FlowState } from '@naakwu/flowkit-core';
-import type { FlowTask } from '@naakwu/flowkit-tasks';
+import type { FlowCommand, FlowState } from '@teopeurt/flowkit-core';
+import type { FlowTask } from '@teopeurt/flowkit-tasks';
 
 import { LeaveFlowRepository, type TenantScope } from '@flowkit-demo/database';
 import { FlowkitDemoConsumer, newLeaveFlowId } from '../flow/flowkit-demo.consumer';

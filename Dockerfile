@@ -13,14 +13,14 @@ COPY packages/domain/package.json packages/domain/package.json
 COPY packages/ui/package.json packages/ui/package.json
 
 FROM workspace AS dependencies
-RUN --mount=type=secret,id=npmrc,target=/root/.npmrc,required=true bun install --frozen-lockfile --ignore-scripts
+RUN bun install --frozen-lockfile --ignore-scripts
 
 FROM dependencies AS build
 COPY . .
 RUN bun run build
 
 FROM workspace AS production-dependencies
-RUN --mount=type=secret,id=npmrc,target=/root/.npmrc,required=true bun install --frozen-lockfile --production --ignore-scripts
+RUN bun install --frozen-lockfile --production --ignore-scripts
 
 FROM oven/bun:1.3.14 AS production
 ENV NODE_ENV=production

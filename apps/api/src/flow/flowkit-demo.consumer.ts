@@ -6,8 +6,8 @@ import {
   type FlowkitActorResolver,
   type FlowkitConsumer,
   type FlowkitConsumerStart,
-} from '@naakwu/flowkit-consumer';
-import { publishDefinition } from '@naakwu/flowkit-temporal';
+} from '@teopeurt/flowkit-consumer';
+import { publishDefinition } from '@teopeurt/flowkit-temporal';
 
 import { resolveDemoActor, tenantWorkflowId } from '@flowkit-demo/domain';
 import { LeaveFlowRepository } from '@flowkit-demo/database';

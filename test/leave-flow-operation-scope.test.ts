@@ -1,6 +1,6 @@
 import { afterAll, afterEach, describe, expect, it } from 'bun:test';
-import { buildInitialState, type FlowState } from '@naakwu/flowkit-core';
-import type { RecordTransitionInput } from '@naakwu/flowkit-temporal';
+import { buildInitialState, type FlowState } from '@teopeurt/flowkit-core';
+import type { RecordTransitionInput } from '@teopeurt/flowkit-temporal';
 
 import { LeaveFlowRepository, scopeOperationId } from '@flowkit-demo/database';
 import { publishedLeaveDefinition } from '../apps/api/src/flow/flowkit-demo.consumer';

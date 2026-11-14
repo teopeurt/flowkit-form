@@ -6,42 +6,26 @@ designed to run headless through its Document and workflow APIs and with a refer
 Read the [specification](docs/spec.md) for scope and goals, and the [roadmap](docs/roadmap.md) for
 what exists today and what is planned.
 
-**Status:** specification draft v0.1. The code in this repository is still the FlowKit Demo
+**Status:** specification draft v0.2. The code in this repository is still the FlowKit Demo
 starting point, a tenant-safe approval-workflow application. It is an application monorepo, not a
 copy of the FlowKit framework: the six framework packages are consumed through their public
-`@naakwu/flowkit-*` exports, while this repository owns its domain, database, API, workers, and
+`@teopeurt/flowkit-*` exports, while this repository owns its domain, database, API, workers, and
 browser experience. The document-management features in the specification are not implemented yet;
 the sections below describe running and customizing the current application.
 
-## Current package availability
+## Package availability
 
-The FlowKit packages are private GitHub Packages during this phase. They require a GitHub token
-with `read:packages` and access to the package-owning repository. Version `0.2.0` is not published
-to GitHub Packages yet. Therefore a clean archive cannot currently complete
-`bun install --frozen-lockfile`, even after package authentication is configured. That clean-clone
-gate is deferred until the private `0.2.0` artifacts exist; do not describe local registry
-artifacts as released packages.
-
-When the private artifacts are available, configure the repository-root `.npmrc` without putting a
-token in the file:
+The FlowKit packages are published on [npmjs.org](https://www.npmjs.com/org/teopeurt) as
+`@teopeurt/flowkit-*` (version `1.2.0`; versions through `1.0.0` used the `@naakwu` scope). They are
+public, so installing them needs no token and no `.npmrc`:
 
 ```sh
-cp .npmrc.example .npmrc
-export NODE_AUTH_TOKEN=your-github-packages-read-token
 bun install --frozen-lockfile
 ```
 
-`.npmrc.example` deliberately uses the exact private scope configuration:
-
-```text
-@naakwu:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
-always-auth=true
-```
-
-Keep `.npmrc` and `NODE_AUTH_TOKEN` private. Never commit a token or pass it as a Docker build
-argument. See [local package overrides](docs/local-package-overrides.md) for temporary local-artifact
-testing before publication.
+Source and releases live in [teopeurt/flowkit](https://github.com/teopeurt/flowkit). See
+[local package overrides](docs/local-package-overrides.md) for testing an unreleased FlowKit change
+against this repository.
 
 ## Default local development
 
@@ -51,7 +35,7 @@ After dependencies are installed, the single development entry point is:
 bun run dev
 ```
 
-It validates Docker and the package credential configuration, starts the disposable dependency
+It validates Docker, starts the disposable dependency
 stack, validates the database identity, runs the approved local migration and seed, then starts the
 API, workflow worker, notification worker, and Vite application. It prints these local addresses:
 

@@ -17,7 +17,7 @@ money-moving process that proved the interpreter generalizes beyond approvals
 Neither exercises the thing FlowKit's own vision document calls out as the reason the framework
 exists: *maker-checker controls*. Leave approval has a single approver. The ride has a support agent
 who can resume a trip alone. In both, one person's decision is final, and the demo therefore never
-touches `@naakwu/flowkit-tasks`' four-eyes primitive at all.
+touches `@teopeurt/flowkit-tasks`' four-eyes primitive at all.
 
 This document specifies a third reference workflow: worker enrolment and standing for a contingent
 labour platform. An adverse decision here removes someone's ability to earn, so no single actor may
@@ -68,7 +68,7 @@ document says is hardest to retrofit and is, until now, the part the demo never 
 3. **G3 — Surface framework gaps as evidence, not opinion.** Where the process cannot be expressed
    cleanly, record the specific kernel or interpreter behaviour responsible with a proposed change.
 4. **G4 — Stay inside the consumer boundary.** No edits to `node_modules`, no framework source
-   imports, no parallel copy of a `@naakwu/flowkit-*` package.
+   imports, no parallel copy of a `@teopeurt/flowkit-*` package.
 5. **G5 — Preserve the tenant invariant.** Every subject, task, transition, and notification stays
    organization-scoped, matching `docs/architecture.md`.
 
@@ -442,7 +442,7 @@ suite pins exactly this — a dual-role principal who proposes is refused with a
 
 Guards receive `facts` supplied by the `resolveActionContext` activity, which is free to do I/O.
 `rejectionProposedBy` and `suspensionProposedBy` are expected to be produced by
-`evaluateMakerChecker` from `@naakwu/flowkit-tasks` rather than by a bespoke query — with the
+`evaluateMakerChecker` from `@teopeurt/flowkit-tasks` rather than by a bespoke query — with the
 caveat in KF-2.
 
 ---
@@ -514,7 +514,7 @@ Eleven templates over three channels (`inbox`, `sms`, `whatsapp`).
 `sms` and `whatsapp` are new channels for this repo and neither has a delivery adapter — the notify
 worker delivers `inbox` and `email` only. This repeats the ride's deliberate `push` gap for the same
 reason: it tests whether the notification contract fails loudly at boot rather than silently
-dropping messages. It is also an accurate model of the real gap, since `@naakwu/flowkit-notify`
+dropping messages. It is also an accurate model of the real gap, since `@teopeurt/flowkit-notify`
 ships planning, dedupe, retry, and outbox contracts but no channel adapters at all.
 
 Note that `approve_supervised_registration` and `supervision_timeout_release` reach `active` without
@@ -550,7 +550,7 @@ These came out of building the definition. Each is reproducible from the code in
 
 ### KF-1 — Rules cannot observe entry-step output *(reproduction of FK-1, and total here)*
 
-`ride-hail-spec.md` §8, FK-1 documents that `runEntry` in `@naakwu/flowkit-temporal@0.2.0` evaluates
+`ride-hail-spec.md` §8, FK-1 documents that `runEntry` in `@teopeurt/flowkit-temporal@0.2.0` evaluates
 rules with a hard-coded `facts: {}`, so a rule cannot see the output of the system steps that ran
 immediately before it.
 
@@ -572,7 +572,7 @@ fallback here be deleted outright.
 
 ### KF-2 — `MakerCheckerRule` models two parties; an appeal needs three
 
-`@naakwu/flowkit-tasks` exposes the four-eyes primitive as:
+`@teopeurt/flowkit-tasks` exposes the four-eyes primitive as:
 
 ```ts
 export interface MakerCheckerRule { makerStage: string; checkerStage: string; makerRole?: string; checkerRole?: string; factKey: string; }
@@ -619,7 +619,7 @@ a compliance obligation being modelled once and being modelled fifteen times or 
 
 ### KF-4 — `kind: 'system'` does not mean "not externally invokable"
 
-`transition()` in `@naakwu/flowkit-core` enforces authorization only when the action declares a
+`transition()` in `@teopeurt/flowkit-core` enforces authorization only when the action declares a
 policy, and never inspects `kind`:
 
 ```ts

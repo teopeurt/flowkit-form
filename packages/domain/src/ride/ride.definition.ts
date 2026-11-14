@@ -1,4 +1,4 @@
-import { defineFlow, type FlowDefinition } from '@naakwu/flowkit-core';
+import { defineFlow, type FlowDefinition } from '@teopeurt/flowkit-core';
 
 /**
  * On-demand ride hail, modelled as one durable flow per trip.

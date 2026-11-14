@@ -1,4 +1,4 @@
-import { NotificationAdapterRegistry, NotificationDeliveryRuntime, type NotificationChannelAdapter, type RegisteredAdapter } from '@naakwu/flowkit-notify';
+import { NotificationAdapterRegistry, NotificationDeliveryRuntime, type NotificationChannelAdapter, type RegisteredAdapter } from '@teopeurt/flowkit-notify';
 
 import { loadConfig } from '@flowkit-demo/domain';
 import { PostgresOutboxStore } from '@flowkit-demo/database';

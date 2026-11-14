@@ -1,5 +1,5 @@
-import { freezePrincipal, type AuthenticatedPrincipal } from '@naakwu/flowkit-auth';
-import type { FlowkitActorRef } from '@naakwu/flowkit-consumer';
+import { freezePrincipal, type AuthenticatedPrincipal } from '@teopeurt/flowkit-auth';
+import type { FlowkitActorRef } from '@teopeurt/flowkit-consumer';
 import { roleRegistry } from './role-registry';
 
 const canonicalRoles = {

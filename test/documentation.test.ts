@@ -22,8 +22,7 @@ describe('starter documentation contract', () => {
     const readme = await guide('README.md');
 
     expect(readme).toContain('bun run dev');
-    expect(readme).toContain('@naakwu:registry=https://npm.pkg.github.com');
-    expect(readme).toContain('NODE_AUTH_TOKEN');
+    expect(readme).not.toContain('NODE_AUTH_TOKEN');
     expect(readme).toContain('http://localhost:5173/');
     expect(readme).toContain('http://localhost:3011/health/ready');
     expect(readme).toContain('http://localhost:8025/');
@@ -33,15 +32,15 @@ describe('starter documentation contract', () => {
     expect(readme).toMatch(/never.*remote|remote.*never/i);
   });
 
-  it('states the current private-package limitation without claiming a release', async () => {
+  it('documents the public package install without a credential', async () => {
     const readme = await guide('README.md');
     const overrides = await guide('docs/local-package-overrides.md');
-    const text = `${readme}\n${overrides}`;
+    const text = `${readme}
+${overrides}`;
 
-    expect(text).toMatch(/0\.2\.0.*not published|not published.*0\.2\.0/i);
+    expect(text).toContain('npmjs.org');
     expect(text).toContain('bun install --frozen-lockfile');
-    expect(text).toMatch(/cannot run|deferred/i);
-    expect(text).not.toMatch(/released packages are available|packages have been released/i);
+    expect(text).not.toMatch(/NODE_AUTH_TOKEN|\.npmrc\.example|not published/i);
   });
 
   it('keeps all guides neutral and points only to repository-owned paths', async () => {

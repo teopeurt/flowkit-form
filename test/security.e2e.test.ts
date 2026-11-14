@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test';
-import { AuthError } from '@naakwu/flowkit-auth';
+import { AuthError } from '@teopeurt/flowkit-auth';
 
 import {
   resolveOrganizationContext,

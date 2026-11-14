@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test';
-import type { FlowRuntime } from '@naakwu/flowkit-consumer';
+import type { FlowRuntime } from '@teopeurt/flowkit-consumer';
 
 import { FlowkitDemoConsumer } from '../apps/api/src/flow/flowkit-demo.consumer';
 

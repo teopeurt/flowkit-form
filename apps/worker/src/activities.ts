@@ -1,10 +1,10 @@
-import type { FlowkitActorResolver } from '@naakwu/flowkit-consumer';
+import type { FlowkitActorResolver } from '@teopeurt/flowkit-consumer';
 import type {
   ExecuteSystemStepInput,
   FlowkitActivityRegistry,
   ResolveActionContextInput,
-} from '@naakwu/flowkit-temporal';
-import { validateRegistryRefs } from '@naakwu/flowkit-core';
+} from '@teopeurt/flowkit-temporal';
+import { validateRegistryRefs } from '@teopeurt/flowkit-core';
 
 import { resolveDemoActor, tenantFlowId } from '@flowkit-demo/domain';
 import { LeaveFlowRepository, requireTenantScope, type TenantScope } from '@flowkit-demo/database';

@@ -1,4 +1,4 @@
-import { defineFlow, type FlowDefinition } from '@naakwu/flowkit-core';
+import { defineFlow, type FlowDefinition } from '@teopeurt/flowkit-core';
 
 export const leaveDefinition: FlowDefinition = defineFlow({
   id: 'leave-approval-demo', version: 1, roles: ['employee', 'manager'], initialStage: 'employee_draft', initialStatus: 'draft',

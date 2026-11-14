@@ -1,6 +1,6 @@
 import { Client, Connection } from '@temporalio/client';
-import type { FlowRuntime } from '@naakwu/flowkit-consumer';
-import { createFlowkitTemporalRuntime } from '@naakwu/flowkit-temporal';
+import type { FlowRuntime } from '@teopeurt/flowkit-consumer';
+import { createFlowkitTemporalRuntime } from '@teopeurt/flowkit-temporal';
 
 import { loadConfig } from '@flowkit-demo/domain';
 import { leaveWorkflowType } from '@flowkit-demo/domain';

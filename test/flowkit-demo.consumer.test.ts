@@ -1,5 +1,5 @@
 import { afterAll, afterEach, describe, expect, it } from 'bun:test';
-import { createFlowkitTemporalRuntime } from '@naakwu/flowkit-temporal';
+import { createFlowkitTemporalRuntime } from '@teopeurt/flowkit-temporal';
 import { TestWorkflowEnvironment } from '@temporalio/testing';
 import { Worker } from '@temporalio/worker';
 

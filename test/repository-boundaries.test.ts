@@ -50,7 +50,7 @@ describe('repository boundaries', () => {
     });
   });
 
-  it('imports FlowKit only through released @naakwu package exports', async () => {
+  it('imports FlowKit only through released @teopeurt package exports', async () => {
     const violations: string[] = [];
     const sourceFiles = (await repositoryFiles('**/*.{ts,tsx,js,mjs,cjs}'));
     const importPattern = /(?:from\s+|import\s*\(|require\s*\()\s*['"]([^'"]+)['"]/g;
@@ -75,12 +75,12 @@ describe('repository boundaries', () => {
   it('pins all six FlowKit packages at the exact released version without local links', async () => {
     const manifests = await repositoryFiles('**/package.json');
     const expectedPackages = [
-      '@naakwu/flowkit-auth',
-      '@naakwu/flowkit-consumer',
-      '@naakwu/flowkit-core',
-      '@naakwu/flowkit-notify',
-      '@naakwu/flowkit-tasks',
-      '@naakwu/flowkit-temporal',
+      '@teopeurt/flowkit-auth',
+      '@teopeurt/flowkit-consumer',
+      '@teopeurt/flowkit-core',
+      '@teopeurt/flowkit-notify',
+      '@teopeurt/flowkit-tasks',
+      '@teopeurt/flowkit-temporal',
     ];
     const resolved = new Map<string, string>();
     const localLinks: string[] = [];
@@ -103,7 +103,7 @@ describe('repository boundaries', () => {
       expect(resolvedEntries.every(([name, version]) => expectedPackages.includes(name) && version.startsWith('file:'))).toBe(true);
     } else {
       expect(Object.fromEntries(resolvedEntries)).toEqual(
-        Object.fromEntries(expectedPackages.map((name) => [name, '0.2.0'])),
+        Object.fromEntries(expectedPackages.map((name) => [name, '1.2.0'])),
       );
     }
   });
@@ -133,7 +133,7 @@ describe('repository boundaries', () => {
     const violations: string[] = [];
     for (const path of await repositoryFiles('packages/**/package.json')) {
       const manifest = JSON.parse(await readFile(path, 'utf8')) as { name?: string };
-      if (manifest.name?.startsWith('@naakwu/flowkit-') || manifest.name?.startsWith('@flowkit/')) {
+      if (manifest.name?.startsWith('@teopeurt/flowkit-') || manifest.name?.startsWith('@flowkit/')) {
         violations.push(relative(repositoryRoot, path));
       }
     }

@@ -1,4 +1,4 @@
-import type { NotificationChannelAdapter, NotificationDeliveryEnvelope } from '@naakwu/flowkit-notify';
+import type { NotificationChannelAdapter, NotificationDeliveryEnvelope } from '@teopeurt/flowkit-notify';
 import type { Sql } from 'postgres';
 import { randomUUID } from 'node:crypto';
 

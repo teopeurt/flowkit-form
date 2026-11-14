@@ -1,7 +1,7 @@
-import { buildInitialState, type FlowDefinition, type FlowState } from '@naakwu/flowkit-core';
-import { planNotification, NotificationAdapterRegistry, testAdapter, type NotificationDeliveryEnvelope } from '@naakwu/flowkit-notify';
-import { planTaskProjection } from '@naakwu/flowkit-tasks';
-import type { DispatchNotificationInput, FlowkitNotificationBinding, RecordStageReadyInput, RecordTransitionInput, RecordTransitionOutput } from '@naakwu/flowkit-temporal';
+import { buildInitialState, type FlowDefinition, type FlowState } from '@teopeurt/flowkit-core';
+import { planNotification, NotificationAdapterRegistry, testAdapter, type NotificationDeliveryEnvelope } from '@teopeurt/flowkit-notify';
+import { planTaskProjection } from '@teopeurt/flowkit-tasks';
+import type { DispatchNotificationInput, FlowkitNotificationBinding, RecordStageReadyInput, RecordTransitionInput, RecordTransitionOutput } from '@teopeurt/flowkit-temporal';
 import type { Sql, TransactionSql } from 'postgres';
 
 import { leaveDefinition } from '@flowkit-demo/domain';
