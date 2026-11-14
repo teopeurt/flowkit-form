@@ -8,7 +8,17 @@
 
 **Tech Stack:** TypeScript/Bun, `@flowkit-form/document-search`, OpenSearch client with AWS SigV4, DynamoDB/SQS coordinators, existing document API and CDK deployment.
 
-**Spec:** [Approved design](../specs/2026-11-14-flowkitform-design.md); [master waves](2026-11-14-release-waves.md). Depends on P1/P2; full text consumes P4 artifacts and cleanup consumes P3.
+**Spec:** [Approved design](../specs/2026-11-14-flowkitform-design.md); [master waves](2026-11-14-release-waves.md). Shared query/materializer/rebuild contracts depend on P1/P0; AWS adapter depends on P2. CF3 Task 2 supplies Cloudflare FTS5. Full text consumes P4 artifacts and cleanup consumes P3.
+
+## Parallel-provider ownership
+
+This plan implements shared services first and the AWS provider portion second.
+The [approved Cloudflare amendment](../specs/2026-11-14-cloudflare-alternative-design.md)
+and [master waves](2026-11-14-release-waves.md) apply to every task. Commit and
+verify portable outputs before AWS adapters so Cloudflare can consume them
+without waiting for AWS implementation or deployment. The shared API/identity,
+upload/artifact/reader/delivery and runner-neutral test boundaries belong to
+[P0](2026-11-14-shared-provider-contracts.md). Do not recreate them in this plan.
 
 ## Global Constraints
 
@@ -36,7 +46,7 @@ Deployment region must be checked against the Serverless endpoint table, not mer
 
 **Files:** Create `packages/document-search/package.json`, `packages/document-search/src/{contracts,query,index}.ts`, `test/document-search/query.test.ts`; update root manifests/lockfile.
 
-**Interfaces:** `SearchQuery = { text?: string; filters?: { type?: string; tags?: readonly string[]; issuer?: string; expiresBefore?: string; association?: { type: string; id: string } }; sort: 'updated_desc' | 'created_desc'; pageSize: number; cursor?: string }`. `SearchIndex.candidates({ tenantId, query, after?, limit, epoch }): Promise<{ refs: readonly SearchCandidate[]; after: string | null }>`; candidate contains DocumentRef, sourceVersionId, metadataRevision, lifecycleGeneration, extractionRunId? and opaque internal sort token, no client-visible snippet. `upsert(snapshot: IndexedSnapshot): Promise<void>` and `remove(ref, epoch): Promise<void>` are coordinator-only. `IndexedSnapshot` contains canonical source versions, tenant/ref/generation/revisions, searchable metadata, normalized text and provenance; engine-specific mapping stays in AWS package.
+**Interfaces:** `SearchQuery = { text?: string; filters?: { type?: string; tags?: readonly string[]; issuer?: string; expiresBefore?: string; association?: { type: string; id: string } }; sort: 'updated_desc' | 'created_desc'; pageSize: number; cursor?: string }`. `SearchIndex.candidates({ tenantId, query, after?, limit, epoch }): Promise<{ refs: readonly SearchCandidate[]; after: string | null }>`; candidate contains DocumentRef, sourceVersionId, metadataRevision, lifecycleGeneration, extractionRunId? and opaque internal sort token, no client-visible snippet. `upsert(snapshot: IndexedSnapshot): Promise<void>` and `remove(ref, epoch): Promise<void>` are coordinator-only. `IndexedSnapshot` contains canonical source versions, tenant/ref/generation/revisions, searchable metadata, normalized text and provenance; engine-specific mapping stays in the respective provider package.
 
 - [ ] Test empty query allowed for authorized listing, unknown filters rejected, custom query DSL rejected, malformed dates, escaped literal text, max page size and stable unique tie-breaker ordering. Use pageSize default 25 and maximum 100 as planner defaults, configurable only downward for API safety.
 - [ ] Run `bun test test/document-search/query.test.ts`; expect missing query parser.
@@ -48,7 +58,7 @@ Deployment region must be checked against the Serverless endpoint table, not mer
 
 **Files:** Create `packages/document-search/src/service.ts`, `apps/document-api/src/routes/search.ts`, `test/document-search/authorization.test.ts`, `test/document-api/search.test.ts`; update API dependencies/OpenAPI.
 
-**Interfaces:** `SearchService.search(scope: Scope, query: SearchQuery): Promise<{ items: readonly SearchHit[]; nextCursor: string | null }>`; `SearchHit` has documentId, authorized metadata and optional snippet/provenance. It has no score, raw total, facet or provider offset. Consume P2 CursorCodec; bind cursor to tenant, actor, normalized query hash, sort, epoch and expiry. `SearchMaterializer.load(scope, candidate, includeText): Promise<SearchHit | null>` checks current state and metadata/content permissions from base persistence, reads exact canonical text artifact through authorized storage, and verifies lifecycle/source revisions. `discover` plus `metadata.read` required for a hit; text matches/snippets additionally require `content.read`.
+**Interfaces:** `SearchService.search(scope: Scope, query: SearchQuery): Promise<{ items: readonly SearchHit[]; nextCursor: string | null }>`; `SearchHit` has documentId, authorized metadata and optional snippet/provenance. It has no score, raw total, facet or provider offset. Consume P0 CursorCodec; bind cursor to deployment, tenant, actor, normalized query hash, sort, epoch and expiry. `SearchMaterializer.load(scope, candidate, includeText): Promise<SearchHit | null>` checks current state and metadata/content permissions from base persistence, reads exact canonical text artifact through authorized storage, and verifies lifecycle/source revisions. `discover` plus `metadata.read` required for a hit; text matches/snippets additionally require `content.read`.
 
 - [ ] Test stale ACL after revocation, missing content permission for a text query, authorization-store outage fails closed, hidden/removed documents yield no IDs/snippets/scores/counts/facets, cursor reuse after revocation and cross-tenant/user/query misuse, sparse authorized results, and changed metadata revision suppresses stale materialization. Assert response never serializes internal candidate count or denied fields.
 - [ ] Run `bun test test/document-search/authorization.test.ts test/document-api/search.test.ts`; expect missing-service failures.
@@ -58,7 +68,7 @@ Deployment region must be checked against the Serverless endpoint table, not mer
 
 ### Task 3: AWS index adapter and fenced indexing coordinator
 
-**Files:** Create `packages/documents-aws/src/search/{opensearch,index-coordinator,index-work-store,cleanup}.ts`, `apps/document-api/src/workers/indexing.ts`, `deploy/aws/src/search-resources.ts`, `test/document-search/indexing.test.ts`, `test/aws-documents/search.integration.test.ts`; update CDK/exports/config.
+**Files:** Create `packages/document-search/src/{index-coordinator,index-work-store}.ts` for shared contracts/orchestration, `packages/documents-aws/src/search/{opensearch,index-coordinator,index-work-store,cleanup}.ts` for AWS implementation, `apps/document-api/src/workers/indexing.ts`, `deploy/aws/src/search-resources.ts`, `test/document-search/indexing.test.ts`, `test/aws-documents/search.integration.test.ts`; update CDK/exports/config.
 
 **Interfaces:** `createOpenSearchIndex(config): SearchIndex` uses signed AWS requests and collection/index allowlist. `IndexCoordinator.refresh(event: EventEnvelope): Promise<void>` consumes metadata/version/extraction/grant/lifecycle events. `IndexWorkStore.claim(ref, eventId): Promise<IndexWorkLease>` / `settle(leaseId, outcome): Promise<void>` stores durable per-document exclusive publication state. Index document ID is encoded tenant+document, source fields pin canonical chosen version and extraction run. Latest successful extraction for the canonical current version is selected explicitly; older version text is not mixed into current search. Search across historical versions is deferred; exact-version retrieval remains available.
 
@@ -72,12 +82,12 @@ Deployment region must be checked against the Serverless endpoint table, not mer
 
 **Files:** Create `packages/document-search/src/rebuild.ts`, `packages/documents-aws/src/search/rebuild-store.ts`, `scripts/documents/reindex.ts`, `test/document-search/rebuild.test.ts`, `test/aws-documents/search-acceptance.integration.test.ts`, `docs/operations/document-search.md`; update root scripts and evidence.
 
-**Interfaces:** `RebuildService.start(context): Promise<{ rebuildId: string; epoch: string }>`; `step(rebuildId): Promise<{ status: 'running' | 'validating' | 'complete' | 'failed'; checkpoint: string }>`; `activate(rebuildId): Promise<void>`. An authoritative `IndexCatalog` stores active epoch and rebuild checkpoint. Cursor epoch is immutable; retiring index invalidates its cursor with a safe restart error. Rebuild scans authoritative paged document refs via a service-only `DocumentInventory.page(tenantId, cursor): Promise<Page<DocumentRef>>`, defined in P2 DocumentReader implementation, never a client bypass.
+**Interfaces:** `RebuildService.start(context): Promise<{ rebuildId: string; epoch: string }>`; `step(rebuildId): Promise<{ status: 'running' | 'validating' | 'complete' | 'failed'; checkpoint: string }>`; `activate(rebuildId): Promise<void>`. An authoritative `IndexCatalog` stores active epoch and rebuild checkpoint. Cursor epoch is immutable; retiring index invalidates its cursor with a safe restart error. Rebuild scans authoritative paged document refs via a service-only `DocumentInventory.page(tenantId, cursor): Promise<Page<DocumentRef>>`, defined by P0 and implemented by each provider, never a client bypass.
 
 - [ ] Test restart between pages, mutation/deletion during scan, queued refresh catch-up, tombstone dominance over restored source, failed validation leaves active epoch unchanged, superseded extraction ignored and cursor epoch retirement. Acceptance includes native/OCR text queries across two tenants, expired evidence filter, record association filter and revocation during pagination.
 - [ ] Run `bun test test/document-search/rebuild.test.ts`; expect missing rebuild service.
 - [ ] Implement checkpointed new-epoch indexing, dual publication of new mutations while rebuilding, catch-up/high-water validation and atomic catalog switch. Serialize catalog activation against mutation-enqueue watermark so no source change falls between catch-up and switch. Deletion reconciliation checks every active/building/retiring epoch, not just current index. Rebuild requires operational service identity, fixed configured target and audit; no client-provided endpoints. Retire old epoch only after cursor TTL and no unresolved publication.
-- [ ] Run all search/offline checks, authorized live acceptance and P3 race suite; record search lag, denial correctness and restart/reindex evidence. Update runbook with no-total/facet behavior and bounded pagination contract.
+- [ ] Create shared cases in `test/support/document-conformance/search.ts`; run all search/offline checks, authorized AWS live acceptance and P3 race suite, with CF3 Task 4 running the same cases on Cloudflare; record search lag, denial correctness and restart/reindex evidence. Update runbook with no-total/facet behavior and bounded pagination contract.
 - [ ] Commit: `feat: rebuild authorized search from durable evidence`.
 
 ## Self-review and handoff

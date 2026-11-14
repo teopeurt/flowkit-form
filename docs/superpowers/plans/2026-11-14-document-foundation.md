@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Deliver a portable, executable document foundation proving evidence identity, historical metadata, authorization and lifecycle safety before implementing AWS adapters.
+**Goal:** Deliver a portable, executable document foundation proving evidence identity, historical metadata, authorization and lifecycle safety before implementing AWS and Cloudflare adapters.
 
 **Architecture:** Add an independent document package with application services and provider-neutral persistence contracts. An in-memory reference adapter exercises transaction and concurrency semantics; it is test infrastructure, not production persistence. Existing demo domain, PostgreSQL repositories and FlowKit composition retain their responsibilities.
 
@@ -80,7 +80,7 @@ Planner limits for this milestone: metadata up to 64 KiB UTF-8 JSON, at most 16 
 - [ ] Write a reusable `documentStoreContract(createStore)` suite asserting atomic success, injected failure leaves no state/audit/outbox/receipt, conflicting expected revision loses atomically, duplicate command produces one receipt/event, changed payload conflicts, and the same IDs in two tenants remain isolated. Assert reads return copies, a command scope/ref tenant mismatch is rejected, a second history page is accessible, and head size/transaction write count do not grow with existing history.
 - [ ] Run `bun test test/documents/persistence.contract.test.ts`; expect missing-contract failures.
 - [ ] Implement interfaces and memory adapter with an atomic synchronous compare-and-swap section; add a failure injection seam for tests. Keep receipts and events separate from document-sensitive history so deletion can sanitize history later. Canonical fingerprint serialization must sort object keys while preserving arrays.
-- [ ] Run the contract suite; expect all cases to pass. Export the factory-based suite for later DynamoDB conformance without importing the reference adapter in production.
+- [ ] Run the contract suite; expect all cases to pass. Export runner-neutral scenario bodies with Bun registration wrappers for later DynamoDB and D1/workerd conformance without importing the reference adapter in production.
 - [ ] Commit with `feat: define atomic document persistence contract`.
 
 ### Task 3: Current document permissions
@@ -106,7 +106,7 @@ All unannotated leading parameters are `DocumentStore`, `CommandContext`, `Scope
 
 - [ ] Write tests for create, exact-version reads, duplicate append, replacement preserving old checksum/artifact, monotonically increasing metadata revisions, stale-update conflict and historical values after edits. Revoke access then assert historical reads fail. Assert creation and every successful mutation append atomic audit/outbox intent, metadata values never enter event payloads, and identical operation retries do not duplicate versions.
 - [ ] Run `bun test test/documents/documents.test.ts`; confirm failure for missing services.
-- [ ] Implement services with injected IDs/time and compare-and-swap. Application reads authorize a fresh bounded head before reading the requested immutable row. Authorization runs before returning a stored retry result. Reject reuse of a version ID with different immutable content. `appendVersion` only accepts verifier output within trusted application composition; AWS upload verification is a later milestone.
+- [ ] Implement services with injected IDs/time and compare-and-swap. Application reads authorize a fresh bounded head before reading the requested immutable row. Authorization runs before returning a stored retry result. Reject reuse of a version ID with different immutable content. `appendVersion` only accepts verifier output within trusted application composition; Provider upload verification is implemented through P0/P2/CF1 later.
 - [ ] Run all `test/documents/` tests and `bun run typecheck`; expect exit 0.
 - [ ] Commit with `feat: preserve document versions and metadata history`.
 
@@ -124,7 +124,7 @@ All unannotated leading parameters are `DocumentStore`, `CommandContext`, `Scope
 
 ## Companion plans and later milestone gates
 
-The complete execution sequence is in [release waves](2026-11-14-release-waves.md). Companion implementation plans: [AWS slice](2026-11-14-aws-document-slice.md), [governance](2026-11-14-governance-external-access.md), [processing/OCR](2026-11-14-processing-ocr.md), [search](2026-11-14-authorized-search.md), [FlowKit](2026-11-14-flowkit-integration.md), and [release operations](2026-11-14-aws-release-operations.md).
+The complete execution sequence is in [release waves](2026-11-14-release-waves.md). [P0 shared contracts/API](2026-11-14-shared-provider-contracts.md) follows P1 before either provider slice. Cloudflare plans: [CF1 evidence](2026-11-14-cloudflare-document-slice.md), [CF2 governance](2026-11-14-cloudflare-governance.md), [CF3 processing/search/FlowKit](2026-11-14-cloudflare-processing-search-flowkit.md), [CF4 operations](2026-11-14-cloudflare-release-operations.md). Companion implementation plans: [AWS slice](2026-11-14-aws-document-slice.md), [governance](2026-11-14-governance-external-access.md), [processing/OCR](2026-11-14-processing-ocr.md), [search](2026-11-14-authorized-search.md), [FlowKit](2026-11-14-flowkit-integration.md), and [release operations](2026-11-14-aws-release-operations.md).
 
 These are roadmap gates, not permission to implement unspecified later subsystems.
 
@@ -135,9 +135,9 @@ These are roadmap gates, not permission to implement unspecified later subsystem
 | Processing | Evaluate pdf-inspector and Unlimited-OCR without adopting or executing model code by default; obtain representative evaluation inputs and approved hosting choice | Native/scanned/mixed PDFs, images, whole-document mode, page failures, bounded rendering, capability negotiation, async callbacks, history/provenance, stale/deleted results cleanup |
 | Search | Select AWS serverless engine after verifying region availability, pricing and limits in official docs; decide bounded candidate scanning and omit totals/facets unless securely computable | Revocation before index refresh hides hits/snippets/counts/facets and later pages; cross-tenant cursors fail; out-of-order index events and rebuild preserve lifecycle fences |
 | FlowKit | Inspect installed public `FlowRuntime`/`FlowkitConsumer` contracts; explicitly inventory existing runtime/PostgreSQL/auth dependencies and provision outside the document functions | Supported runtime reviews exact version and metadata revision; authorized service grants; duplicate/out-of-order events; runtime outage leaves stored evidence intact; approval never transfers to a replacement |
-| Release operations | Record region, identity integration, quotas, availability/cost, capacity, recovery objectives and OCR/search selections with official sources during that milestone's planning | Real assembled AWS + FlowKit acceptance, least privilege, encryption, DLQ/replay/reindex, queue/search lag alerts, restore exercise and measured budgets |
+| Release operations | Record region, identity integration, quotas, availability/cost, capacity, recovery objectives and OCR/search selections with official sources during that milestone's planning | Real assembled AWS and Cloudflare + FlowKit acceptance, least privilege, encryption, DLQ/replay/reindex, queue/search lag alerts, restore exercise and measured budgets |
 
-The companion plans select CDK and OpenSearch Serverless as planner choices and cite verified AWS constraints. This foundation remains provider-neutral; account-specific limits, region, budgets and engine adoption remain explicit gates. GCP and Azure must reuse the portable contract suite in their own phases.
+The companion plans select CDK and OpenSearch Serverless as planner choices and cite verified AWS constraints. The approved amendment adds D1/R2/Queues/Workers/FTS5. This foundation remains provider-neutral; account-specific limits, region, budgets and engine adoption remain explicit gates. GCP and Azure must reuse the portable contract suite in their own phases.
 
 ## Self-review and handoff
 

@@ -4,11 +4,21 @@
 
 **Goal:** Connect document events and exact evidence references to supported FlowKit review processes with independent document/workflow authorization and recoverable delivery.
 
-**Architecture:** A separate portable integration package owns evidence associations and consumer-selected bindings. A document-side SQS adapter calls an authenticated integration gateway alongside the existing supported runtime; the gateway delegates to public FlowkitConsumer/FlowRuntime contracts. Existing Temporal/PostgreSQL/task infrastructure remains an explicit external runtime dependency, not a Lambda runtime rewrite.
+**Architecture:** A separate portable integration package owns evidence associations and consumer-selected bindings. Provider-side SQS or Queues adapters call an authenticated integration gateway alongside the existing supported runtime; the gateway delegates to public FlowkitConsumer/FlowRuntime contracts. Existing Temporal/PostgreSQL/task infrastructure remains an explicit external runtime dependency, not a Lambda runtime rewrite.
 
 **Tech Stack:** TypeScript/Bun, existing public `@teopeurt/flowkit-*` 1.2.0 packages, DynamoDB integration records, SQS delivery, authenticated HTTP bridge and the existing runtime host; no framework source modifications.
 
-**Spec:** [Approved design](../specs/2026-11-14-flowkitform-design.md); [master waves](2026-11-14-release-waves.md). P1/P2 precede implementation; P3–P5 precede final assembled acceptance.
+**Spec:** [Approved design](../specs/2026-11-14-flowkitform-design.md); [master waves](2026-11-14-release-waves.md). P1/P0 precede shared implementation; P2 precedes AWS adapter implementation and CF3 Task 3 implements Cloudflare. P3–P5/CF2/CF3 precede final assembled acceptance.
+
+## Parallel-provider ownership
+
+This plan implements shared services first and the AWS provider portion second.
+The [approved Cloudflare amendment](../specs/2026-11-14-cloudflare-alternative-design.md)
+and [master waves](2026-11-14-release-waves.md) apply to every task. Commit and
+verify portable outputs before AWS adapters so Cloudflare can consume them
+without waiting for AWS implementation or deployment. The shared API/identity,
+upload/artifact/reader/delivery and runner-neutral test boundaries belong to
+[P0](2026-11-14-shared-provider-contracts.md). Do not recreate them in this plan.
 
 ## Global Constraints
 
@@ -43,7 +53,7 @@
 
 **Files:** Create `packages/documents-flowkit/package.json`, `packages/documents-flowkit/src/{contracts,bindings,service,index}.ts`, `packages/documents-aws/src/flowkit/binding-store.ts`, `test/documents-flowkit/bindings.test.ts`; update root manifests/lockfile.
 
-**Interfaces:** `EvidenceRef = { document: DocumentRef; versionId: string; metadataRevision: number }`; `ReviewBinding = { id: string; tenantId: string; businessRecord: { type: string; id: string }; flowId: string; reviewRef: string; evidence: readonly EvidenceRef[]; decisionRef?: string }`. `EvidenceBindingStore.create(context, binding): Promise<CommitReceipt>`, `read(scope, bindingId): Promise<ReviewBinding | null>`, `recordDecision(context, { bindingId, decisionRef }): Promise<CommitReceipt>`, `list(scope, { documentId?, flowId?, cursor? }): Promise<Page<ReviewBinding>>`. P2 DynamoDB atomic receipts/audit/outbox semantics apply to this store; binding payloads contain references, not sensitive metadata snapshots.
+**Interfaces:** `EvidenceRef = { document: DocumentRef; versionId: string; metadataRevision: number }`; `ReviewBinding = { id: string; tenantId: string; businessRecord: { type: string; id: string }; flowId: string; reviewRef: string; evidence: readonly EvidenceRef[]; decisionRef?: string }`. `EvidenceBindingStore.create(context, binding): Promise<CommitReceipt>`, `read(scope, bindingId): Promise<ReviewBinding | null>`, `recordDecision(context, { bindingId, decisionRef }): Promise<CommitReceipt>`, `list(scope, { documentId?, flowId?, cursor? }): Promise<Page<ReviewBinding>>`. P1/P0 atomic receipts/audit/outbox semantics apply to this store on DynamoDB and D1; binding payloads contain references, not sensitive metadata snapshots.
 
 - [ ] Test consumer business-record IDs remain external, multiple evidence versions/metadata revisions can be pinned, absent/cross-tenant versions fail, duplicate binding is idempotent, changed operation payload conflicts, replacement metadata/content does not mutate prior binding, and historical metadata remains retrievable with current grants.
 - [ ] Run `bun test test/documents-flowkit/bindings.test.ts`; expect missing model/store.
@@ -83,7 +93,7 @@
 
 - [ ] Write live scenarios: upload A at metadata revision 1 → start review → upload B/edit metadata → approve A → retrieve decision/evidence association. Verify B remains unapproved, current document grants still apply, maker-checker is enforced and a configured replacement continuation behaves only as defined by fixture.
 - [ ] Run offline review suites and run live tests without approval flag to confirm explicit skip. Assert a run with flag but missing runtime fails configuration.
-- [ ] Add real outage/recovery, duplicate/reordered event, revoked service grants, deleted evidence and stale decision callback scenarios. Use external supported runtime, actual task/consumer authorization and real AWS records; no mocked runtime as substitute.
+- [ ] Add real outage/recovery, duplicate/reordered event, revoked service grants, deleted evidence and stale decision callback scenarios. Create shared scenarios in `test/support/document-conformance/reviews.ts`. Use external supported runtime, actual task/consumer authorization and real AWS records; CF3 Task 4 invokes the same scenarios against D1/R2/Queues; no mocked runtime as substitute.
 - [ ] Run authorized live suites plus P3/P5 integration; record workflow identity, definition hash, evidence versions/metadata revisions and correlation IDs without raw evidence. All prerequisites must be operational before marking P6 complete.
 - [ ] Commit: `test: prove document review on supported FlowKit runtime`.
 

@@ -1,36 +1,26 @@
 # FlowKitForm roadmap and gap analysis
 
-The [approved design](superpowers/specs/2026-11-14-flowkitform-design.md) supersedes
-the earlier phases below. Current code remains the demo application; no document
-management implementation is claimed by design approval.
+The [approved base design](superpowers/specs/2026-11-14-flowkitform-design.md) and
+[approved Cloudflare amendment](superpowers/specs/2026-11-14-cloudflare-alternative-design.md)
+define the target. AWS and Cloudflare ship alongside each other; each tenant is
+assigned to one deployment/provider. Current code remains the demo application;
+approved plans do not imply document features have been implemented.
 
-1. Portable document foundation: immutable evidence, metadata history, permissions,
-   atomic mutations and lifecycle fencing, verified with an in-memory adapter.
-2. AWS upload vertical slice: S3 immutable generations, DynamoDB transactions,
-   SQS delivery, authenticated /v1 APIs and infrastructure as code.
-3. Lifecycle governance: external grants, retention, holds, complete deletion and
-   reconciliation against real AWS races.
-4. First-class processing: evaluate engines early, implement version-specific jobs,
-   inspection/native extraction/rendering/OCR adapters and result history.
-5. Authorized search: metadata/full-text indexing with current permission checks,
-   safe pagination, replay and rebuild.
-6. FlowKit assembly: authorized service bindings and review references pinned to
-   exact content and metadata, tested against a supported runtime.
-7. Release operations: assembled AWS acceptance, least privilege, monitoring,
-   restore/replay exercises and measured performance/cost budgets.
-
-Engine evaluation may proceed alongside foundation work, but running model code
-or deploying inference requires the separate authorization stated in the design.
-Detailed plans exist for every AWS milestone; execution verifies prerequisite
-interfaces and deployment-specific service choices at the recorded gates. GCP/Azure and product UI remain later scope.
+1. Portable foundation (P1): evidence/history, permissions, atomic persistence and lifecycle fencing.
+2. Shared provider prerequisites (P0): readers/artifacts/uploads/delivery, identity, Fetch API/OpenAPI and runner-neutral conformance.
+3. Parallel evidence slices (P2/CF1): DynamoDB/S3/SQS/Lambda/CDK and D1/R2/Queues/Workers/Wrangler, verified independently.
+4. Governance and extraction (P3/P4, CF2/CF3): scoped external access, holds/deletion, version-specific OCR/jobs/results and provider cleanup.
+5. Search and FlowKit (P5/P6, CF3): OpenSearch or FTS5, current permissions, exact evidence review on a supported external runtime.
+6. Operations and release (P7/CF4): monitoring/replay, separate backup/restore drills, budgets and two-provider release evidence.
 
 ## Execution plans
 
 The [master wave and implementation plan](superpowers/plans/2026-11-14-release-waves.md)
-links all seven subsystem plans, their dependency order, task checklists and exit
-checks. It covers the complete approved AWS release. Engine/hosting adoption,
-real deployment configuration and live-environment authorization remain explicit
-gates; writing plans does not imply implementation or deployment has occurred.
+links all twelve shared/provider plans and defines six execution waves, task
+ownership, entry/exit checks, parallel work and live-test gates. Both providers
+must pass their own acceptance to declare the first release ready; simultaneous
+deployment is not required. Engine/hosting adoption, actual deployment profiles
+and target authorization remain explicit gates. GCP/Azure and UI remain later scope.
 
 ## Historical roadmap and existing demo gap analysis
 

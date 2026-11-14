@@ -8,7 +8,17 @@
 
 **Tech Stack:** TypeScript/Bun, existing CI, CDK, AWS monitoring/logging/tracing, encrypted backups and approved isolated AWS/runtime integration environments. No UI or new runtime backend.
 
-**Spec:** [Approved design](../specs/2026-11-14-flowkitform-design.md); [master waves](2026-11-14-release-waves.md). Release exit requires P1–P6.
+**Spec:** [Approved design](../specs/2026-11-14-flowkitform-design.md); [master waves](2026-11-14-release-waves.md). AWS lane requires P1/P0/P2–P6. Shared release readiness also requires CF1–CF4; Cloudflare operations are in CF4.
+
+## Parallel-provider ownership
+
+This plan implements shared services first and the AWS provider portion second.
+The [approved Cloudflare amendment](../specs/2026-11-14-cloudflare-alternative-design.md)
+and [master waves](2026-11-14-release-waves.md) apply to every task. Commit and
+verify portable outputs before AWS adapters so Cloudflare can consume them
+without waiting for AWS implementation or deployment. The shared API/identity,
+upload/artifact/reader/delivery and runner-neutral test boundaries belong to
+[P0](2026-11-14-shared-provider-contracts.md). Do not recreate them in this plan.
 
 ## Global Constraints
 
@@ -31,7 +41,7 @@
 
 **Files:** Create `deploy/aws/src/{observability,release-stack}.ts`, `packages/documents-aws/src/observability/{logging,metrics,tracing}.ts`, `test/documents-aws/operations.test.ts`, `docs/operations/aws-monitoring.md`; update document function composition and release configuration.
 
-**Interfaces:** `emitMetric(name, value, dimensions): void` restricts dimension names to service/operation/status, not document IDs/raw actor data. `safeLog(event: OperationalLog): void` accepts correlation/operation IDs, safe error code and duration, never arbitrary request/body. `readiness(): Promise<{ ready: boolean; dependencies: Readonly<Record<string,'ready'|'unavailable'|'unconfigured'>> }>` checks required config and dependency health without returning endpoints/secrets. FlowKit outage degrades integration readiness and raises alerts without making valid stored evidence inaccessible.
+**Interfaces:** `emitMetric(name, value, dimensions): void` restricts dimension names to provider/deployment/service/operation/status, not document IDs/raw actor data. `safeLog(event: OperationalLog): void` accepts correlation/operation IDs, safe error code and duration, never arbitrary request/body. `readiness(): Promise<{ ready: boolean; dependencies: Readonly<Record<string,'ready'|'unavailable'|'unconfigured'>> }>` checks required config and dependency health without returning endpoints/secrets. FlowKit outage degrades integration readiness and raises alerts without making valid stored evidence inaccessible.
 
 - [ ] Write tests that final composition includes document, governance, processing, search and FlowKit modules; missing required profile/identity/runtime prevents release readiness. Assert no token, signed URL, raw text, metadata values or binary content in error/log/trace fixtures. Assert API roles cannot delete originals, search roles cannot access quarantine and cleanup roles cannot bypass retention.
 - [ ] Run `bun test test/documents-aws/operations.test.ts`; expect missing monitoring/final-composition failures.
@@ -43,7 +53,7 @@
 
 **Files:** Create `scripts/documents/{replay,reconcile,status}.ts`, `packages/documents-aws/src/operations/commands.ts`, `test/documents-aws/operational-commands.test.ts`, `docs/operations/failed-work.md`; reuse P5 `scripts/documents/reindex.ts`, modify root scripts.
 
-**Interfaces:** `replay({ target, failedDeliveryIds, dryRun }): Promise<ReplayReport>` uses configured target names only; `reconcile({ documentRef, dryRun }): Promise<ReconciliationReport>`; `status({ operationId }): Promise<OperationStatus>`. Every command requires trusted operations identity, account/region match and explicit deployment output file. Default dry-run emits sanitized plan; apply mode requires explicit flag. Preserve event/operation/binding IDs from original intent, with a new audited replay invocation ID.
+**Interfaces:** `replay({ target, failedDeliveryIds, dryRun }): Promise<ReplayReport>` uses configured target names only; `reconcile({ documentRef, dryRun }): Promise<ReconciliationReport>`; `status({ operationId }): Promise<OperationStatus>`. Every command requires trusted operations identity, provider/account/target match and explicit deployment output file. AWS target includes region; Cloudflare includes environment/bindings fingerprint. Dispatch is from trusted operator profile, never client API input. Default dry-run emits sanitized plan; apply mode requires explicit flag. Preserve event/operation/binding IDs from original intent, with a new audited replay invocation ID.
 
 - [ ] Test dry run mutates nothing, target mismatch is rejected, denied operator cannot replay, schema mismatch remains failed, duplicate invocation produces no duplicate effect, deleted generation is rejected/cleaned, and changing the target endpoint through arguments is impossible.
 - [ ] Run `bun test test/documents-aws/operational-commands.test.ts`; expect absent command failures.
@@ -53,7 +63,7 @@
 
 ### Task 3: Full acceptance, security races and resource budgets
 
-**Files:** Create `test/aws-documents/{assembled-acceptance,security-races,capacity}.integration.test.ts`, `docs/validation/{aws-design-coverage,aws-release-evidence}.md`, `.github/workflows/documents-aws.yml`; update `.github/workflows/ci.yml` synth/offline gates without weakening existing checks.
+**Files:** Create `test/aws-documents/{assembled-acceptance,security-races,capacity}.integration.test.ts`, `docs/validation/{document-design-coverage,document-release-evidence}.md`, `.github/workflows/documents-aws.yml`; update `.github/workflows/ci.yml` synth/offline gates without weakening existing checks.
 
 **Interfaces:** Explicit live profile names are `smoke`, `acceptance`, `races`, `capacity`; every live profile consumes approved deployment outputs and workload limits. Profile config includes corpus/profile IDs, tenant identities, runtime fixture, request rate, duration and max spend. Test runner must reject identity/target mismatch and stop on spend/timeout cap. Offline CI cannot claim live acceptance success.
 
@@ -67,7 +77,7 @@
 
 **Files:** Create `packages/documents-aws/src/operations/{recovery-ledger,restore}.ts`, `scripts/documents/restore-check.ts`, `test/documents-aws/restore.test.ts`, `test/aws-documents/restore.integration.test.ts`, `docs/operations/backup-restore.md`; update CDK backup and lifecycle configuration, governance cleanup registry and evidence.
 
-**Interfaces:** `RecoveryLedger` persists minimal deletion generations, active/pending holds and access-revocation epochs in an independently protected restore-control store. `recordControlChange(change): Promise<void>` has durable outbox intent in the authoritative mutation transaction; recovery refuses service until it reconciles all control changes after the restore point. `RestoreCoordinator.validate({ restoredTable, sourceWatermark, target }): Promise<RestoreReport>` / `activate(reportId): Promise<void>` gates recovery on reconciliation, IAM/config verification and index rebuild. Control records use references only, not sensitive values.
+**Interfaces:** `RecoveryLedger` persists minimal deletion generations, active/pending holds and access-revocation epochs in an independently protected restore-control store. `recordControlChange(change): Promise<void>` has durable outbox intent in the authoritative mutation transaction; recovery refuses service until it reconciles all control changes after the restore point. `RestoreCoordinator.validate({ restoredResource, sourceWatermark, target }): Promise<RestoreReport>` / `activate(reportId): Promise<void>` gates recovery on reconciliation, IAM/config verification and index rebuild. Control records use references only, not sensitive values.
 
 - [ ] Test restoring a snapshot from before deletion, before hold activation and before grant revocation; restored content remains unavailable until control ledger/state replay blocks deleted generations and restores holds/revocations. Test lagged/unavailable recovery ledger fails closed, provider cleanup remains pending and operational replay cannot erase tombstones.
 - [ ] Run `bun test test/documents-aws/restore.test.ts`; expect absent restore controls.
@@ -77,14 +87,14 @@
 
 ### Task 5: Reproducible release package and rollout/rollback gate
 
-**Files:** Create `scripts/documents/release-manifest.ts`, `docs/deployment/aws-release.md`, `test/documents-aws/release-contract.test.ts`; update root scripts, CI artifacts, README and active specification/roadmap status to reflect only verified delivered functionality.
+**Files:** Create `packages/documents/src/operations/{contracts,release}.ts`, `scripts/documents/release-manifest.ts`, `docs/deployment/aws-release.md`, `test/documents-aws/release-contract.test.ts`; update root scripts, CI artifacts, README and active specification/roadmap status to reflect only verified delivered functionality.
 
-**Interfaces:** `ReleaseManifest` includes source commit, locked dependencies, Lambda artifact hashes, CDK template hash, supported event schema versions, storage schema migration compatibility, engine/profile revisions and credential/config references with values redacted. `validateRelease(manifest, evidence): Promise<{ ready: boolean; blockers: readonly string[] }>` refuses missing P1–P7 evidence, open engine/dependency/deployment gates or incompatible rollback target.
+**Interfaces:** `ReleaseManifest` includes source commit, locked dependencies and separate tagged provider entries. AWS entry has Lambda artifact/CDK template hashes; Cloudflare entry has Worker bundle/Wrangler binding/compatibility date/D1 migration hashes. Both entries include supported event schema versions, storage migration/rollback compatibility, engine/profile revisions and redacted credential/config references. Shared operational types (`OperationalLog`, ReplayReport, ReconciliationReport, OperationStatus, RecoveryLedger, RestoreCoordinator) live in `packages/documents/src/operations/contracts.ts`, implemented per provider. `validateRelease(manifest, evidence): Promise<{ ready: boolean; blockers: readonly string[] }>` requires passing evidence for both AWS and Cloudflare, refuses missing P1/P0/P2–P7/CF1–CF4 evidence, open engine/dependency/deployment gates or incompatible rollback target.
 
-- [ ] Test changed artifact/template hash invalidates evidence, engine revision mismatch fails release, missing live runtime/restore evidence blocks ready status, unknown queued event schema blocks unsafe rollback and private config never enters manifest.
+- [ ] Test changed artifact/template hash invalidates evidence, engine revision mismatch fails release, missing live runtime/restore evidence or failed/missing Cloudflare evidence blocks ready status even when AWS passes, unknown queued event schema blocks unsafe rollback and private config never enters manifest.
 - [ ] Run `bun test test/documents-aws/release-contract.test.ts`; expect missing release validator.
 - [ ] Implement reproducible bundles/synth, staged deployment checklist and backward-compatible expand/contract schema/event rules. Rollback uses prior compatible code/config while retaining durable objects, tombstones, grants, audit and queues; never rolls state back to remove accepted holds/deletions. Drain/quarantine incompatible queued work or migrate explicitly before rollback. Document external runtime and inference dependencies, service health prerequisites and cost/region verification evidence. Prepare target-specific CDK diff and manifest before any release approval request.
-- [ ] Run all required offline gates, validate evidence ledger and package hashes, synth/diff final reviewed configuration and confirm every wave exit. Report any remaining blocker honestly. Deployment is performed only when target authorization exists; after authorized rollout run smoke checks and observe metrics for configured rollout duration before marking released.
+- [ ] Run all required offline gates, validate both provider evidence ledgers and package hashes, synth/diff final reviewed AWS configuration and confirm every wave exit. CF4 supplies Cloudflare artifacts/evidence independently; shared combined readiness is evaluated after both are collected, without a circular dependency on the other task's ready boolean. Report any remaining blocker honestly. Deployment is performed only when target authorization exists; after authorized rollout run smoke checks and observe metrics for configured rollout duration before marking released.
 - [ ] Commit: `build: package verified AWS document management release`.
 
 ## Self-review and handoff

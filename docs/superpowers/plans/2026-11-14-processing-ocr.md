@@ -8,7 +8,17 @@
 
 **Tech Stack:** TypeScript/Bun, separate `@flowkit-form/document-processing` package, DynamoDB/SQS/S3 AWS adapters, adapter-specific native/runtime dependencies only after evaluation. pdf-inspector and Unlimited-OCR remain candidates, not implicit installations.
 
-**Spec:** [Approved design](../specs/2026-11-14-flowkitform-design.md); [master waves](2026-11-14-release-waves.md). P1 required; P2 for deployed jobs and API; P3 for complete cleanup.
+**Spec:** [Approved design](../specs/2026-11-14-flowkitform-design.md); [master waves](2026-11-14-release-waves.md). P1/P0 required for shared services/API; P2 for AWS deployed jobs; CF1/CF2/CF3 Task 1 for Cloudflare. P3 owns common cleanup interfaces.
+
+## Parallel-provider ownership
+
+This plan implements shared services first and the AWS provider portion second.
+The [approved Cloudflare amendment](../specs/2026-11-14-cloudflare-alternative-design.md)
+and [master waves](2026-11-14-release-waves.md) apply to every task. Commit and
+verify portable outputs before AWS adapters so Cloudflare can consume them
+without waiting for AWS implementation or deployment. The shared API/identity,
+upload/artifact/reader/delivery and runner-neutral test boundaries belong to
+[P0](2026-11-14-shared-provider-contracts.md). Do not recreate them in this plan.
 
 ## Global Constraints
 
@@ -61,15 +71,15 @@
 
 - [ ] Test duplicate source-event starts one automatic run, manual reprocessing creates a separate run, retry records a new attempt, deadline/poll timeout fails boundedly, partial page results persist, duplicate/stale callbacks do not replace newer outcomes, revoked service grant blocks dispatch, and deletion before/after remote output leaves cleanup obligations. Test crash after remote submit uses stable provider operation ID or reconciliation before resubmitting.
 - [ ] Run `bun test test/document-processing/jobs.test.ts`; expect missing lifecycle methods.
-- [ ] Implement SQS orchestration with bounded per-stage work, resumable page batches and deadline checks. Pending provider jobs persist handles and schedule polling; callback routes authenticate the configured service and bind tenant/run/attempt/job ID. Register source and possible output leases with P3 before external writes; artifacts inherit retention/holds. No source bytes or extracted text in queue payloads. Explicit fallback creates a recorded attempt with selected provider, never a hidden switch. Register cleanup provider owner `processing` to cancel/reconcile all remote jobs and artifacts.
+- [ ] Implement portable orchestration through P0 delivery and P4 ProcessingStore first, then the AWS SQS dispatcher, with bounded per-stage work, resumable page batches and deadline checks. Pending provider jobs persist handles and schedule polling; callback routes authenticate the configured service and bind tenant/run/attempt/job ID. Register source and possible output leases with P3 before external writes; artifacts inherit retention/holds. No source bytes or extracted text in queue payloads. Explicit fallback creates a recorded attempt with selected provider, never a hidden switch. Register cleanup provider owner `processing` to cancel/reconcile all remote jobs and artifacts.
 - [ ] Run offline suite and authorized AWS fixture-provider tests; prove duplicate/out-of-order delivery, DLQ/manual replay and cleanup after delayed completion. These test transport/lifecycle, not OCR quality acceptance.
 - [ ] Commit: `feat: orchestrate durable version-specific extraction jobs`.
 
 ### Task 4: Implement evaluated engine adapters and execution packaging
 
-**Files:** Create `packages/documents-aws/src/processing/adapters/{pdf-inspector,native-renderer,remote-parser}.ts`, `deploy/aws/src/processing-resources.ts`, `test/document-processing/adapters.test.ts`, `test/aws-documents/ocr-engine.integration.test.ts`; add engine-specific lock/manifests only for approved selections.
+**Files:** Create `packages/document-processing/src/adapters/{remote-inspector,remote-renderer,remote-parser}.ts`, `packages/documents-aws/src/processing/adapters/{pdf-inspector,native-renderer}.ts`, `deploy/aws/src/processing-resources.ts`, `test/document-processing/adapters.test.ts`, `test/aws-documents/ocr-engine.integration.test.ts`; add engine-specific lock/manifests only for approved selections.
 
-**Interfaces:** `createInspector(config): Inspector & NativeExtractor`, `createRenderer(config): Renderer`, `createRemoteParser(config): OcrParser`; config includes pinned engine/model revision, registered endpoint/credential refs, limits and capabilities. Every adapter implements Task 2 contracts. A remote bridge accommodates Unlimited-OCR without putting model code in the API; implement a specific engine transport only after Task 1 selects and authorizes it. If pdf-inspector is rejected, replace its adapter file with a name matching the evaluated selection and update manifest/plan evidence; preserve contracts.
+**Interfaces:** `createInspector(config): Inspector & NativeExtractor`, `createRenderer(config): Renderer`, `createRemoteParser(config): OcrParser`; config includes pinned engine/model revision, registered endpoint/credential refs, limits and capabilities. Every adapter implements Task 2 contracts. Shared HTTP transports live in document-processing; CF3 supplies Worker credential/artifact wrappers and reuses those transports instead of forking engine protocol logic. A remote bridge accommodates Unlimited-OCR without putting model code in the API; implement a specific engine transport only after Task 1 selects and authorizes it. If pdf-inspector is rejected, replace its adapter file with a name matching the evaluated selection and update manifest/plan evidence; preserve contracts.
 
 - [ ] Test process/container timeout, native dependency load failure, missing models, overlarge renderer output, remote authentication error, remote result schema mismatch, redirect to unregistered host and cross-job artifact references. Test both synchronous result and asynchronous handle modes with adapter conformance suite.
 - [ ] Run `bun test test/document-processing/adapters.test.ts`; expect absent adapters.
@@ -85,8 +95,8 @@
 
 - [ ] Test authorization independently for status/start/results, grant revocation before artifact URL issuance, all history pages, error redaction and human-reviewed values kept distinct from machine output. Add real native/scanned/mixed/image/multi-page cases with expected page order/provenance and at least one partial failure/reprocess history.
 - [ ] Run `bun test test/document-api/processing.test.ts`; expect unregistered route failures.
-- [ ] Register routes and trusted processing hooks, document statuses/retry/reprocess and configured fallback behavior. Store result text separately and return bounded paginated data/artifact references; do not pass large full text through Lambda/API responses. Human review remains consumer/FlowKit policy.
-- [ ] Run OpenAPI/offline suites and authorized real engine + AWS acceptance; verify P3 cleanup contract and search-ingestion events for P5. Record current engine adoption/hosting decision as a required release artifact.
+- [ ] Register routes and trusted processing hooks, document statuses/retry/reprocess and configured fallback behavior. Store result text separately and return bounded paginated data/artifact references; do not pass large full text through either provider's HTTP responses. Human review remains consumer/FlowKit policy.
+- [ ] Create shared cases in `test/support/document-conformance/processing.ts`; run OpenAPI/offline suites and authorized real engine + AWS acceptance, with CF3 Task 4 executing the same cases on Cloudflare; verify P3 cleanup contract and search-ingestion events for P5. Record current engine adoption/hosting decision as a required release artifact.
 - [ ] Commit: `feat: expose first-class extraction status and result history`.
 
 ## Self-review and handoff

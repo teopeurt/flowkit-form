@@ -1,5 +1,11 @@
 # FlowKitForm
 
+First-release deployment targets now include **AWS and Cloudflare alongside
+each other**. D1 is selected for Cloudflare authoritative storage; the
+[technical amendment](docs/superpowers/specs/2026-11-14-cloudflare-alternative-design.md)
+is approved. The expanded plan set covers both provider implementations and
+their shared prerequisites.
+
 FlowKitForm is an open-source document management platform for storing, processing, and governing
 documents through durable, auditable workflows, built on the FlowKit workflow framework. It is
 designed to run headless through its Document and workflow APIs and with a reference web client.
@@ -14,13 +20,13 @@ browser experience. The document-management features in the specification are no
 the sections below describe running and customizing the current application.
 
 The [approved document management design](docs/superpowers/specs/2026-11-14-flowkitform-design.md)
-is the current target: AWS-first portable adapters, first-class OCR, and an
+is the current target: portable AWS/Cloudflare deployment alternatives, first-class OCR, and an
 API-first release. The specification, architecture and roadmap identify the
 superseded historical direction. Approval does not mean these features exist;
 the current application described below remains the demo starting point.
 
 The [release wave plan](docs/superpowers/plans/2026-11-14-release-waves.md) links
-the full implementation plan set and its verification gates.
+the shared and provider implementation plans, parallel waves and verification gates.
 
 ## Package availability
 

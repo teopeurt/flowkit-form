@@ -1,10 +1,18 @@
 # Architecture
 
+**Provider scope update:** Cloudflare is a first-release alternative alongside
+AWS, with D1 as authoritative storage. The
+[Cloudflare technical amendment](superpowers/specs/2026-11-14-cloudflare-alternative-design.md)
+is approved and specifies Workers/R2/Queues/FTS5 adapters. Both provider
+implementations consume the same portable core, Fetch API and conformance suite.
+
 The [approved design](superpowers/specs/2026-11-14-flowkitform-design.md) is the
 current target architecture. The document core owns evidence, permissions,
 metadata history, processing lifecycle and retention. Separate modules provide
 HTTP transport, FlowKit integration and provider adapters. AWS uses S3, Lambda,
-API Gateway, DynamoDB and SQS; search and OCR engines require explicit evaluation.
+API Gateway, DynamoDB and SQS with an OpenSearch search adapter. Cloudflare uses
+Workers, authoritative D1, R2, Queues and D1 FTS5. Engine hosting/adoption and
+account-specific service limits/budgets remain explicit evaluation gates.
 State, audit and outbox intent commit atomically. Search rechecks authoritative
 permissions, uploads publish immutable references, and deletion fences all writers.
 

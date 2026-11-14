@@ -2,6 +2,11 @@
 
 Status: approved by the user on 2026-11-14; implementation not started.
 
+Scope update confirmed on 2026-11-14: Cloudflare ships alongside AWS in the
+first release, with D1 selected as its authoritative store. The
+[Cloudflare technical amendment](2026-11-14-cloudflare-alternative-design.md)
+records the detailed mechanisms and was approved by the user on 2026-11-14.
+
 ## Relationship to existing documentation
 
 This approved design supersedes conflicting target requirements in
@@ -26,7 +31,8 @@ is checked, audited, and approved through FlowKit workflows.
 FormKiQ is a capability reference, not a selected backend or an API compatibility
 requirement: https://raw.githubusercontent.com/formkiq/formkiq-core/refs/heads/master/docs/openapi/openapi-jwt.yaml
 
-Deploy to AWS serverless first, GCP serverless second, Azure serverless third.
+Deliver AWS and Cloudflare serverless deployment alternatives alongside each
+other in the first release. GCP follows in a later phase, then Azure.
 FlowKit integration is required in the assembled product but lives in a separate
 module. Extending FlowKit to additional execution backends is separate work.
 
@@ -42,7 +48,7 @@ module. Extending FlowKit to additional execution backends is separate work.
 - Enforce tenant isolation, document permissions, and controlled external submission/access.
 - Support retention, legal holds, controlled deletion, and deletion audit records.
 - Provide documented APIs, pagination, consistent errors, idempotent mutations, and versioned events.
-- Deliver AWS infrastructure as code, encryption, monitoring, recovery procedures, and failed-processing visibility.
+- Deliver AWS and Cloudflare infrastructure/configuration as code, encryption, monitoring, recovery procedures, and failed-processing visibility.
 
 ## Non-goals and anti-goals
 
@@ -50,7 +56,7 @@ No visual workflow designer, electronic signing, automated signature verificatio
 or advanced AI classification in this release. Accepting a signed file does not
 certify its signature. No application-specific approval or replacement rules in
 the document core. No new FlowKit runtime backend. No GCP/Azure implementations
-in the AWS release. No requirement to copy FormKiQ endpoints or implementation.
+in the first release. No requirement to copy FormKiQ endpoints or implementation.
 
 Avoid AWS-specific types in portable contracts, accidental cross-tenant search
 disclosure, silently lost audit events, approvals pointing at mutable latest
@@ -60,7 +66,7 @@ workflow runtime dependency.
 ## Approaches
 
 1. AWS implementation followed by portability extraction: fastest start, but later clouds risk a rewrite.
-2. Portable document core with cloud adapters: some initial contract work, but stable behavior across deployments. **Selected by the user**, implementing AWS adapters first.
+2. Portable document core with cloud adapters: some initial contract work, but stable behavior across deployments. **Selected by the user**, implementing AWS and Cloudflare adapters alongside each other for the first release.
 3. Common infrastructure stack across clouds: uniform operations, but restricts native serverless choices.
 
 ## Ownership and modules
@@ -78,7 +84,7 @@ compiled package exports, and consumer-owned dependency injection conventions.
   public exports only. It does not own approval policy or task eligibility.
 - Provider adapters: object storage, transactional metadata/audit persistence,
   asynchronous delivery, text extraction, search indexing, and key management.
-- AWS deployment: infrastructure and composition of the above modules.
+- Provider deployments: AWS infrastructure and Cloudflare configuration/composition of the above modules; detailed Cloudflare mechanisms are in the approved amendment.
 
 Physical package names and granularity are left to the implementation planner.
 Existing packages must retain their current responsibilities.
@@ -348,6 +354,6 @@ destructive step and verify the authoritative ordering is respected.
 ## Scope and next step
 
 This is a multi-module project. After design approval, write an implementation
-plan with incremental AWS milestones and required integration checks. This
+plan with parallel AWS/Cloudflare milestones and required integration checks. This
 document authorizes no runtime extension or product UI design. The first release
 is API-first; any submission/reviewer UI requires separate scope agreement.

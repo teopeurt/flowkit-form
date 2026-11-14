@@ -1,142 +1,189 @@
-# FlowkitForm AWS Release Waves Implementation Plan
+# FlowkitForm AWS and Cloudflare Release Waves Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Execute the approved document-management design through a complete, verifiable AWS release.
+**Goal:** Execute the approved document design and amendment through two independently deployable, verified first-release alternatives: AWS and Cloudflare.
 
-**Architecture:** Portable domain and processing contracts feed separate AWS and FlowKit adapters. Small vertical slices converge into an assembled serverless document product connected to an external supported FlowKit runtime. This index coordinates the seven implementation plans; it does not replace their task checklists.
+**Architecture:** One portable document core, Fetch API, processing/search/FlowKit service layer and behavioral conformance suite feed two provider adapter sets. AWS uses DynamoDB/S3/SQS/Lambda/OpenSearch; Cloudflare uses authoritative D1/R2/Queues/Workers/FTS5. Each assembly connects to a configured external supported FlowKit runtime and evaluated verification/OCR services.
 
-**Tech Stack:** TypeScript, Bun 1.3.14 (matching CI), Node.js Lambda bundles, AWS CDK v2 in TypeScript, S3, DynamoDB, SQS, API Gateway, OpenSearch Serverless, configured OIDC identity integration and an external FlowKit runtime. CDK and OpenSearch are planner selections, not claims of user-selected tools. Pin compatible exact package versions at implementation; keep the six existing FlowKit packages at 1.2.0 unless a separate compatibility decision changes them.
+**Tech Stack:** TypeScript, Bun 1.3.14 matching existing CI, AWS SDK v3/CDK v2 and Node.js Lambda; Wrangler, workerd/Vitest Workers and scoped Workers types for Cloudflare. Pin compatible exact tool versions during execution; existing FlowKit packages remain 1.2.0 unless a separate compatibility decision changes them. No provider SDK/types in portable contracts.
 
-**Spec:** [Approved design](../specs/2026-11-14-flowkitform-design.md).
+**Spec:** [Approved base design](../specs/2026-11-14-flowkitform-design.md) and [approved Cloudflare amendment](../specs/2026-11-14-cloudflare-alternative-design.md).
 
 ## Global Constraints
 
-- “Deploy to AWS serverless first, GCP serverless second, Azure serverless third.”
+- “AWS and Cloudflare are first-release targets, each independently runnable against the same portable document core and behavioral contracts.”
+- “Each tenant belongs to one configured deployment/provider in this release.”
+- “Neither provider may omit a required capability and still count as release-complete.”
 - “Existing packages must retain their current responsibilities.”
-- “FlowKit integration is required in the assembled product but lives in a separate module.”
-- “First-class OCR is required”; engine and hosting adoption remain subject to the design's evaluation gate.
-- “The first release is API-first; any submission/reviewer UI requires separate scope agreement.”
-- No new FlowKit runtime backend, electronic signing or automated signature validation.
-- Each mutation has atomic state, audit and event intent; processing/event delivery is at least once.
-- This plan set authorizes implementation preparation, not deployment, real-data transfer, model execution or production changes. Use existing session authorization where applicable; request only missing external-action approval when the result is ready for review.
+- Required FlowKit integration remains separate; no replacement runtime, UI, GCP/Azure adapter, cross-provider replication/failover or migration tool in this release.
+- State/audit/outbox intent commits atomically; asynchronous delivery is at least once, never cross-service exactly once.
+- Engine/hosting/data-location/account/budget decisions are explicit deployment/evaluation gates, not guessed approvals. Prepare deployable artifacts and diffs before requesting only missing authorization for actual external actions.
 
 ## Review Focus
 
-- Interfaces drifting between independently executed plans: use the shared ownership table and compile their consumers at each wave exit.
-- Stale asynchronous work after deletion: run cross-subsystem races in Governance Task 4 and Release Task 3.
-- Hidden PostgreSQL/Temporal dependencies: AWS Task 5 and FlowKit Task 1 inventory them and fail document-function import checks.
-- Fake adapters masking an unusable deployment: Release Task 3 requires a real AWS environment and supported runtime.
-- Missing engines, deployment values or corpus treated as success: track each gate below; no production-readiness claim while unresolved.
+- Portable contracts accidentally depend on AWS implementation: P0 lands before either vertical slice and compiles both harnesses.
+- D1 CAS loser commits side effects or R2 write ambiguity resurrects evidence: CF1 Tasks 2–3 and CF2 Task 3.
+- Source permissions/holds are stale at search/download/cleanup: shared authorization plus primary persistence tests on both lanes.
+- Cloudflare reuses S3 assumptions or AWS alone passes parity: CF-specific conformance and combined P7/CF4 release gate.
+- Local mocks conceal missing actual engines/runtime/recovery: required real environments and per-provider evidence, never a skipped live suite reported as success.
 
-## Plan set and dependency order
+## Complete plan set and dependency order
 
-| ID | Plan | Dependencies | Deliverable |
+| ID | Plan | Prerequisite | Responsibility |
 | --- | --- | --- | --- |
-| P1 | [Portable foundation](2026-11-14-document-foundation.md) | None | Tested evidence, permissions, history, persistence and lifecycle contracts |
-| P2 | [AWS document slice](2026-11-14-aws-document-slice.md) | P1 | Running /v1 upload, version, metadata and audit API with AWS adapters and IaC |
-| P3 | [Governance and external access](2026-11-14-governance-external-access.md) | P1, P2 | Scoped external grants, retention/holds and reconciled deletion |
-| P4 | [Processing and OCR](2026-11-14-processing-ocr.md) | P1; AWS wiring needs P2; deletion checks need P3 | First-class extraction jobs and selected approved engines |
-| P5 | [Authorized search](2026-11-14-authorized-search.md) | P1, P2; text integration P4; cleanup P3 | Search, indexing and rebuild with current permissions |
-| P6 | [FlowKit integration](2026-11-14-flowkit-integration.md) | P1, P2; assembled acceptance P3–P5 | Exact-evidence review via supported external runtime |
-| P7 | [AWS release and operations](2026-11-14-aws-release-operations.md) | P1–P6 | Assembled acceptance, monitoring, replay, recovery and release evidence |
+| P1 | [Portable foundation](2026-11-14-document-foundation.md) | None | Evidence identity/history, permissions, atomic persistence, lifecycle |
+| P0 | [Shared provider contracts and API](2026-11-14-shared-provider-contracts.md) | P1 | Artifacts/readers/uploads/identity/cursors/delivery, one Fetch API and conformance harness |
+| P2 | [AWS document slice](2026-11-14-aws-document-slice.md) | P1/P0 | DynamoDB/S3/SQS, Lambda envelope and CDK vertical slice |
+| CF1 | [Cloudflare document slice](2026-11-14-cloudflare-document-slice.md) | P1/P0 | D1/R2/Queues, Workers envelope and Wrangler vertical slice |
+| P3 | [Governance and external access](2026-11-14-governance-external-access.md) | P1/P0 | Shared services/routes; AWS protection/cleanup implementation after P2 |
+| CF2 | [Cloudflare governance](2026-11-14-cloudflare-governance.md) | CF1; P3 shared services | D1 grants/permits, R2 lock reservations and complete cleanup |
+| P4 | [Processing and OCR](2026-11-14-processing-ocr.md) | P1/P0; P3 lifecycle | Shared contracts/services/routes/engine evaluation; AWS adapters after P2 |
+| P5 | [Authorized search](2026-11-14-authorized-search.md) | P1/P0; P3/P4 interfaces | Shared query/materializer/rebuild; AWS OpenSearch adapter after P2 |
+| P6 | [FlowKit integration](2026-11-14-flowkit-integration.md) | P1/P0; P3 lifecycle | Shared exact-evidence bridge/gateway; AWS stores after P2 |
+| CF3 | [Cloudflare processing/search/FlowKit](2026-11-14-cloudflare-processing-search-flowkit.md) | CF1/CF2; respective P4–P6 shared contracts | D1 jobs/FTS5/bindings, Worker transport and real engine/runtime acceptance |
+| P7 | [AWS release and shared operations](2026-11-14-aws-release-operations.md) | P1/P0/P2–P6 | Shared operational/release contracts, AWS evidence and release artifacts |
+| CF4 | [Cloudflare release and operations](2026-11-14-cloudflare-release-operations.md) | CF1–CF3; P7 shared contracts | Cloudflare monitoring/replay/recovery/evidence and release artifacts |
 
-The older `2026-09-02-governance-contracts.md` is a framework/demo historical plan and is not part of this release; do not execute its cross-repository framework changes.
+P0's number preserves existing P1–P7 references; execution order is P1 then P0.
+The old `2026-09-02-governance-contracts.md` is historical framework/demo work,
+not part of this release and not authority for cross-repository framework edits.
 
-## Shared ownership and integration contracts
+## Ownership and concurrency rules
 
-All portable APIs return promises and receive trusted tenant/actor context; JSON HTTP input never supplies trusted verification or service identity. IDs are opaque strings; timestamps ISO UTC; generations and revisions nonnegative safe integers. Each module exports from `src/index.ts`; compiled production artifacts use the existing root TypeScript build plus isolated Lambda bundling. Existing demo source exports remain unchanged.
-
-| Owner | Contract used by other plans |
+| Owner | Sole authority for shared interface/behavior |
 | --- | --- |
-| P1 `packages/documents` | `DocumentStore`, `CommandContext`, `Scope`, `DocumentRef`, `ArtifactRef`, `VerifiedContent`, `CommitReceipt`, `authorize`, content/metadata/grant and lifecycle services |
-| P2 `packages/documents` | `UploadStore`, `UploadService`, `ArtifactStore`, `DocumentReader`, `Page<T>`, event envelope and durable delivery interfaces |
-| P2 `packages/documents-aws` | DynamoDB store, S3 artifact store, outbox relay, Lambda composition and CDK resources; no SDK types in P1 |
-| P2 `apps/document-api` | `DocumentApiDependencies`, verified identity adapter, HTTP router, errors/cursors and OpenAPI; later plans register routes here |
-| P3 `packages/documents` | `ExternalGrantService`, `CleanupRegistry`, `DeletionService`, provider destruction authorization |
-| P4 `packages/document-processing` | Inspector, NativeExtractor, Renderer, OcrParser, ResultNormalizer, ProcessingStore, ProcessingService and artifact cleanup registration |
-| P5 `packages/document-search` | SearchIndex, IndexCoordinator, SearchService; AWS OpenSearch implementation remains in `packages/documents-aws` |
-| P6 `packages/documents-flowkit` | EvidenceBindingStore, FlowkitDocumentBridge, evidence references and consumer-selected event/action bindings |
-| P7 | Operational commands/runbooks and assembled tests; does not own document business policy |
+| P1 `packages/documents` | DocumentStore, Scope/CommandContext, immutable references, permission/history/lifecycle services |
+| P0 `packages/documents` | ArtifactStore, UploadStore/Service/Backend, UploadVerifier, DocumentReader/Inventory, paging and delivery |
+| P0 `apps/document-api` | createDocumentApplication(Request→Response), TokenVerifier/IdentityDirectory, errors/cursors, common base routes/OpenAPI |
+| P2 / CF1 | Provider-specific stores, upload sealing/promotion, queue adapters, ingress envelope and deployment configuration |
+| P3 / CF2 | P3 common grant/protection/cleanup policy and routes; AWS / Cloudflare provider stores/protections respectively |
+| P4 / CF3 Task 1 | P4 common processing/engine contracts/services/routes; AWS / Cloudflare persistence/dispatch/runtime wrappers respectively |
+| P5 / CF3 Task 2 | P5 common SearchService/materialization/query/rebuild contract; OpenSearch / D1 FTS5 adapters respectively |
+| P6 / CF3 Task 3 | P6 common evidence binding/bridge/gateway/consumer fixture; AWS / D1 stores and authenticated delivery respectively |
+| P7 / CF4 | P7 common operational/release types, validators/scenarios; AWS / Cloudflare telemetry/recovery/evidence respectively |
 
-**Persistence rule:** P1's logical aggregate must not become an unbounded DynamoDB item or a transaction rewriting all history. P1 defines bounded head reads, immutable-row reads and append/delta mutations before P2 implementation. Root head changes always use aggregate revision CAS. Store immutable metadata/version rows separately and page every collection; state, appended rows, receipt, audit and outbox must commit together. Reject an oversized single command before writes. Never split a logically atomic mutation across independent transactions.
+When a P3–P7 task contains both portable and AWS outputs, deliver and verify its
+portable portion first as a separately reviewable commit, then implement its AWS
+adapter portion. Cloudflare may consume that verified shared output without
+waiting for AWS code, deployment or live-test completion. CF tasks implement
+interfaces rather than fork the shared service. Each consumer compiles against
+its owner's exports. P0 takes ownership of portable files formerly scheduled in
+P2; historical P2 declarations do not override it. Every plan's task text has
+been adjusted to this split.
 
-**Destruction rule:** A hold request may be pending while an irreversible provider deletion is in flight. Serialize per-document cleanup under durable destruction permits; do not acknowledge a hold as active until an earlier permit is resolved and provider protections are applied. Do not expire a timed-out permit and assume the destructive call stopped. A pending hold prevents new destructive permits. P3 supplies the state machine and race proof.
+Both providers may work independently after shared prerequisites land. Serialize
+edits to common exports, route registrations, root manifests/lockfile, shared
+scenario files and OpenAPI. Merge provider-specific files first, then integrate
+shared composition once. Parallel waves describe dependency independence and do
+not themselves select subagent execution.
 
-**Live test convention:** Unit/contract tests under `test/documents*/` use injected fakes and run normally. Real-cloud suites under `test/aws-documents/` skip unless `FLOWKITFORM_AWS_TEST_APPROVED=true` and an explicit deployment output file/account/region is provided. With that flag set, missing configuration is a failure, never a skip. No tests create environments or migrate databases. Test-owned fixture destruction is confined to the explicitly approved isolated test deployment.
+**Persistence:** bounded head/delta commands, immutable paged rows, durable
+receipts, atomic state/audit/outbox. D1 zero-row CAS must fail inside transaction;
+DynamoDB transaction limits cannot be evaded by non-atomic splitting. Capacity
+and workload bounds are explicit and measured separately.
 
-## Accompanying wave and implementation checklist
+**Artifacts/destruction:** opaque immutable generation, staged verification,
+tracked promotion, no published-byte mutation. Unknown writes/destruction/rule
+updates must be reconciled, not assumed cancelled after timeout. Pending holds
+block new destructive permits; active acknowledgment waits for earlier permit
+settlement and provider protection. Cleanup includes all artifact owners,
+index epochs and recoverable sensitive copies.
+
+## Wave and implementation checklist
 
 ### Wave 0: Baseline and deployment decisions
 
-- [ ] Record clean/dirty workspace state, existing test baseline and installed package exports; use an isolated worktree at execution time where required.
-- [ ] Review P1–P7 and select execution method. The authorization to write all plans does not select subagents.
-- [ ] Start P4 Task 1 read-only evaluation matrix and P6 Task 1 compatibility inventory; neither requires executing models or deploying infrastructure.
-- [ ] Prepare `docs/decisions/aws-release-config.md` from P2 Task 1: account/region/issuer/audience/membership endpoint, size/concurrency/cost limits, recovery objectives, external runtime and credential references. Missing real values block deployment, not local implementation.
+- [ ] Review the full plan set, record workspace/test baseline and public installed FlowKit exports, select execution method and use an isolated worktree when needed.
+- [ ] Start read-only P4 engine/corpus evaluation planning and P6 runtime compatibility inventory; do not execute model code or deploy inference without existing/explicit authorization.
+- [ ] Prepare separate AWS and Cloudflare account/region-or-location/identity/credential/capacity/cost/recovery configuration records (P2 Task 1, CF1 Task 1).
+- [ ] Inventory production verifier, OCR hosting, trusted membership directory and supported external runtime prerequisites for each profile.
 
-**Exit:** all plans read; dependency ownership agreed; baseline recorded. No product functionality claimed.
+**Exit:** both providers' inputs/gates recorded, no fake deployment values treated as production-ready.
 
-### Wave 1: Portable foundation
+### Wave 1: Core and shared prerequisites
 
-- [ ] Execute P1 Tasks 1–5 in order, including the bounded persistence clarification above.
-- [ ] Run portable contract suites, typecheck and build; preserve existing demo behavior.
-- [ ] Review the public contract diff before provider implementations consume it.
+- [ ] Execute P1 Tasks 1–5; verify bounded persistence, exact content/metadata history, default-deny permissions and lifecycle fencing.
+- [ ] Execute P0 Tasks 1–4; one upload service, standard Fetch API, identity/cursors, delivery and runner-neutral conformance suite.
+- [ ] Compile synthetic AWS/Cloudflare implementations; run portable tests/typecheck/build and review public contracts before provider implementations consume them.
 
-**Exit:** immutable content/history, current permissions, atomic commits and publication/deletion fences have executable contract coverage.
+**Exit:** neither provider requires the other's SDK or implementation to meet shared contracts. Existing demo behavior remains intact.
 
-### Wave 2: AWS evidence vertical slice
+### Wave 2: Parallel evidence vertical slices
 
-- [ ] Execute P2 Tasks 1–6 in order; prepare CDK synthesis and deployment diff before seeking any missing cloud approval.
-- [ ] Deploy only into an explicitly authorized test environment, then run real-cloud atomicity, upload reuse/multipart and isolation tests.
-- [ ] Start P4 Tasks 2–3, P5 Tasks 1–2 and P6 Tasks 2–3 after their P1/P2 interfaces land. These streams can be worked independently, but must not edit shared API composition concurrently.
+- [ ] AWS: execute P2 Tasks 1–6 using P0, prepare CDK synth/diff and run real DynamoDB/S3/SQS evidence tests after target authorization.
+- [ ] Cloudflare: execute CF1 Tasks 1–5 using P0, prepare Wrangler/migration configuration and run real D1/R2/Queues evidence tests after target authorization.
+- [ ] Run identical upload/history/download/audit/auth scenarios plus provider-specific CAS/VersionId-or-create-only/queue ambiguity cases.
+- [ ] Begin shared P3–P6 service/contract work once P0 is available; do not wait for either lane's live environment to create portable code.
 
-**Exit:** authorized API client can create a document, upload/complete immutable bytes, query history and download an exact version with durable audit/event intent.
+**Exit:** authorized client can create, upload, complete, retrieve exact evidence/history and audit in both real deployments with atomic intent and durable replay.
 
-### Wave 3: Governance and processing
+### Wave 3: Governance and extraction
 
-- [ ] Complete P3 Tasks 1–4 and P4 Tasks 1–5; production OCR integration waits for its engine/hosting gate.
-- [ ] Prove pending/active hold semantics and deletion reconciliation before exposing destructive release APIs.
-- [ ] Complete P5 indexing and text ingestion integration with real processing artifacts.
+- [ ] Shared: complete P3 portable grants/holds/cleanup and P4 processing/engine/profile/service/route work.
+- [ ] AWS: finish P3 S3 protection/cleanup and P4 AWS job/engine packaging adapters and real acceptance.
+- [ ] Cloudflare: execute CF2 Tasks 1–3 and CF3 Task 1; prove lock capacity/ordering, D1 cleanup and bounded Worker/declared remote extraction.
+- [ ] Run shared external submission, hold/deletion/late-result and native/scanned/mixed/image/multi-page corpus cases on both lanes.
 
-**Exit:** controlled external submission, version-specific OCR/results, retained histories and complete deletion work across original and derived data. Fake OCR alone cannot pass this wave.
+**Exit:** required first-class extraction and lifecycle behavior works on both, with evaluated engine hosting and no fictitious scanner/model success. Later search/FlowKit cleanup remains an explicit assembly gate until Wave 4.
 
-### Wave 4: Search and workflow assembly
+### Wave 4: Authorized search and exact-evidence workflow
 
-- [ ] Complete P5 Tasks 1–4 and P6 Tasks 1–5; use evidence IDs/revisions across the boundary.
-- [ ] Register the final API routes and regenerate/validate OpenAPI once the route set is assembled.
-- [ ] Run live search revocation/pagination tests and real-runtime evidence replacement and delivery-outage tests.
+- [ ] Complete P5/P6 shared materialization/rebuild/bridge/gateway/consumer-fixture code and route modules.
+- [ ] AWS: finish P5 OpenSearch and P6 AWS stores/delivery; Cloudflare: finish CF3 Tasks 2–4 with D1 FTS5/bindings and shared runtime gateway.
+- [ ] Regenerate/validate the one OpenAPI inventory and run both providers' live permission revocation/pagination and exact-version/metadata review scenarios.
+- [ ] Re-run P3/CF2 full cleanup provider matrix against processing/search/FlowKit/replay/rebuild; holds and tombstones must dominate all writers.
 
-**Exit:** evidence can be found, reviewed and correlated to an exact historical snapshot; permissions and holds apply throughout.
+**Exit:** two independent deployments support search, review and deletion without transferring approval or leaking revoked evidence.
 
-### Wave 5: Release operations and acceptance
+### Wave 5: Operations, recovery and parallel-provider release
 
-- [ ] Complete P7 Tasks 1–5, including repeated out-of-order delivery/deletion races, security negative tests and a restore drill.
-- [ ] Record measured latency, throughput, cost and recovery results against deployment budgets; resolve failed gates.
-- [ ] Prepare release artifact hashes, CDK diff, service dependency inventory and rollback instructions for final deployment review.
+- [ ] Complete P7 shared operational contracts/coverage/evidence format and AWS monitoring/replay/restore/packaging.
+- [ ] Complete CF4 Tasks 1–4: Worker monitoring, provider-safe commands, D1/R2 restore, real parity/capacity evidence and Cloudflare packaging.
+- [ ] Record separate provider latency/throughput/resource/cost/RPO/RTO results and fix failed acceptance gates; no provider's evidence substitutes for the other.
+- [ ] Build both release artifacts and run the common combined readiness validator after their evidence is collected. Package preparation does not depend on the other lane's final ready boolean, avoiding a circular release dependency.
+- [ ] Prepare concrete target manifests/diffs and rollback instructions; roll out independently only when authorized, then observe each provider's smoke/monitoring window.
 
-**Exit:** all approved-design acceptance cases have real assembled evidence. Release deployment requires existing or newly obtained authorization for its concrete target.
+**Exit:** first product release ready only when both providers have complete passing evidence. Simultaneous deployment, shared production accounts and cross-provider data synchronization are not required.
 
-## Open deployment and engine gates
+## Live verification, evidence and unresolved gates
 
-| Gate | Owner | Can continue while unresolved | Required before |
+Offline Bun tests cover portable code and AWS mocks; `test:cloudflare` uses
+Vitest/workerd on explicit `.worker-case.ts` includes (not Bun's auto-discovery).
+Live suites are `test/aws-documents/` and `test/cloudflare-documents/` with their
+own `FLOWKITFORM_AWS_TEST_APPROVED=true` or
+`FLOWKITFORM_CLOUDFLARE_TEST_APPROVED=true`, explicit outputs/account/target and
+identity fixtures. A missing flag means explicit skip/no live evidence. A
+present flag with missing/mismatched configuration fails. Tests never provision
+or migrate remote services; provisioning/migrations are separate reviewed
+operator actions for the approved isolated environment.
+
+Write `docs/validation/document-release-evidence.md` and
+`docs/validation/document-design-coverage.md` during execution. Each row records
+plan/task, provider, commit, command, environment/profile, result and sanitized
+artifact hash/location. Include every base/amendment invariant. Do not collect
+raw certificate text, tokens or actual deployment secrets in public artifacts.
+
+| Gate | Owners | Local progress allowed | Blocks |
 | --- | --- | --- | --- |
-| Real AWS account/region, spending/capacity/recovery budgets | P2 Task 1 | Offline code, fakes, synth with explicit synthetic values | Live test deployment and release |
-| OIDC issuer/audience, membership directory and service credentials | P2 Task 4 | Typed adapter and negative-auth tests | Authenticated real API acceptance |
-| Upload-verifier implementation and hosting | P2 Task 3 | Verification contracts and rejecting fixture | Making real uploaded evidence available |
-| Authorized representative corpus, engine execution/adoption/hosting | P4 Tasks 1 and 4 | Portable processing contracts, job orchestration and fixture adapters | Real OCR acceptance and release |
-| Supported runtime contract verification and external dependencies | P6 Tasks 1 and 3 | Binding models and bridge tests | Runtime deployment/assembled workflow acceptance |
-| Actual OpenSearch region/capacity pricing and network policy | P5 Task 3 | Search contracts, authorization and coordinator tests | Collection deployment and live search acceptance |
-| Production retention mode, backup-copy expiry and hold authority | P3 Task 2, P7 Task 4 | Governance state machine, simulated recovery | Destructive release operations and governance sign-off |
-| Concrete target approval for deployment/restore | P2 Task 6, P7 Tasks 4–5 | Bundles, CDK diff, runbooks and evidence preparation | Target mutation |
+| Actual account/region/location, workload/cost/resource/recovery budgets | P2.1 / CF1.1 | Synthetic config, offline adapters/bundles | Provider deployment and budget acceptance |
+| Identity issuer/audience/membership directory and credentials | P0.3, P2.4 / CF1.5 | Typed adapters, negative-auth tests | Real API acceptance |
+| Configured upload verifier | P0.2, P2.3 / CF1.3 | Rejecting fixtures and streaming tests | Making real evidence available |
+| Authorized representative corpus and selected engine/hosting | P4.1/P4.4 / CF3.1 | Portable service/profile/job work | Real OCR acceptance on both |
+| Supported runtime/gateway/public-export compatibility | P6.1/P6.3 / CF3.3 | Binding/bridge tests | Actual workflow acceptance |
+| Search service budget/availability or D1 FTS capacity | P5.3 / CF3.2 | Query/materializer tests | Live search/capacity acceptance |
+| Retention/hold authority, R2 rule admission and recovery copy expiry | P3/P7 / CF2/CF4 | State-machine/recovery simulations | Destructive release behavior and restore readiness |
+| Concrete target deployment/migration/restore authorization | Provider operators | Artifacts/diffs/runbooks ready for review | Actual target mutations |
 
-No elapsed wait, passing fake, or design approval resolves one of these gates.
-
-## Evidence ledger and completion rules
-
-Create `docs/validation/aws-release-evidence.md` during execution with one row per plan/task: commit, exact command, environment, result, artifact location and unresolved failures. Never mark an entire wave complete from unit tests alone when its exit requires live services. Collect no raw certificate content or credentials in this ledger.
-
-Local verification per code task: its focused tests, `bun run typecheck`, and appropriate build checks. Full root tests/build run at each wave exit; broaden only for changed integration concerns. Preserve existing Compose/browser CI alongside new document gates. Commits are scoped to each task; never commit credentials or deployment outputs.
+Use focused tests per code task and full relevant portable/Worker/root checks at
+wave exit. Preserve existing Compose/browser CI and framework boundaries. Fix
+new failures; record and resolve baseline failures before claiming release.
+Commits remain scoped, including a portable-first commit where tasks mix lanes.
 
 ## Self-review and handoff
 
-Every approved design goal maps to P1–P7; P7 owns the full coverage matrix. No UI, GCP/Azure adapters or runtime extension is scheduled. Native execution minimizes context churn for shared contracts; subagent-driven execution provides independent per-task review. Review the full plan set and choose the execution approach before starting implementation.
+P1/P0 own shared foundation/API; P2/CF1 vertical slices; P3/CF2 governance;
+P4–P6/CF3 extraction/search/review; P7/CF4 operations and combined release.
+All amendment conditions have task owners and provider-specific live proof.
+Review the complete plan set and choose native or subagent-driven execution
+before implementation; no execution method is inferred from design approval.

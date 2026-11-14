@@ -1,9 +1,17 @@
 # FlowKitForm — Specification
 
+**First-release scope update:** AWS and Cloudflare will ship alongside each
+other; D1 is selected as Cloudflare's authoritative store. The
+[Cloudflare amendment](superpowers/specs/2026-11-14-cloudflare-alternative-design.md)
+was approved on 2026-11-14. The [combined wave plan](superpowers/plans/2026-11-14-release-waves.md)
+links shared prerequisites and both provider implementation lanes.
+
 The [approved design](superpowers/specs/2026-11-14-flowkitform-design.md) is the
-current release specification. It defines an AWS-first, API-first document
+current release specification. It defines an API-first document
 management product with portable adapters, first-class OCR, independent document
-permissions, immutable evidence versions, and retention-controlled deletion.
+permissions, immutable evidence versions, and retention-controlled deletion. AWS
+and Cloudflare are parallel first-release targets; detailed Cloudflare mechanisms
+are approved in the amendment above.
 
 The reconciliation below is authoritative; the previous draft is retained below
 as historical context, not additional release scope.
@@ -11,19 +19,19 @@ as historical context, not additional release scope.
 | Earlier requirement | Disposition for the approved release |
 | --- | --- |
 | Tenant isolation, immutable versions, verified hashes, audit, encryption, maker-checker | Carried forward; maker-checker remains FlowKit policy. |
-| PostgreSQL fixed document substrate | Retired; DynamoDB is the AWS document adapter. Existing auth/runtime stores remain external dependencies until explicitly replaced. |
+| PostgreSQL fixed document substrate | Retired; DynamoDB is the AWS adapter; D1 is the Cloudflare authority. Existing auth/runtime stores remain external dependencies until explicitly replaced. |
 | Temporal fixed core dependency | Retired for document core; current supported FlowKit runtime is an external prerequisite. |
 | OCR only through extensions | Retired; inspection, extraction, OCR jobs and results are first-class. Engine/hosting selection requires evaluation. |
 | Reference UI in first release | Deferred; separate scope agreement required. Existing demo UI remains current code. |
 | Workflow owns one document status, one running definition per document, active workflow prevents deletion | Retired as universal core rules; consumers own business policy, and references pin exact evidence. Retention and holds always constrain destruction. |
-| Runtime definition registration, generic projections, public extension registration, outbound webhooks | Deferred beyond initial AWS release; trusted hooks and required FlowKit bindings are included. |
+| Runtime definition registration, generic projections, public extension registration, outbound webhooks | Deferred beyond the initial AWS/Cloudflare release; trusted hooks and required FlowKit bindings are included. |
 | Per-tenant audit hash chain | Deferred; atomic audit/event intent and attributable history are required. No full event sourcing. |
 | Signed direct upload | Carried forward as required, including large-file upload and immutable publication. |
 | REST/JSON, /v1, OpenAPI, service identities, non-disclosing cross-tenant errors | Carried forward. Identity-provider deployment choice remains a milestone decision. |
-| API p95 300ms, dispatch p95 500ms, unspecified concurrency | Retired as unsupported universal promises; define measured budgets and scale targets before AWS deployment. |
+| API p95 300ms, dispatch p95 500ms, unspecified concurrency | Retired as unsupported universal promises; define measured budgets and scale targets before either provider deployment. |
 | Durable workflow snapshots, registered executable steps, task eligibility, timers, notifications | Reuse supported FlowKit behavior; do not rebuild its runtime. |
 | Approval quorum, compensation, AI classification/signature validation | Deferred or excluded; no runtime extension in this project. |
-| Compose/Kubernetes as product target; three-cloud manifests together | Retired as release target; existing dev tooling remains. AWS IaC first, GCP then Azure in later phases. |
+| Compose/Kubernetes as product target; three-cloud manifests together | Retired as release target; existing dev tooling remains. AWS/Cloudflare infrastructure as code alongside each other, GCP then Azure later. |
 | Observability and recovery | Carried forward, including failed delivery, replay, reindex and documented restore exercises. |
 
 ## Historical specification draft v0.2
