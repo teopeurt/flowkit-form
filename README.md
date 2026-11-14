@@ -13,6 +13,15 @@ copy of the FlowKit framework: the six framework packages are consumed through t
 browser experience. The document-management features in the specification are not implemented yet;
 the sections below describe running and customizing the current application.
 
+The [approved document management design](docs/superpowers/specs/2026-11-14-flowkitform-design.md)
+is the current target: AWS-first portable adapters, first-class OCR, and an
+API-first release. The specification, architecture and roadmap identify the
+superseded historical direction. Approval does not mean these features exist;
+the current application described below remains the demo starting point.
+
+The [release wave plan](docs/superpowers/plans/2026-11-14-release-waves.md) links
+the full implementation plan set and its verification gates.
+
 ## Package availability
 
 The FlowKit packages are published on [npmjs.org](https://www.npmjs.com/org/teopeurt) as
