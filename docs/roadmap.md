@@ -1,5 +1,29 @@
 # FlowKitForm roadmap and gap analysis
 
+The [approved base design](superpowers/specs/2026-11-14-flowkitform-design.md) and
+[approved Cloudflare amendment](superpowers/specs/2026-11-14-cloudflare-alternative-design.md)
+define the target. AWS and Cloudflare ship alongside each other; each tenant is
+assigned to one deployment/provider. Current code remains the demo application;
+approved plans do not imply document features have been implemented.
+
+1. Portable foundation (P1): evidence/history, permissions, atomic persistence and lifecycle fencing.
+2. Shared provider prerequisites (P0): readers/artifacts/uploads/delivery, identity, Fetch API/OpenAPI and runner-neutral conformance.
+3. Parallel evidence slices (P2/CF1): DynamoDB/S3/SQS/Lambda/CDK and D1/R2/Queues/Workers/Wrangler, verified independently.
+4. Governance and extraction (P3/P4, CF2/CF3): scoped external access, holds/deletion, version-specific OCR/jobs/results and provider cleanup.
+5. Search and FlowKit (P5/P6, CF3): OpenSearch or FTS5, current permissions, exact evidence review on a supported external runtime.
+6. Operations and release (P7/CF4): monitoring/replay, separate backup/restore drills, budgets and two-provider release evidence.
+
+## Execution plans
+
+The [master wave and implementation plan](superpowers/plans/2026-11-14-release-waves.md)
+links all twelve shared/provider plans and defines six execution waves, task
+ownership, entry/exit checks, parallel work and live-test gates. Both providers
+must pass their own acceptance to declare the first release ready; simultaneous
+deployment is not required. Engine/hosting adoption, actual deployment profiles
+and target authorization remain explicit gates. GCP/Azure and UI remain later scope.
+
+## Historical roadmap and existing demo gap analysis
+
 This tracks how the repository gets from its starting point to the [FlowKitForm specification](spec.md). The [architecture](architecture.md) describes the target design each phase builds toward.
 
 ## Starting point
