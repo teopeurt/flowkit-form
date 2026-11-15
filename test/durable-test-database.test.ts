@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'bun:test';
 
-import { durableTestsEnabled } from '@flowkit-demo/domain';
+import { durableTestsEnabled } from '@flowkitform/demo-domain';
 
 describe('durable test opt-in', () => {
   it('is disabled unless explicitly set to true', () => {

@@ -6,8 +6,8 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 import {
   betterAuthSchema,
   createDemoDatabaseClient,
-} from '@flowkit-demo/database';
-import { loadConfig } from '@flowkit-demo/domain';
+} from '@flowkitform/demo-database';
+import { loadConfig } from '@flowkitform/demo-domain';
 
 export function createAuth(overrides: { database?: DB } = {}) {
   const config = loadConfig();

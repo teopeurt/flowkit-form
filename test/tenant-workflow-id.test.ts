@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'bun:test';
 
-import { tenantFlowId, tenantWorkflowId } from '@flowkit-demo/domain';
+import { tenantFlowId, tenantWorkflowId } from '@flowkitform/demo-domain';
 
 describe('tenant-qualified Temporal workflow IDs', () => {
   it('round-trips a tenant-local flow identifier', () => {

@@ -1,4 +1,4 @@
-import { EmptyState } from '@flowkit-demo/ui';
+import { EmptyState } from '@flowkitform/demo-ui';
 import type { FlowActivity } from '../../lib/api';
 
 const actionLabels: Record<string, string> = {

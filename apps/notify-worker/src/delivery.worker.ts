@@ -1,11 +1,11 @@
 import { NotificationAdapterRegistry, NotificationDeliveryRuntime, type NotificationChannelAdapter, type RegisteredAdapter } from '@teopeurt/flowkit-notify';
 
-import { loadConfig } from '@flowkit-demo/domain';
-import { PostgresOutboxStore } from '@flowkit-demo/database';
-import { RuntimeHealthRepository } from '@flowkit-demo/database';
+import { loadConfig } from '@flowkitform/demo-domain';
+import { PostgresOutboxStore } from '@flowkitform/demo-database';
+import { RuntimeHealthRepository } from '@flowkitform/demo-database';
 import { MailpitSmtpAdapter } from './mailpit-smtp.adapter';
-import { PostgresInboxAdapter } from '@flowkit-demo/database';
-import type { TenantScope } from '@flowkit-demo/database';
+import { PostgresInboxAdapter } from '@flowkitform/demo-database';
+import type { TenantScope } from '@flowkitform/demo-database';
 
 const retryPolicy = { maxAttempts: 3, initialDelayMs: 1_000, multiplier: 2, maxDelayMs: 10_000 };
 

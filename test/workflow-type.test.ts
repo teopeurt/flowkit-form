@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'bun:test';
 import { readFile } from 'node:fs/promises';
 
-import { enrolmentWorkflowType, leaveWorkflowType } from '@flowkit-demo/domain';
+import { enrolmentWorkflowType, leaveWorkflowType } from '@flowkitform/demo-domain';
 
 describe('leave workflow module', () => {
   it('reads no configuration, because the sandbox that imports it has no process', async () => {
@@ -13,8 +13,8 @@ describe('leave workflow module', () => {
   it('imports only the workflow-safe domain entry point', async () => {
     const source = await readFile(new URL('../apps/worker/src/workflows.ts', import.meta.url), 'utf8');
 
-    expect(source).toContain("from '@flowkit-demo/domain/workflow'");
-    expect(source).not.toContain("from '@flowkit-demo/domain';");
+    expect(source).toContain("from '@flowkitform/demo-domain/workflow'");
+    expect(source).not.toContain("from '@flowkitform/demo-domain';");
   });
 });
 

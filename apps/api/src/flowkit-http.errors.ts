@@ -12,7 +12,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
-import { LeaveFlowProjectionConflictError } from '@flowkit-demo/database';
+import { LeaveFlowProjectionConflictError } from '@flowkitform/demo-database';
 
 export function asFlowkitHttpException(error: unknown): unknown {
   if (error instanceof HttpException) return error;

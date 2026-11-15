@@ -9,12 +9,12 @@ import {
 } from '@teopeurt/flowkit-consumer';
 import { publishDefinition } from '@teopeurt/flowkit-temporal';
 
-import { resolveDemoActor, tenantWorkflowId } from '@flowkit-demo/domain';
-import { LeaveFlowRepository } from '@flowkit-demo/database';
-import { leaveDefinition } from '@flowkit-demo/domain';
-import { leaveRequestSchema, type LeaveRequest } from '@flowkit-demo/domain';
-import { PostgresInboxAdapter } from '@flowkit-demo/database';
-import type { TenantScope } from '@flowkit-demo/database';
+import { resolveDemoActor, tenantWorkflowId } from '@flowkitform/demo-domain';
+import { LeaveFlowRepository } from '@flowkitform/demo-database';
+import { leaveDefinition } from '@flowkitform/demo-domain';
+import { leaveRequestSchema, type LeaveRequest } from '@flowkitform/demo-domain';
+import { PostgresInboxAdapter } from '@flowkitform/demo-database';
+import type { TenantScope } from '@flowkitform/demo-database';
 import { leaveRuntime } from './temporal.client';
 
 export const publishedLeaveDefinition = publishDefinition({ definition: leaveDefinition });

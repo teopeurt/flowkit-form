@@ -2,8 +2,8 @@ import { Client, Connection } from '@temporalio/client';
 import type { FlowRuntime } from '@teopeurt/flowkit-consumer';
 import { createFlowkitTemporalRuntime } from '@teopeurt/flowkit-temporal';
 
-import { loadConfig } from '@flowkit-demo/domain';
-import { leaveWorkflowType } from '@flowkit-demo/domain';
+import { loadConfig } from '@flowkitform/demo-domain';
+import { leaveWorkflowType } from '@flowkitform/demo-domain';
 
 const config = loadConfig();
 const connection = Connection.lazy({ address: config.TEMPORAL_ADDRESS });

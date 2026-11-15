@@ -7,10 +7,10 @@ import type { AuthenticatedPrincipal } from '@teopeurt/flowkit-auth';
 import type { FlowkitConsumerView } from '@teopeurt/flowkit-consumer';
 
 import { OrganizationContextGuard } from './auth/auth.module';
-import type { LeaveRequestRow, TenantScope } from '@flowkit-demo/database';
+import type { LeaveRequestRow, TenantScope } from '@flowkitform/demo-database';
 import type { OrganizationContext } from './auth/organization-context';
 import { FlowkitDemoConsumer, newLeaveFlowId } from './flow/flowkit-demo.consumer';
-import { leaveRequestSchema } from '@flowkit-demo/domain';
+import { leaveRequestSchema } from '@flowkitform/demo-domain';
 import { asFlowkitHttpException } from './flowkit-http.errors';
 
 type SessionRequest = { principal: AuthenticatedPrincipal; organizationContext: OrganizationContext };

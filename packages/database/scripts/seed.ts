@@ -1,6 +1,6 @@
 import { hashPassword } from 'better-auth/crypto';
 
-import { loadConfig } from '@flowkit-demo/domain';
+import { loadConfig } from '@flowkitform/demo-domain';
 import { withMigrationClient } from '../src/client';
 import { assertDisposableLocalDatabase } from '../../../scripts/lib/local-database-guard';
 

@@ -6,8 +6,8 @@ import { describe, expect, it } from 'bun:test';
 import { serializeSignedCookie } from 'better-call';
 import { drizzle } from 'drizzle-orm/pg-proxy';
 
-import { betterAuthSchema } from '@flowkit-demo/database';
-import { loadConfig } from '@flowkit-demo/domain';
+import { betterAuthSchema } from '@flowkitform/demo-database';
+import { loadConfig } from '@flowkitform/demo-domain';
 
 import { auth, createAuth } from '../apps/api/src/auth/auth.config';
 import { AppModule } from '../apps/api/src/app.module';

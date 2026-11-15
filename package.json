@@ -1,5 +1,5 @@
 {
-  "name": "@flowkit-demo/workspace",
+  "name": "@flowkitform/workspace",
   "version": "0.2.0",
   "private": true,
   "type": "module",
@@ -26,9 +26,9 @@
     "stack:reset": "bun run scripts/reset-stack.ts"
   },
   "dependencies": {
-    "@flowkit-demo/database": "workspace:*",
-    "@flowkit-demo/document": "workspace:*",
-    "@flowkit-demo/domain": "workspace:*",
+    "@flowkitform/demo-database": "workspace:*",
+    "@flowkitform/document": "workspace:*",
+    "@flowkitform/demo-domain": "workspace:*",
     "@teopeurt/flowkit-auth": "1.2.0",
     "@teopeurt/flowkit-consumer": "1.2.0",
     "@teopeurt/flowkit-core": "1.2.0",

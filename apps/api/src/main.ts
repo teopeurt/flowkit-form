@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 
-import { loadConfig } from '@flowkit-demo/domain';
+import { loadConfig } from '@flowkitform/demo-domain';
 
 import { AppModule } from './app.module';
 export async function createDemoApp() { const app = await NestFactory.create(AppModule); app.enableShutdownHooks(); return app; }

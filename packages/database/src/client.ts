@@ -1,6 +1,6 @@
 import postgres, { type Sql } from 'postgres';
 
-import { loadConfig } from '@flowkit-demo/domain';
+import { loadConfig } from '@flowkitform/demo-domain';
 
 export function databaseTarget() { const config = loadConfig(); return new URL(config.DATABASE_URL).pathname.slice(1); }
 

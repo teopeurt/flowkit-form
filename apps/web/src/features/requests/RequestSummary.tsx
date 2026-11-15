@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Alert, Badge, Button, Panel } from '@flowkit-demo/ui';
+import { Alert, Badge, Button, Panel } from '@flowkitform/demo-ui';
 import { ActivityTimeline, sentenceCase } from '../activity/ActivityTimeline';
 import { errorMessage, type ActiveMember, type FlowRecord, type TaskRecord } from '../../lib/api';
 

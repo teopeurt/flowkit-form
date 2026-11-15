@@ -1,5 +1,5 @@
 {
-  "name": "@flowkit-demo/worker",
+  "name": "@flowkitform/demo-worker",
   "version": "0.2.0",
   "private": true,
   "type": "module",

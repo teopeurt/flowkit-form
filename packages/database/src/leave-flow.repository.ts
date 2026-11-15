@@ -4,9 +4,9 @@ import { planTaskProjection } from '@teopeurt/flowkit-tasks';
 import type { DispatchNotificationInput, FlowkitNotificationBinding, RecordStageReadyInput, RecordTransitionInput, RecordTransitionOutput } from '@teopeurt/flowkit-temporal';
 import type { Sql, TransactionSql } from 'postgres';
 
-import { leaveDefinition } from '@flowkit-demo/domain';
-import type { LeaveRequest } from '@flowkit-demo/domain';
-import { notificationTemplates } from '@flowkit-demo/domain';
+import { leaveDefinition } from '@flowkitform/demo-domain';
+import type { LeaveRequest } from '@flowkitform/demo-domain';
+import { notificationTemplates } from '@flowkitform/demo-domain';
 import { createDemoDatabaseClient } from './client';
 import { jsonb } from './jsonb';
 import { PostgresOutboxStore } from './postgres-outbox-store';

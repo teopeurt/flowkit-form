@@ -1,4 +1,4 @@
-import { Badge, EmptyState, Panel } from '@flowkit-demo/ui';
+import { Badge, EmptyState, Panel } from '@flowkitform/demo-ui';
 import type { NotificationPayload } from '../../lib/api';
 import { sentenceCase } from '../activity/ActivityTimeline';
 

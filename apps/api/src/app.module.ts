@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
-import { createDemoDatabaseClient } from '@flowkit-demo/database';
-import { RuntimeHealthRepository } from '@flowkit-demo/database';
+import { createDemoDatabaseClient } from '@flowkitform/demo-database';
+import { RuntimeHealthRepository } from '@flowkitform/demo-database';
 import { FlowkitDemoConsumer } from './flow/flowkit-demo.consumer';
 import { AuthModule } from './auth/auth.module';
 import { FlowController } from './flow.controller';

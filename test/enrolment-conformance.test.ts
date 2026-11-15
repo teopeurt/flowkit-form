@@ -3,7 +3,7 @@ import type { FlowkitActivityRegistry, RecordTransitionInput, ResolveActionConte
 import { publishDefinition } from '@teopeurt/flowkit-temporal';
 import { TestWorkflowEnvironment } from '@temporalio/testing';
 import { Worker } from '@temporalio/worker';
-import { enrolmentDefinition } from '@flowkit-demo/domain';
+import { enrolmentDefinition } from '@flowkitform/demo-domain';
 
 const publishedEnrolmentDefinition = publishDefinition({ definition: enrolmentDefinition });
 

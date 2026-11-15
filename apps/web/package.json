@@ -1,5 +1,5 @@
 {
-  "name": "@flowkit-demo/web",
+  "name": "@flowkitform/demo-web",
   "version": "0.2.0",
   "private": true,
   "type": "module",
@@ -10,7 +10,7 @@
     "build": "vite build --configLoader runner"
   },
   "dependencies": {
-    "@flowkit-demo/ui": "workspace:*",
+    "@flowkitform/demo-ui": "workspace:*",
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "react-router-dom": "7.8.0"

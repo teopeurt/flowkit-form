@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'bun:test';
 import { drizzle } from 'drizzle-orm/pg-proxy';
 
-import { betterAuthSchema } from '@flowkit-demo/database';
+import { betterAuthSchema } from '@flowkitform/demo-database';
 
 import { createAuth } from './auth.config';
 

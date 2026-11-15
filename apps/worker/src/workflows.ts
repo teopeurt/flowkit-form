@@ -6,7 +6,7 @@ import {
   leaveGuards,
   leavePolicies,
   leaveRules,
-} from '@flowkit-demo/domain/workflow';
+} from '@flowkitform/demo-domain/workflow';
 
 /**
  * The worker bundles this module into the deterministic workflow sandbox, which has no `process`.

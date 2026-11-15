@@ -1,6 +1,6 @@
 import { afterAll, afterEach, describe, expect, it } from 'bun:test';
 
-import { LeaveFlowRepository } from '@flowkit-demo/database';
+import { LeaveFlowRepository } from '@flowkitform/demo-database';
 import { LeaveService } from '../apps/api/src/leave/leave.service';
 import { clearDurableLeaveServiceData, durableLeaveServiceDatabase } from './durable-test-database';
 

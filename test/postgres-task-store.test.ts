@@ -2,8 +2,8 @@ import { afterAll, afterEach, describe, expect, it } from 'bun:test';
 import { buildInitialState, type FlowState } from '@teopeurt/flowkit-core';
 import { planTaskProjection, type FlowTask } from '@teopeurt/flowkit-tasks';
 
-import { PostgresTaskStore } from '@flowkit-demo/database';
-import { leaveDefinition } from '@flowkit-demo/domain';
+import { PostgresTaskStore } from '@flowkitform/demo-database';
+import { leaveDefinition } from '@flowkitform/demo-domain';
 import { durableTestDatabase } from './durable-test-database';
 
 const sql = await durableTestDatabase('PostgresTaskStore', ['flow_tasks', 'flow_task_events', 'flow_task_projection_operations', 'flow_task_invitations']);

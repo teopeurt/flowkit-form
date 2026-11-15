@@ -7,7 +7,7 @@ import {
   type DocumentRepository,
   type DocumentUnitOfWork,
   type TenantScope,
-} from '@flowkit-demo/document';
+} from '@flowkitform/document';
 
 function storageKey(organizationId: string, documentId: string): string {
   return `${organizationId}\u0000${documentId}`;

@@ -2,9 +2,9 @@ import { afterAll, afterEach, describe, expect, it } from 'bun:test';
 import { buildInitialState, type FlowState } from '@teopeurt/flowkit-core';
 import type { RecordTransitionInput } from '@teopeurt/flowkit-temporal';
 
-import { LeaveFlowRepository, scopeOperationId } from '@flowkit-demo/database';
+import { LeaveFlowRepository, scopeOperationId } from '@flowkitform/demo-database';
 import { publishedLeaveDefinition } from '../apps/api/src/flow/flowkit-demo.consumer';
-import { leaveDefinition } from '@flowkit-demo/domain';
+import { leaveDefinition } from '@flowkitform/demo-domain';
 import { durableTestDatabase } from './durable-test-database';
 
 const sql = await durableTestDatabase('leave flow operation scope', [

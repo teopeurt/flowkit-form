@@ -1,8 +1,8 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 
 import { OrganizationContextGuard } from './auth/auth.module';
-import { loadConfig } from '@flowkit-demo/domain';
-import { RuntimeHealthRepository } from '@flowkit-demo/database';
+import { loadConfig } from '@flowkitform/demo-domain';
+import { RuntimeHealthRepository } from '@flowkitform/demo-database';
 
 @Controller('runtime')
 @UseGuards(OrganizationContextGuard)

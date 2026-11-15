@@ -5,8 +5,8 @@ import {
   type IdentityProof,
 } from '@teopeurt/flowkit-auth';
 
-import { createDemoDatabaseClient } from '@flowkit-demo/database';
-import { roleRegistry, type DemoRole } from '@flowkit-demo/domain';
+import { createDemoDatabaseClient } from '@flowkitform/demo-database';
+import { roleRegistry, type DemoRole } from '@flowkitform/demo-domain';
 
 export type BetterAuthSession = {
   readonly user: {

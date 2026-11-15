@@ -1,4 +1,4 @@
-import { loadConfig } from '@flowkit-demo/domain';
+import { loadConfig } from '@flowkitform/demo-domain';
 import { createHash } from 'node:crypto';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

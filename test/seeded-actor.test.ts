@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'bun:test';
 
-import { resolveDemoActor } from '@flowkit-demo/domain';
+import { resolveDemoActor } from '@flowkitform/demo-domain';
 
 describe('seeded organization actors', () => {
   it.each([

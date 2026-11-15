@@ -11,8 +11,8 @@ import {
   ORGANIZATION_CONTEXT_PROVIDER,
   OrganizationContextGuard,
 } from '../apps/api/src/auth/auth.module';
-import { principal } from '@flowkit-demo/domain';
-import { RuntimeHealthRepository } from '@flowkit-demo/database';
+import { principal } from '@flowkitform/demo-domain';
+import { RuntimeHealthRepository } from '@flowkitform/demo-database';
 import { FlowkitDemoConsumer } from '../apps/api/src/flow/flowkit-demo.consumer';
 
 const fiveDayLeave = {

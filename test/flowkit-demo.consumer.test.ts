@@ -3,10 +3,10 @@ import { createFlowkitTemporalRuntime } from '@teopeurt/flowkit-temporal';
 import { TestWorkflowEnvironment } from '@temporalio/testing';
 import { Worker } from '@temporalio/worker';
 
-import { LeaveFlowRepository } from '@flowkit-demo/database';
+import { LeaveFlowRepository } from '@flowkitform/demo-database';
 import { createFlowkitDemoConsumer, publishedLeaveDefinition } from '../apps/api/src/flow/flowkit-demo.consumer';
 import { createLeaveActivities } from '../apps/worker/src/activities';
-import { leaveWorkflowType } from '@flowkit-demo/domain';
+import { leaveWorkflowType } from '@flowkitform/demo-domain';
 import { clearDurableLeaveServiceData, durableLeaveServiceDatabase } from './durable-test-database';
 
 const sql = await durableLeaveServiceDatabase('Flowkit demo consumer');

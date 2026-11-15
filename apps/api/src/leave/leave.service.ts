@@ -1,9 +1,9 @@
 import type { FlowCommand, FlowState } from '@teopeurt/flowkit-core';
 import type { FlowTask } from '@teopeurt/flowkit-tasks';
 
-import { LeaveFlowRepository, type TenantScope } from '@flowkit-demo/database';
+import { LeaveFlowRepository, type TenantScope } from '@flowkitform/demo-database';
 import { FlowkitDemoConsumer, newLeaveFlowId } from '../flow/flowkit-demo.consumer';
-import { leaveRequestSchema, type LeaveRequest } from '@flowkit-demo/domain';
+import { leaveRequestSchema, type LeaveRequest } from '@flowkitform/demo-domain';
 
 export type LeaveRecord = LeaveRequest & {
   id: string;

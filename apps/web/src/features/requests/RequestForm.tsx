@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 
-import { Alert, Button, Panel, TextareaField, TextField } from '@flowkit-demo/ui';
+import { Alert, Button, Panel, TextareaField, TextField } from '@flowkitform/demo-ui';
 import { errorMessage, type CreateRequestInput } from '../../lib/api';
 
 export function RequestForm({ onCreate, defaultManagerId }: { onCreate(input: CreateRequestInput): Promise<void>; defaultManagerId: string }) {

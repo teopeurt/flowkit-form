@@ -1,5 +1,5 @@
-import { loadConfig } from '@flowkit-demo/domain';
-import { RuntimeHealthRepository } from '@flowkit-demo/database';
+import { loadConfig } from '@flowkitform/demo-domain';
+import { RuntimeHealthRepository } from '@flowkitform/demo-database';
 import { activities, validateWorkerRegistries } from './activities';
 import { NativeConnection, Worker, bundleWorkflowCode } from '@temporalio/worker';
 import { fileURLToPath } from 'node:url';

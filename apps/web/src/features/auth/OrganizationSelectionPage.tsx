@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Alert, Button, EmptyState } from '@flowkit-demo/ui';
+import { Alert, Button, EmptyState } from '@flowkitform/demo-ui';
 import { errorMessage, type Organization } from '../../lib/api';
 
 export function OrganizationSelectionPage({ organizations, onSelect }: { organizations: Organization[]; onSelect(id: string): Promise<void> }) {

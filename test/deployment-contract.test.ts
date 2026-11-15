@@ -56,7 +56,7 @@ async function resolveLocalImport(
   } else {
     const workspaceExport = workspaceExports.get(specifier);
     if (workspaceExport === undefined) {
-      if (specifier.startsWith('@flowkit-demo/')) {
+      if (specifier.startsWith('@flowkitform/')) {
         throw new Error(`Unresolved workspace package import ${specifier} from ${relative(root, importer)}`);
       }
       return undefined;

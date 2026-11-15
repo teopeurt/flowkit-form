@@ -5,7 +5,7 @@ import {
   DocumentRevisionConflictError,
   DocumentService,
   DocumentStateError,
-} from '@flowkit-demo/document';
+} from '@flowkitform/document';
 
 import { InMemoryDocumentStore } from './in-memory-document-store';
 

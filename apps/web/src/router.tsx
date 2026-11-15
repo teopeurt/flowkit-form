@@ -14,7 +14,7 @@ import {
   type LoaderFunctionArgs,
 } from 'react-router-dom';
 
-import { Alert, Badge, Button, LoadingState, Panel } from '@flowkit-demo/ui';
+import { Alert, Badge, Button, LoadingState, Panel } from '@flowkitform/demo-ui';
 import { ActivityTimeline } from './features/activity/ActivityTimeline';
 import { LoginPage } from './features/auth/LoginPage';
 import { OrganizationSelectionPage } from './features/auth/OrganizationSelectionPage';

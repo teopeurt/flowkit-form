@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 
-import { Alert, Button, TextField } from '@flowkit-demo/ui';
+import { Alert, Button, TextField } from '@flowkitform/demo-ui';
 import { errorMessage } from '../../lib/api';
 
 export function LoginPage({ onSignIn }: { onSignIn(email: string, password: string): Promise<void> }) {

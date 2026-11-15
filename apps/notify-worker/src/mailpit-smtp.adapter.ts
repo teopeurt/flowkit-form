@@ -2,8 +2,8 @@ import type { NotificationChannelAdapter, NotificationDeliveryEnvelope } from '@
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 
-import { loadConfig, type DemoConfig } from '@flowkit-demo/domain';
-import { requireTenantScope, type TenantScope } from '@flowkit-demo/database';
+import { loadConfig, type DemoConfig } from '@flowkitform/demo-domain';
+import { requireTenantScope, type TenantScope } from '@flowkitform/demo-database';
 
 const require = createRequire(import.meta.url);
 

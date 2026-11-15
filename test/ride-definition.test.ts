@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'bun:test';
 import { buildInitialState, lintFlow, lintInterpreterFlow, transition, validateRegistryRefs, type FlowState } from '@teopeurt/flowkit-core';
 import { publishDefinition, validateFlowkit, verifyPublishedDefinition } from '@teopeurt/flowkit-temporal';
-import { MAX_DISPATCH_ATTEMPTS, rideChannels, rideDefinition, rideGuards, ridePolicies, rideRules, rideSystemSteps, rideTemplates } from '@flowkit-demo/domain';
+import { MAX_DISPATCH_ATTEMPTS, rideChannels, rideDefinition, rideGuards, ridePolicies, rideRules, rideSystemSteps, rideTemplates } from '@flowkitform/demo-domain';
 
 /** Interpreter boot shape: rules are pure, system steps are declared I/O refs. */
 const interpreterRegistries = { guards: rideGuards, policies: ridePolicies, rules: rideRules, systemSteps: rideSystemSteps, templates: rideTemplates, channels: rideChannels };

@@ -6,10 +6,10 @@ import type {
 } from '@teopeurt/flowkit-temporal';
 import { validateRegistryRefs } from '@teopeurt/flowkit-core';
 
-import { resolveDemoActor, tenantFlowId } from '@flowkit-demo/domain';
-import { LeaveFlowRepository, requireTenantScope, type TenantScope } from '@flowkit-demo/database';
-import { leaveDefinition } from '@flowkit-demo/domain';
-import { leaveChannels, leaveGuards, leavePolicies, leaveRules, leaveSystemSteps, leaveTemplates } from '@flowkit-demo/domain';
+import { resolveDemoActor, tenantFlowId } from '@flowkitform/demo-domain';
+import { LeaveFlowRepository, requireTenantScope, type TenantScope } from '@flowkitform/demo-database';
+import { leaveDefinition } from '@flowkitform/demo-domain';
+import { leaveChannels, leaveGuards, leavePolicies, leaveRules, leaveSystemSteps, leaveTemplates } from '@flowkitform/demo-domain';
 
 type LeaveActivityDependencies = {
   repository?: LeaveFlowRepository;

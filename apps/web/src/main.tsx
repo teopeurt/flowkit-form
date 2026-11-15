@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
-import '@flowkit-demo/ui/tokens.css';
+import '@flowkitform/demo-ui/tokens.css';
 import './styles.css';
 import { router } from './router';
 
