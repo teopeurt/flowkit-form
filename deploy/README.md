@@ -72,7 +72,7 @@ cp deploy/k8s/examples/secrets.env.example deploy/k8s/examples/secrets.env
 The bootstrap script loads `deploy/k8s/examples/secrets.env` automatically when
 it exists. Override the path with `FLOWKIT_K3S_ENV_FILE=/path/to/file`, or export
 variables directly in your shell. The committed example intentionally contains
-no values. Set `FLOWKIT_DEMO_MIGRATION_APPROVED=true` only for the explicit
+no values. Set `FLOWKITFORM_MIGRATION_APPROVED=true` only for the explicit
 migration run, then return it to `false`.
 
 If Tilt reports `namespaces "flowkit-demo-dev" not found`, stop Tilt, run the

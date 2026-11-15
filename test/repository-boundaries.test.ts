@@ -98,7 +98,7 @@ describe('repository boundaries', () => {
 
     expect(localLinks).toEqual([]);
     const resolvedEntries = Object.entries(Object.fromEntries([...resolved].sort()));
-    if (process.env.FLOWKIT_DEMO_CANDIDATE_TARBALLS === 'true') {
+    if (process.env.FLOWKITFORM_CANDIDATE_TARBALLS === 'true') {
       expect(resolvedEntries.map(([name]) => name)).toEqual([...expectedPackages].sort());
       expect(resolvedEntries.every(([name, version]) => expectedPackages.includes(name) && version.startsWith('file:'))).toBe(true);
     } else {

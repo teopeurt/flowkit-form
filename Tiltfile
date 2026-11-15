@@ -10,14 +10,14 @@ else:
 
     local_resource(
         'flowkit-migration',
-        cmd='FLOWKIT_DEMO_MIGRATION_APPROVED=true bun run db:migrate',
+        cmd='FLOWKITFORM_MIGRATION_APPROVED=true bun run db:migrate',
         resource_deps=['postgres'],
         auto_init=False,
         allow_parallel=False,
     )
     local_resource(
         'flowkit-seed',
-        cmd='FLOWKIT_DEMO_ALLOW_SEED=true bun run db:seed',
+        cmd='FLOWKITFORM_ALLOW_SEED=true bun run db:seed',
         resource_deps=['flowkit-migration'],
         auto_init=False,
         allow_parallel=False,

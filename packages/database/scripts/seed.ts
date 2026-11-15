@@ -5,8 +5,8 @@ import { withMigrationClient } from '../src/client';
 import { assertDisposableLocalDatabase } from '../../../scripts/lib/local-database-guard';
 
 const config = loadConfig();
-if (!config.FLOWKIT_DEMO_ALLOW_SEED || !['development', 'test'].includes(config.NODE_ENV)) {
-  throw new Error('Demo seed requires development/test and FLOWKIT_DEMO_ALLOW_SEED=true');
+if (!config.FLOWKITFORM_ALLOW_SEED || !['development', 'test'].includes(config.NODE_ENV)) {
+  throw new Error('Demo seed requires development/test and FLOWKITFORM_ALLOW_SEED=true');
 }
 
 const organizations = [

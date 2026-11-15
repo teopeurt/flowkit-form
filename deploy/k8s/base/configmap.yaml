@@ -4,9 +4,9 @@ metadata:
   name: flowkit-demo-config
 data:
   NODE_ENV: development
-  FLOWKIT_DEMO_PORT: "3011"
-  FLOWKIT_DEMO_ALLOW_SEED: "true"
-  FLOWKIT_DEMO_PERSISTENCE: "true"
+  FLOWKITFORM_PORT: "3011"
+  FLOWKITFORM_ALLOW_SEED: "true"
+  FLOWKITFORM_PERSISTENCE: "true"
   TEMPORAL_ADDRESS: temporal-frontend:7233
   TEMPORAL_NAMESPACE: flowkit-demo
   TEMPORAL_TASK_QUEUE: flowkit-demo

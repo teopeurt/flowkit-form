@@ -17,7 +17,7 @@ docker compose -f deploy/compose/docker-compose.yml config --quiet
 ```
 
 Migration and seed services are deliberately ordered and guarded. Do not start them against any
-database other than the disposable target, and do not set `FLOWKIT_DEMO_MIGRATION_APPROVED=true`
+database other than the disposable target, and do not set `FLOWKITFORM_MIGRATION_APPROVED=true`
 without explicit approval.
 
 ## k3s and Tilt

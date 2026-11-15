@@ -90,8 +90,8 @@ if (import.meta.main) {
         outbox,
         adapters: createDeliveryAdapters({ inbox: inbox.forOrganization(scope), smtp: smtp.forOrganization(scope) }),
         health,
-        activePollMs: config.FLOWKIT_DEMO_NOTIFY_ACTIVE_POLL_MS,
-        idlePollMs: config.FLOWKIT_DEMO_NOTIFY_IDLE_POLL_MS,
+        activePollMs: config.FLOWKITFORM_NOTIFY_ACTIVE_POLL_MS,
+        idlePollMs: config.FLOWKITFORM_NOTIFY_IDLE_POLL_MS,
         logger: console,
       });
     }));

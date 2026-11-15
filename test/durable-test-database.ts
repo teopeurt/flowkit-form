@@ -9,15 +9,15 @@ const leaveServiceTables = [
 
 export async function durableTestDatabase(label: string, requiredTables: string[]): Promise<Sql | null> {
   if (!durableTestsEnabled()) {
-    process.stderr.write(`Skipping ${label}: set FLOWKIT_DEMO_DURABLE_TESTS=true to enable durable database tests.\n`);
+    process.stderr.write(`Skipping ${label}: set FLOWKITFORM_DURABLE_TESTS=true to enable durable database tests.\n`);
     return null;
   }
 
   const config = loadConfig();
   const databaseName = new URL(config.DATABASE_URL).pathname.slice(1);
-  if (databaseName !== config.FLOWKIT_DEMO_DURABLE_TEST_DATABASE) {
+  if (databaseName !== config.FLOWKITFORM_DURABLE_TEST_DATABASE) {
     throw new Error(
-      `${label} requires DATABASE_URL pathname ${config.FLOWKIT_DEMO_DURABLE_TEST_DATABASE}; received ${databaseName}.`,
+      `${label} requires DATABASE_URL pathname ${config.FLOWKITFORM_DURABLE_TEST_DATABASE}; received ${databaseName}.`,
     );
   }
 

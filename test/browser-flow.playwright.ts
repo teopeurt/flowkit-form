@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 
-const demoUrl = process.env.FLOWKIT_DEMO_URL ?? 'http://localhost:3012';
+const demoUrl = process.env.FLOWKITFORM_URL ?? 'http://localhost:3012';
 const password = 'Acme-Demo-Only-2026!';
 
 type ReviewDecision = 'approve' | 'reject';

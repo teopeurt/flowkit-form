@@ -70,7 +70,7 @@ The repository began as a copy of the FlowKit Demo reference application. It alr
 
 ## Open decisions
 
-- Whether the `@flowkit-demo/*` workspace package scope and `FLOWKIT_DEMO_*` environment variables are renamed to FlowKitForm names. This is deliberately not done yet: the names appear across code, deployment manifests, and tests, and renaming them is a mechanical change best done on its own.
+- Whether the `@flowkit-demo/*` workspace package scope and `FLOWKITFORM_*` environment variables are renamed to FlowKitForm names. This is deliberately not done yet: the names appear across code, deployment manifests, and tests, and renaming them is a mechanical change best done on its own.
 - Target concurrency for the scale requirement (§10 "N concurrent workflow instances").
 - Approval quorum and step compensation, which have no FlowKit construct (spec §11).
 - Signed-URL upload from the first API release, or a size-limited direct upload first.

@@ -8,7 +8,7 @@ export default defineConfig({
   timeout: 60_000,
   reporter: 'list',
   use: {
-    baseURL: process.env.FLOWKIT_DEMO_URL ?? 'http://localhost:3012',
+    baseURL: process.env.FLOWKITFORM_URL ?? 'http://localhost:3012',
     trace: 'retain-on-failure',
   },
 });

@@ -36,17 +36,19 @@ function isExempt(path: string): boolean {
   );
 }
 
+/**
+ * Git-tracked files only. Build output under dist/ and dist-examples/ is
+ * generated from these sources and is ignored, so scanning it would report
+ * stale copies of names that have already been renamed.
+ */
 async function trackedSources(): Promise<string[]> {
-  const glob = new Bun.Glob('**/*.{ts,tsx,js,mjs,cjs,json,jsonc,yml,yaml,sql,sh,md,css,html,env,example,Tiltfile}');
-  const paths: string[] = [];
-  for await (const path of glob.scan({ cwd: repositoryRoot, dot: true })) {
-    if (path.startsWith('node_modules/') || path.startsWith('.git/') || path.startsWith('dist/')) continue;
-    paths.push(path);
-  }
-  for (const extra of ['Tiltfile', 'Dockerfile', '.env.example', '.dockerignore']) {
-    if (!paths.includes(extra)) paths.push(extra);
-  }
-  return paths.sort();
+  const listed = Bun.spawnSync(['git', 'ls-files', '-z'], { cwd: repositoryRoot });
+  if (listed.exitCode !== 0) throw new Error('git ls-files failed; the naming gate needs a git checkout.');
+  return listed.stdout
+    .toString()
+    .split('\0')
+    .filter((path) => path.length > 0)
+    .sort();
 }
 
 describe('naming contract', () => {

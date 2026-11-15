@@ -119,7 +119,7 @@ describe('deployment contract', () => {
     expect(dockerignore.split(/\r?\n/)).toContain('.npmrc');
     expect(dockerignore.split(/\r?\n/)).toContain('.env');
     expect(lockfile).not.toContain('http://127.0.0.1:4873');
-    if (process.env.FLOWKIT_DEMO_CANDIDATE_TARBALLS === 'true') {
+    if (process.env.FLOWKITFORM_CANDIDATE_TARBALLS === 'true') {
       expect(lockfile).toContain('"overrides"');
     } else {
       for (const packageName of ['auth', 'consumer', 'core', 'notify', 'tasks', 'temporal']) {
@@ -176,7 +176,7 @@ describe('deployment contract', () => {
       expect(service?.build).toEqual({ context: '../..', dockerfile: 'Dockerfile' });
       expect(service?.command).toEqual(Array.from(command));
     }
-    expect(compose.services.migration.environment?.FLOWKIT_DEMO_MIGRATION_APPROVED).toBe('true');
+    expect(compose.services.migration.environment?.FLOWKITFORM_MIGRATION_APPROVED).toBe('true');
     expect(compose.services.seed.depends_on?.migration?.condition).toBe('service_completed_successfully');
     expect(compose.services.api.depends_on?.seed?.condition).toBe('service_completed_successfully');
     expect(compose.services.worker.depends_on?.['temporal-namespace']?.condition).toBe('service_completed_successfully');

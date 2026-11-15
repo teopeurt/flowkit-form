@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-const demoUrl = process.env.FLOWKIT_DEMO_URL ?? 'http://localhost:3012';
-const mailpitUrl = process.env.FLOWKIT_DEMO_MAILPIT_URL ?? 'http://localhost:8025';
+const demoUrl = process.env.FLOWKITFORM_URL ?? 'http://localhost:3012';
+const mailpitUrl = process.env.FLOWKITFORM_MAILPIT_URL ?? 'http://localhost:8025';
 const password = 'Acme-Demo-Only-2026!';
 
 async function signIn(page: import('@playwright/test').Page, role: 'employee' | 'manager') {

@@ -71,7 +71,7 @@ The checked-in SQL is only for the recognized disposable database. The guard per
 migration or seed operations. Do not run a migration manually unless you have explicit approval:
 
 ```sh
-FLOWKIT_DEMO_MIGRATION_APPROVED=true bun run db:migrate
+FLOWKITFORM_MIGRATION_APPROVED=true bun run db:migrate
 ```
 
 `bun run dev` can set that approval only after all local-identity checks pass. `bun run stack:reset`

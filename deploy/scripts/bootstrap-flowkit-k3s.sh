@@ -18,7 +18,7 @@ fi
 
 namespace="${FLOWKIT_K3S_NAMESPACE:-flowkit-demo-dev}"
 database_url="${DATABASE_URL:-postgresql://flowkit_demo:flowkit_demo@postgres:5432/flowkit_demo}"
-migration_approved="${FLOWKIT_DEMO_MIGRATION_APPROVED:-false}"
+migration_approved="${FLOWKITFORM_MIGRATION_APPROVED:-false}"
 
 if [[ "${#BETTER_AUTH_SECRET}" -lt 32 ]]; then
   echo "BETTER_AUTH_SECRET must be at least 32 characters." >&2
@@ -42,7 +42,7 @@ kubectl -n "${namespace}" create secret docker-registry flowkit-demo-registry \
 kubectl -n "${namespace}" create secret generic flowkit-demo-runtime \
   --from-literal=DATABASE_URL="${database_url}" \
   --from-literal=BETTER_AUTH_SECRET="${BETTER_AUTH_SECRET}" \
-  --from-literal=FLOWKIT_DEMO_MIGRATION_APPROVED="${migration_approved}" \
+  --from-literal=FLOWKITFORM_MIGRATION_APPROVED="${migration_approved}" \
   --dry-run=client -o yaml | kubectl apply --validate=false -f -
 
 htpasswd -nbB "${OPS_USER}" "${OPS_PASSWORD}" \

@@ -21,7 +21,7 @@ kubectl get secret flowkit-demo-registry -n "${namespace}" >/dev/null
 kubectl get secret flowkit-demo-runtime -n "${namespace}" >/dev/null
 kubectl get secret flowkit-demo-basic-auth -n "${namespace}" >/dev/null
 
-for key in DATABASE_URL BETTER_AUTH_SECRET FLOWKIT_DEMO_MIGRATION_APPROVED; do
+for key in DATABASE_URL BETTER_AUTH_SECRET FLOWKITFORM_MIGRATION_APPROVED; do
   if ! kubectl get secret flowkit-demo-runtime -n "${namespace}" -o "jsonpath={.data.${key}}" | grep -q .; then
     echo "Secret flowkit-demo-runtime in ${namespace} is missing key ${key}" >&2
     exit 1

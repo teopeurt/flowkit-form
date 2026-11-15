@@ -37,7 +37,7 @@ kubectl -n flowkit-demo-dev create secret docker-registry flowkit-demo-registry 
 kubectl -n flowkit-demo-dev create secret generic flowkit-demo-runtime \
   --from-literal=DATABASE_URL="$DATABASE_URL" \
   --from-literal=BETTER_AUTH_SECRET="$BETTER_AUTH_SECRET" \
-  --from-literal=FLOWKIT_DEMO_MIGRATION_APPROVED="$FLOWKIT_DEMO_MIGRATION_APPROVED"
+  --from-literal=FLOWKITFORM_MIGRATION_APPROVED="$FLOWKITFORM_MIGRATION_APPROVED"
 
 htpasswd -nbB "$OPS_USER" "$OPS_PASSWORD" | kubectl -n flowkit-demo-dev create secret generic flowkit-demo-basic-auth \
   --from-file=users=/dev/stdin

@@ -28,7 +28,7 @@ describe('starter documentation contract', () => {
     expect(readme).toContain('http://localhost:8025/');
     expect(readme).toContain('Acme Demo');
     expect(readme).toContain('Globex Demo');
-    expect(readme).toContain('FLOWKIT_DEMO_MIGRATION_APPROVED');
+    expect(readme).toContain('FLOWKITFORM_MIGRATION_APPROVED');
     expect(readme).toMatch(/never.*remote|remote.*never/i);
   });
 

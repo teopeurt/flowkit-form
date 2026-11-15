@@ -8,7 +8,7 @@ import { runPendingMigrations, type Migration } from './migration-runner';
 const config = loadConfig();
 const database = new URL(config.DATABASE_URL).pathname.slice(1);
 if (!/^flowkit_demo(?:_test_)?/.test(database)) throw new Error(`Refusing migration for database ${database}`);
-if (process.env.FLOWKIT_DEMO_MIGRATION_APPROVED !== 'true') throw new Error('Migration is guarded. Set FLOWKIT_DEMO_MIGRATION_APPROVED=true only after explicit approval. No migration was applied.');
+if (process.env.FLOWKITFORM_MIGRATION_APPROVED !== 'true') throw new Error('Migration is guarded. Set FLOWKITFORM_MIGRATION_APPROVED=true only after explicit approval. No migration was applied.');
 const migrationDirectory = resolve(import.meta.dir, '../migrations');
 const migrationFiles = (await readdir(migrationDirectory))
   .filter((file) => file.endsWith('.sql'))
