@@ -242,8 +242,11 @@ describe('deployment contract', () => {
     expect(ci).not.toContain('NODE_AUTH_TOKEN');
     expect(ci).toContain('bun install --frozen-lockfile');
     expect(ci).toContain('bun run typecheck');
-    expect(ci).toContain('bun test');
+    // Both suites are gated: the product target and the quarantined demo.
+    expect(ci).toContain('bun run test');
+    expect(ci).toContain('bun run test:examples');
     expect(ci).toContain('bun run build');
+    expect(ci).toContain('bun run build:examples');
     expect(ci).toContain('docker build -f Dockerfile .');
     expect(ci).toContain('docker compose config --quiet');
     expect(ci).toContain('kubectl kustomize deploy/k8s/overlays/k3s-dev');
