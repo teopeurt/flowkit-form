@@ -87,7 +87,7 @@ beforeAll(async () => {
   worker = await Worker.create({
     connection: environment.nativeConnection,
     taskQueue,
-    workflowsPath: new URL('../apps/worker/src/workflows.ts', import.meta.url).pathname,
+    workflowsPath: new URL('../../apps/worker/src/workflows.ts', import.meta.url).pathname,
     activities,
   });
   workerRun = worker.run();

@@ -4,8 +4,8 @@ import { TestWorkflowEnvironment } from '@temporalio/testing';
 import { Worker } from '@temporalio/worker';
 
 import { LeaveFlowRepository } from '@flowkitform/demo-database';
-import { createFlowkitDemoConsumer, publishedLeaveDefinition } from '../apps/api/src/flow/flowkitform.consumer';
-import { createLeaveActivities } from '../apps/worker/src/activities';
+import { createFlowkitDemoConsumer, publishedLeaveDefinition } from '../../apps/api/src/flow/flowkitform.consumer';
+import { createLeaveActivities } from '../../apps/worker/src/activities';
 import { leaveWorkflowType } from '@flowkitform/demo-domain';
 import { clearDurableLeaveServiceData, durableLeaveServiceDatabase } from './durable-test-database';
 
@@ -55,7 +55,7 @@ durableTests('Flowkit demo consumer', () => {
     const worker = await Worker.create({
       connection: environment.nativeConnection,
       taskQueue,
-      workflowsPath: new URL('../apps/worker/src/workflows.ts', import.meta.url).pathname,
+      workflowsPath: new URL('../../apps/worker/src/workflows.ts', import.meta.url).pathname,
       activities: createLeaveActivities({ repository }),
     });
     const runWorker = worker.run();

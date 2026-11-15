@@ -63,7 +63,7 @@ supplied by a form.
 
 ## 7. Scenarios and contract tests
 
-Replace the example browser journey in `test/browser-flow.playwright.ts` and the application tests
+Replace the example browser journey in `test/demo/browser-flow.playwright.ts` and the application tests
 that express the old domain. Keep `test/package-contracts.preflight.test.ts`,
 `test/package-boundary.test.ts`, and tenant isolation coverage: they protect the installed-framework
 boundary and the tenant invariant while product behavior changes. The browser test requires an

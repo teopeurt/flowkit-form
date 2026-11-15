@@ -3,7 +3,7 @@ import { buildInitialState, type FlowState } from '@teopeurt/flowkit-core';
 import type { RecordTransitionInput } from '@teopeurt/flowkit-temporal';
 
 import { LeaveFlowRepository, scopeOperationId } from '@flowkitform/demo-database';
-import { publishedLeaveDefinition } from '../apps/api/src/flow/flowkitform.consumer';
+import { publishedLeaveDefinition } from '../../apps/api/src/flow/flowkitform.consumer';
 import { leaveDefinition } from '@flowkitform/demo-domain';
 import { durableTestDatabase } from './durable-test-database';
 

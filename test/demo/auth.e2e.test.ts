@@ -9,12 +9,12 @@ import { drizzle } from 'drizzle-orm/pg-proxy';
 import { betterAuthSchema } from '@flowkitform/demo-database';
 import { loadConfig } from '@flowkitform/demo-domain';
 
-import { auth, createAuth } from '../apps/api/src/auth/auth.config';
-import { AppModule } from '../apps/api/src/app.module';
+import { auth, createAuth } from '../../apps/api/src/auth/auth.config';
+import { AppModule } from '../../apps/api/src/app.module';
 import {
   BETTER_AUTH_INSTANCE,
   BetterAuthController,
-} from '../apps/api/src/auth/auth.module';
+} from '../../apps/api/src/auth/auth.module';
 
 async function availablePort(): Promise<number> {
   const server = createServer();

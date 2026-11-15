@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'bun:test';
 
-import { liveHealth, readyHealth, type ReadinessProbe } from '../apps/api/src/health.responses';
+import { liveHealth, readyHealth, type ReadinessProbe } from '../../apps/api/src/health.responses';
 
 describe('health responses', () => {
   it('reports liveness without opening dependencies', () => {

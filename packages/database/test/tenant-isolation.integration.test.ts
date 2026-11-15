@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from 'bun:test';
 
 import { PostgresInboxAdapter, PostgresOutboxStore, PostgresTaskStore, LeaveFlowRepository, readDelivery } from '../src';
-import { durableTestDatabase } from '../../../test/durable-test-database';
+import { durableTestDatabase } from '../../../test/demo/durable-test-database';
 
 const acme = { organizationId: 'acme-demo' };
 const globex = { organizationId: 'globex-demo' };

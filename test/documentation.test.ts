@@ -60,7 +60,7 @@ ${overrides}`;
       'packages/ui/src/tokens.css',
       'test/package-boundary.test.ts',
       'test/package-contracts.preflight.test.ts',
-      'test/browser-flow.playwright.ts',
+      'test/demo/browser-flow.playwright.ts',
       'deploy/compose/docker-compose.yml',
       'deploy/tilt/k3s.Tiltfile',
     ];

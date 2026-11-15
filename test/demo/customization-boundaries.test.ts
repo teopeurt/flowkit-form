@@ -2,7 +2,7 @@ import { describe, expect, it } from 'bun:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-const root = resolve(import.meta.dir, '..');
+const root = resolve(import.meta.dir, '../..');
 
 describe('customization-guide boundaries', () => {
   it('uses the design-approved seven-step replacement order', async () => {

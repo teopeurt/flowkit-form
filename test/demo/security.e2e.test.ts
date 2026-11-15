@@ -5,7 +5,7 @@ import {
   resolveOrganizationContext,
   type BetterAuthSession,
   type OrganizationMembership,
-} from '../apps/api/src/auth/organization-context';
+} from '../../apps/api/src/auth/organization-context';
 
 const session: BetterAuthSession = {
   user: { id: 'auditor-1', email: 'auditor@example.test', emailVerified: true },

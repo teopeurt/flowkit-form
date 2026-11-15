@@ -37,6 +37,8 @@ describe('repository boundaries', () => {
       'packages/domain/src',
       'packages/database/src',
       'packages/ui/src',
+      'packages/document/src',
+      'test/demo',
     ];
 
     const missing = [];

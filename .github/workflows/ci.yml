@@ -28,9 +28,13 @@ jobs:
       - name: Typecheck
         run: bun run typecheck
       - name: Test
-        run: bun test
+        run: bun run test
+      - name: Test examples
+        run: bun run test:examples
       - name: Build
         run: bun run build
+      - name: Build examples
+        run: bun run build:examples
 
       - name: Build production image
         run: docker build -f Dockerfile .

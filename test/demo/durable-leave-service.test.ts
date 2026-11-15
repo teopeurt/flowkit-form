@@ -1,7 +1,7 @@
 import { afterAll, afterEach, describe, expect, it } from 'bun:test';
 
 import { LeaveFlowRepository } from '@flowkitform/demo-database';
-import { LeaveService } from '../apps/api/src/leave/leave.service';
+import { LeaveService } from '../../apps/api/src/leave/leave.service';
 import { durableTestDatabase } from './durable-test-database';
 
 const sql = await durableTestDatabase('durable LeaveService', [

@@ -3,7 +3,10 @@
   "version": "0.2.0",
   "private": true,
   "type": "module",
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "bun run scripts/dev.ts",
     "dev:api": "bun run apps/api/src/main.ts",
@@ -13,9 +16,10 @@
     "db:migrate": "bun run packages/database/scripts/migrate.ts",
     "db:seed": "bun run packages/database/scripts/seed.ts",
     "scenario": "bun run apps/api/scripts/run-scenario.ts",
-    "test": "bun test ./test/",
-    "test:enrolment-conformance": "bun test test/enrolment-conformance.test.ts",
-    "test:integration": "bun test test/*.integration.test.ts",
+    "test": "bun test test/*.test.ts scripts",
+    "test:examples": "bun test ./test/demo/ packages/database/test",
+    "test:enrolment-conformance": "bun test test/demo/enrolment-conformance.test.ts",
+    "test:integration": "bun test test/demo/*.integration.test.ts",
     "test:browser": "playwright test -c playwright.config.ts",
     "typecheck": "tsc --noEmit",
     "build": "tsc -p tsconfig.build.json",

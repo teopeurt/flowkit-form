@@ -3,17 +3,17 @@ import { NestFactory } from '@nestjs/core';
 import { afterAll, beforeAll, describe, expect, it } from 'bun:test';
 import type { AuthenticatedPrincipal } from '@teopeurt/flowkit-auth';
 
-import { FlowController } from '../apps/api/src/flow.controller';
-import { NotificationsController } from '../apps/api/src/notifications.controller';
-import { RuntimeController } from '../apps/api/src/runtime.controller';
-import { TasksController } from '../apps/api/src/tasks.controller';
+import { FlowController } from '../../apps/api/src/flow.controller';
+import { NotificationsController } from '../../apps/api/src/notifications.controller';
+import { RuntimeController } from '../../apps/api/src/runtime.controller';
+import { TasksController } from '../../apps/api/src/tasks.controller';
 import {
   ORGANIZATION_CONTEXT_PROVIDER,
   OrganizationContextGuard,
-} from '../apps/api/src/auth/auth.module';
+} from '../../apps/api/src/auth/auth.module';
 import { principal } from '@flowkitform/demo-domain';
 import { RuntimeHealthRepository } from '@flowkitform/demo-database';
-import { FlowkitDemoConsumer } from '../apps/api/src/flow/flowkitform.consumer';
+import { FlowkitDemoConsumer } from '../../apps/api/src/flow/flowkitform.consumer';
 
 const fiveDayLeave = {
   managerId: 'manager-1',
