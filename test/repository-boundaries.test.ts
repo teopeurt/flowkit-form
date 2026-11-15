@@ -38,6 +38,7 @@ describe('repository boundaries', () => {
       'packages/database/src',
       'packages/ui/src',
       'packages/document/src',
+      'packages/documents/src',
       'test/demo',
     ];
 

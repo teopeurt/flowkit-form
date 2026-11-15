@@ -8,6 +8,7 @@
         "@flowkitform/demo-database": "workspace:*",
         "@flowkitform/demo-domain": "workspace:*",
         "@flowkitform/document": "workspace:*",
+        "@flowkitform/documents": "workspace:*",
         "@nestjs/common": "11.1.9",
         "@nestjs/core": "11.1.9",
         "@nestjs/platform-express": "11.1.9",
@@ -77,6 +78,10 @@
     },
     "packages/document": {
       "name": "@flowkitform/document",
+      "version": "0.2.0",
+    },
+    "packages/documents": {
+      "name": "@flowkitform/documents",
       "version": "0.2.0",
     },
     "packages/domain": {
@@ -221,6 +226,8 @@
     "@flowkitform/demo-worker": ["@flowkitform/demo-worker@workspace:apps/worker"],
 
     "@flowkitform/document": ["@flowkitform/document@workspace:packages/document"],
+
+    "@flowkitform/documents": ["@flowkitform/documents@workspace:packages/documents"],
 
     "@grpc/grpc-js": ["@grpc/grpc-js@1.14.4", "", { "dependencies": { "@grpc/proto-loader": "^0.8.0", "@js-sdsl/ordered-map": "^4.4.2" } }, "sha512-k9Dj3DV/itK9D06Y8f190Qgop7/Ui+D0njFV3LHMPwPT75DpXLQohE9Wmz0QElrJnzsjB7KPWiKJbOl7IPDArQ=="],
 

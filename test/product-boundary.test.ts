@@ -5,7 +5,7 @@ import { join, relative } from 'node:path';
 const repositoryRoot = new URL('..', import.meta.url).pathname;
 
 /** Workspaces that ship as the product. Everything else is quarantined demo. */
-const productPackages = ['packages/document'];
+const productPackages = ['packages/document', 'packages/documents'];
 
 const demoScopePrefix = '@flowkitform/demo-';
 
