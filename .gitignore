@@ -8,3 +8,4 @@ test-results/
 *.tsbuildinfo
 .local-registry/
 .DS_Store
+dist-examples/

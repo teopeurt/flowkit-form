@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "allowImportingTsExtensions": false,
+    "outDir": "dist-examples",
+    "declaration": true,
+    "sourceMap": true
+  },
+  "include": [
+    "apps/**/*.ts",
+    "apps/**/*.tsx",
+    "packages/domain/**/*.ts",
+    "packages/database/**/*.ts",
+    "packages/ui/**/*.ts",
+    "packages/ui/**/*.tsx",
+    "scripts/**/*.ts"
+  ],
+  "exclude": ["test", "**/*.test.ts", "**/*.test.tsx", "apps/web/dist"]
+}
