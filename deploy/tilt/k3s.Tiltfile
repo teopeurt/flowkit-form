@@ -5,8 +5,8 @@ load('ext://helm_resource', 'helm_resource', 'helm_repo')
 
 # Builds only the FlowKit demo image and wires the flowkit-* resources.
 def configure_flowkit_k3s():
-    registry = os.getenv('FLOWKIT_K3S_REGISTRY', 'docker.pigstycoders.com/flowkit-demo-dev')
-    namespace = os.getenv('FLOWKIT_K3S_NAMESPACE', 'flowkit-demo-dev')
+    registry = os.getenv('FLOWKIT_K3S_REGISTRY', 'docker.pigstycoders.com/flowkitform-dev')
+    namespace = os.getenv('FLOWKIT_K3S_NAMESPACE', 'flowkitform-dev')
     temporal_chart_version = os.getenv('TEMPORAL_HELM_CHART_VERSION', '1.2.0')
     target_platform = os.getenv('K3S_PLATFORM', 'linux/amd64')
     upsert_timeout_secs = int(os.getenv('FLOWKIT_K3S_UPSERT_TIMEOUT_SECS', '300'))
@@ -25,7 +25,7 @@ def configure_flowkit_k3s():
         local('kubectl apply --validate=false -f deploy/k8s/bootstrap/namespace.yaml')
 
     docker_build(
-        registry + '/flowkit-demo',
+        registry + '/flowkitform',
         '.',
         dockerfile='Dockerfile',
         platform=target_platform,

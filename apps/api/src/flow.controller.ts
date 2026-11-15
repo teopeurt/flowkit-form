@@ -9,7 +9,7 @@ import type { FlowkitConsumerView } from '@teopeurt/flowkit-consumer';
 import { OrganizationContextGuard } from './auth/auth.module';
 import type { LeaveRequestRow, TenantScope } from '@flowkitform/demo-database';
 import type { OrganizationContext } from './auth/organization-context';
-import { FlowkitDemoConsumer, newLeaveFlowId } from './flow/flowkit-demo.consumer';
+import { FlowkitDemoConsumer, newLeaveFlowId } from './flow/flowkitform.consumer';
 import { leaveRequestSchema } from '@flowkitform/demo-domain';
 import { asFlowkitHttpException } from './flowkit-http.errors';
 
@@ -114,7 +114,7 @@ export class FlowController {
       throw new NotFoundException('Flow not found.');
     }
     const task = await this.consumer.repository.tasks.find({ organizationId: request.organization_id }, {
-      namespace: 'flowkit-demo', flowId: request.flow_id, subjectType: 'leave', subjectId: request.id,
+      namespace: 'flowkitform', flowId: request.flow_id, subjectType: 'leave', subjectId: request.id,
       stage: 'manager_review', role: 'manager',
     });
     if (!task || task.status !== 'claimed' || task.assigneeId !== current.subjectId) {

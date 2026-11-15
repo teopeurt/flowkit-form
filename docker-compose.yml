@@ -1,4 +1,4 @@
-name: flowkit-demo
+name: flowkitform
 
 services:
   postgres:
@@ -42,9 +42,9 @@ services:
       temporal: { condition: service_healthy }
     entrypoint: ["/bin/sh", "-c"]
     command:
-      - 'temporal operator namespace describe --namespace flowkit-demo >/dev/null 2>&1 || temporal operator namespace create --namespace flowkit-demo >/dev/null; exec sleep infinity'
+      - 'temporal operator namespace describe --namespace flowkitform >/dev/null 2>&1 || temporal operator namespace create --namespace flowkitform >/dev/null; exec sleep infinity'
     healthcheck:
-      test: ["CMD-SHELL", "temporal operator namespace describe --namespace flowkit-demo >/dev/null 2>&1"]
+      test: ["CMD-SHELL", "temporal operator namespace describe --namespace flowkitform >/dev/null 2>&1"]
       interval: 2s
       timeout: 3s
       retries: 20

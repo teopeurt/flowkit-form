@@ -148,7 +148,7 @@ describe('repository boundaries', () => {
     const violations: string[] = [];
     for (const path of await repositoryFiles('deploy/**/*.{yaml,yml,Dockerfile,md,ts,js}')) {
       const source = await readFile(path, 'utf8');
-      if (/(?:faan-avsec|packages\/flowkit-|packages\/flowkit-demo|dockerfile:\s*packages\/)/i.test(source)) {
+      if (/(?:faan-avsec|packages\/flowkit-|packages\/flowkitform|dockerfile:\s*packages\/)/i.test(source)) {
         violations.push(relative(repositoryRoot, path));
       }
     }

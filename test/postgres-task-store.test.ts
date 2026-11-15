@@ -27,7 +27,7 @@ durableTests('PostgresTaskStore', () => {
     const initial = buildInitialState(leaveDefinition);
     const managerReview: FlowState = { stage: 'manager_review', status: 'active', pendingRole: 'manager', tracks: {} };
     const managerReviewPlan = planTaskProjection({
-      namespace: 'flowkit-demo', flowId: 'leave-route-1', subject: { type: 'leave', id: 'leave-route-1' },
+      namespace: 'flowkitform', flowId: 'leave-route-1', subject: { type: 'leave', id: 'leave-route-1' },
       definition: leaveDefinition, operationId: 'route-1', transitionSequence: 1, action: 'require_manager', actorId: 'system',
       previousState: initial, nextState: managerReview, metadata: {},
     }, null);
@@ -45,11 +45,11 @@ durableTests('PostgresTaskStore', () => {
     const initial = buildInitialState(leaveDefinition);
     const managerReview: FlowState = { stage: 'manager_review', status: 'active', pendingRole: 'manager', tracks: {} };
     const first = (await store.applyProjection(scope, { plan: planTaskProjection({
-      namespace: 'flowkit-demo', flowId: 'leave-inbox-1', subject: { type: 'leave', id: 'leave-inbox-1' }, definition: leaveDefinition,
+      namespace: 'flowkitform', flowId: 'leave-inbox-1', subject: { type: 'leave', id: 'leave-inbox-1' }, definition: leaveDefinition,
       operationId: 'inbox-1', transitionSequence: 1, action: 'require_manager', actorId: 'system', previousState: initial, nextState: managerReview, metadata: {},
     }, null), operationId: 'inbox-1' })).tasks[0]!;
     const second = (await store.applyProjection(scope, { plan: planTaskProjection({
-      namespace: 'flowkit-demo', flowId: 'leave-inbox-2', subject: { type: 'leave', id: 'leave-inbox-2' }, definition: leaveDefinition,
+      namespace: 'flowkitform', flowId: 'leave-inbox-2', subject: { type: 'leave', id: 'leave-inbox-2' }, definition: leaveDefinition,
       operationId: 'inbox-2', transitionSequence: 1, action: 'require_manager', actorId: 'system', previousState: initial, nextState: managerReview, metadata: {},
     }, null), operationId: 'inbox-2' })).tasks[0]!;
     await store.claim(scope, { taskId: first.id, expectedRevision: first.revision, actorId: 'manager-1', operationId: 'inbox-claim-1', now: new Date().toISOString() });
@@ -66,12 +66,12 @@ durableTests('PostgresTaskStore', () => {
     const initial = buildInitialState(leaveDefinition);
     const managerReview: FlowState = { stage: 'manager_review', status: 'active', pendingRole: 'manager', tracks: {} };
     const opened = await store.applyProjection(scope, { plan: planTaskProjection({
-      namespace: 'flowkit-demo', flowId: 'leave-route-2', subject: { type: 'leave', id: 'leave-route-2' }, definition: leaveDefinition,
+      namespace: 'flowkitform', flowId: 'leave-route-2', subject: { type: 'leave', id: 'leave-route-2' }, definition: leaveDefinition,
       operationId: 'route-2-open', transitionSequence: 1, action: 'require_manager', actorId: 'system', previousState: initial, nextState: managerReview, metadata: {},
     }, null), operationId: 'route-2-open' });
     const prior = opened.tasks[0]!;
     const plan = planTaskProjection({
-      namespace: 'flowkit-demo', flowId: 'leave-route-2', subject: { type: 'leave', id: 'leave-route-2' }, definition: leaveDefinition,
+      namespace: 'flowkitform', flowId: 'leave-route-2', subject: { type: 'leave', id: 'leave-route-2' }, definition: leaveDefinition,
       operationId: 'route-2-return', transitionSequence: 2, action: 'return', actorId: 'manager-1', previousState: managerReview, nextState: initial, metadata: {},
     }, prior);
     expect(plan.mutations).toHaveLength(2);

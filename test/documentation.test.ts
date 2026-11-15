@@ -69,7 +69,7 @@ ${overrides}`;
       expect(text).toContain(path);
       await expect(lstat(resolve(root, path))).resolves.toBeDefined();
     }
-    expect(text).not.toMatch(/faan|avsec|packages\/flowkit-demo/i);
+    expect(text).not.toMatch(/faan|avsec|packages\/flowkitform/i);
   });
 
   it('type-checks every TypeScript example embedded in the guides', async () => {
@@ -78,7 +78,7 @@ ${overrides}`;
     );
     expect(sources.length).toBeGreaterThan(0);
 
-    const directory = await mkdtemp(join(tmpdir(), 'flowkit-demo-docs-'));
+    const directory = await mkdtemp(join(tmpdir(), 'flowkitform-docs-'));
     try {
       const paths = await Promise.all(sources.map(async (source, index) => {
         const path = join(directory, `example-${index}.ts`);

@@ -27,7 +27,7 @@ type NodemailerModule = {
 
 const nodemailer = require('nodemailer') as NodemailerModule;
 const deliveryKey = (scope: TenantScope, dedupeKey: string) => JSON.stringify([scope.organizationId, dedupeKey]);
-const messageIdFor = (scope: TenantScope, dedupeKey: string) => `<${createHash('sha256').update(deliveryKey(scope, dedupeKey)).digest('hex')}@flowkit-demo.local>`;
+const messageIdFor = (scope: TenantScope, dedupeKey: string) => `<${createHash('sha256').update(deliveryKey(scope, dedupeKey)).digest('hex')}@flowkitform.local>`;
 
 /**
  * Mailpit SMTP channel adapter.
@@ -52,7 +52,7 @@ export class MailpitSmtpAdapter {
       port: config?.SMTP_PORT ?? 1025,
       secure: false,
     });
-    this.from = options.from ?? config?.SMTP_FROM ?? 'notifications@flowkit-demo.test';
+    this.from = options.from ?? config?.SMTP_FROM ?? 'notifications@flowkitform.test';
   }
 
   forOrganization(scope: TenantScope): NotificationChannelAdapter {

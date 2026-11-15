@@ -39,12 +39,14 @@ jobs:
           docker compose config --quiet
           docker compose -f deploy/compose/docker-compose.yml config --quiet
       - name: Render k3s manifests
-        run: kubectl kustomize deploy/k8s/overlays/k3s-dev > "$RUNNER_TEMP/flowkit-demo-k3s.yaml"
+        run: kubectl kustomize deploy/k8s/overlays/k3s-dev > "$RUNNER_TEMP/flowkitform-k3s.yaml"
       - name: Scan deployment contracts
         shell: bash
         run: |
           set -euo pipefail
+          # Literals are split so this guard never matches its own source.
           legacy_pattern='packages/flowkit-''demo|faan-''avsec|public-''web|internal-''web|mini''stack'
+          legacy_pattern="$legacy_pattern"'|@flowkit-''demo/|FLOWKIT_''DEMO_|flowkit_''demo|flowkit-''demo'
           if rg -n -i "$legacy_pattern" Dockerfile docker-compose.yml Tiltfile deploy .github; then
             echo 'Legacy monorepo or tenant-specific deployment path found.' >&2
             exit 1
@@ -54,7 +56,7 @@ jobs:
             echo 'Committed secret material found.' >&2
             exit 1
           fi
-          if rg -n -i 'faan|avsec' "$RUNNER_TEMP/flowkit-demo-k3s.yaml"; then
+          if rg -n -i 'faan|avsec' "$RUNNER_TEMP/flowkitform-k3s.yaml"; then
             echo 'Rendered k3s resources are not tenant-neutral.' >&2
             exit 1
           fi

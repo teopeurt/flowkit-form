@@ -25,14 +25,14 @@ legacy AVSEC stack:
 ```sh
 export KUBECONFIG=/Users/teopeurt/workspace/k3s/k3s.yaml
 export TILT_MODE=flowkit-k3s
-export FLOWKIT_K3S_NAMESPACE=flowkit-demo-dev
-export FLOWKIT_K3S_REGISTRY=docker.pigstycoders.com/flowkit-demo-dev
+export FLOWKIT_K3S_NAMESPACE=flowkitform-dev
+export FLOWKIT_K3S_REGISTRY=docker.pigstycoders.com/flowkitform-dev
 tilt up
 ```
 
-It builds only the `flowkit-demo` image (from the repository-root
+It builds only the `flowkitform` image (from the repository-root
 `Dockerfile`), applies the Kustomize stack, and installs
-Temporal from the upstream Helm chart in the `flowkit-demo-dev` namespace. The
+Temporal from the upstream Helm chart in the `flowkitform-dev` namespace. The
 target hostname family is:
 
 - `https://flowkit.k3s.naakwu.app` — FlowKit demo
@@ -44,6 +44,30 @@ target hostname family is:
 Create the namespace/secrets before starting Tilt. The namespace is
 intentionally outside the ordinary Tilt resource graph so `tilt down` does not
 remove PVCs.
+
+### Upgrading from the flowkit-demo naming
+
+Resources were renamed from `flowkit-demo*` to `flowkitform*`, and the
+namespace from `flowkit-demo-dev` to `flowkitform-dev`. Applying this overlay to
+a cluster that ran the old names creates a parallel set of objects; it does not
+rename the old ones. Delete the previous `flowkit-demo-*` objects and the
+`flowkit-demo-dev` namespace deliberately, after confirming nothing you need
+still runs there.
+
+The PostgreSQL database, user and volume moved from `flowkit_demo` to
+`flowkitform` in the same change. A fresh deployment needs no action. To keep
+an existing database in place, rename it before deploying:
+
+```sql
+ALTER DATABASE flowkit_demo RENAME TO flowkitform;
+ALTER ROLE flowkit_demo RENAME TO flowkitform;
+ALTER TABLE flowkit_demo_migrations RENAME TO flowkitform_migrations;
+```
+
+The tracking-table rename matters: the migration runner keys applied migrations
+on `(filename, sha256(body))`, so a fresh `flowkitform_migrations` table would
+re-run all six applied migrations. Migration filenames deliberately keep the old
+spelling — they are checksum-tracked history, not branding.
 
 cert-manager is optional for the core FlowKit deploy. Install it only when you
 want Tilt to request the real Let's Encrypt certificate:
@@ -75,7 +99,7 @@ variables directly in your shell. The committed example intentionally contains
 no values. Set `FLOWKITFORM_MIGRATION_APPROVED=true` only for the explicit
 migration run, then return it to `false`.
 
-If Tilt reports `namespaces "flowkit-demo-dev" not found`, stop Tilt, run the
+If Tilt reports `namespaces "flowkitform-dev" not found`, stop Tilt, run the
 bootstrap script above, then start `TILT_MODE=flowkit-k3s tilt up` again.
 
 The script is idempotent and uses `kubectl apply`; rerunning it updates the
@@ -106,9 +130,9 @@ the StatefulSet is still starting.
 ## Verification
 
 ```sh
-kubectl -n flowkit-demo-dev get pods
-kubectl -n flowkit-demo-dev get jobs
-kubectl -n flowkit-demo-dev get ingress
+kubectl -n flowkitform-dev get pods
+kubectl -n flowkitform-dev get jobs
+kubectl -n flowkitform-dev get ingress
 curl -fsS https://flowkit.k3s.naakwu.app/health/live
 curl -fsS https://flowkit.k3s.naakwu.app/health/ready
 ```
@@ -119,8 +143,8 @@ If Temporal fails on a pod named like `temporal-schema-*` and a container such
 as `create-default-store`, inspect the schema hook logs before retrying:
 
 ```sh
-kubectl -n flowkit-demo-dev logs pod/<temporal-schema-pod> -c create-default-store --previous
-kubectl -n flowkit-demo-dev describe pod <temporal-schema-pod>
+kubectl -n flowkitform-dev logs pod/<temporal-schema-pod> -c create-default-store --previous
+kubectl -n flowkitform-dev describe pod <temporal-schema-pod>
 ```
 
 The FlowKit NetworkPolicies include an explicit allow rule for Temporal Helm
@@ -134,7 +158,7 @@ If an earlier failed Helm operation is stuck, clear the failed release before
 retriggering Temporal:
 
 ```sh
-helm -n flowkit-demo-dev uninstall temporal --wait=false
+helm -n flowkitform-dev uninstall temporal --wait=false
 ```
 
 If the schema hook still exits immediately after the policy is applied, check
@@ -142,5 +166,5 @@ whether an old Postgres PVC was initialized with a different user/password or a
 role that cannot create databases:
 
 ```sh
-kubectl -n flowkit-demo-dev exec statefulset/postgres -- sh -lc 'PGPASSWORD=flowkitform psql -h 127.0.0.1 -U flowkitform -d flowkitform -c "select current_user, rolsuper, rolcreatedb from pg_roles where rolname=current_user;"'
+kubectl -n flowkitform-dev exec statefulset/postgres -- sh -lc 'PGPASSWORD=flowkitform psql -h 127.0.0.1 -U flowkitform -d flowkitform -c "select current_user, rolsuper, rolcreatedb from pg_roles where rolname=current_user;"'
 ```

@@ -13,7 +13,7 @@ import {
 } from '../apps/api/src/auth/auth.module';
 import { principal } from '@flowkitform/demo-domain';
 import { RuntimeHealthRepository } from '@flowkitform/demo-database';
-import { FlowkitDemoConsumer } from '../apps/api/src/flow/flowkit-demo.consumer';
+import { FlowkitDemoConsumer } from '../apps/api/src/flow/flowkitform.consumer';
 
 const fiveDayLeave = {
   managerId: 'manager-1',

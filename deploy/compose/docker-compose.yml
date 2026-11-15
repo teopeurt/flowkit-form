@@ -21,7 +21,7 @@ services:
     depends_on: { temporal: { condition: service_started } }
     entrypoint: ["/bin/sh", "-c"]
     command:
-      - 'until temporal operator namespace describe --namespace flowkit-demo >/dev/null 2>&1; do temporal operator namespace create --namespace flowkit-demo >/dev/null 2>&1 || true; sleep 2; done'
+      - 'until temporal operator namespace describe --namespace flowkitform >/dev/null 2>&1; do temporal operator namespace create --namespace flowkitform >/dev/null 2>&1 || true; sleep 2; done'
   mailpit:
     image: axllent/mailpit:v1.21.8
     ports: ["${FLOWKITFORM_MAILPIT_HTTP_PORT:-8025}:8025", "${FLOWKITFORM_MAILPIT_SMTP_PORT:-1025}:1025"]
@@ -34,7 +34,7 @@ services:
       FLOWKITFORM_ALLOW_SEED: "true"
       FLOWKITFORM_MIGRATION_APPROVED: "true"
       DATABASE_URL: postgresql://flowkitform:flowkitform@postgres:5432/flowkitform
-      BETTER_AUTH_SECRET: flowkit-demo-compose-secret-change-me-32chars
+      BETTER_AUTH_SECRET: flowkitform-compose-secret-change-me-32chars
     depends_on: { postgres: { condition: service_healthy } }
     command: ["bun", "run", "db:migrate"]
   seed:
@@ -45,7 +45,7 @@ services:
       NODE_ENV: development
       FLOWKITFORM_ALLOW_SEED: "true"
       DATABASE_URL: postgresql://flowkitform:flowkitform@postgres:5432/flowkitform
-      BETTER_AUTH_SECRET: flowkit-demo-compose-secret-change-me-32chars
+      BETTER_AUTH_SECRET: flowkitform-compose-secret-change-me-32chars
     depends_on: { migration: { condition: service_completed_successfully } }
     command: ["bun", "run", "db:seed"]
   api:
@@ -57,12 +57,12 @@ services:
       FLOWKITFORM_ALLOW_SEED: "true"
       FLOWKITFORM_PERSISTENCE: "true"
       DATABASE_URL: postgresql://flowkitform:flowkitform@postgres:5432/flowkitform
-      BETTER_AUTH_SECRET: flowkit-demo-compose-secret-change-me-32chars
+      BETTER_AUTH_SECRET: flowkitform-compose-secret-change-me-32chars
       BETTER_AUTH_URL: ${FLOWKITFORM_WEB_URL:-http://localhost:3012}
       MAILPIT_URL: ${FLOWKITFORM_MAILPIT_URL:-http://localhost:8025}
       TEMPORAL_ADDRESS: temporal:7233
-      TEMPORAL_NAMESPACE: flowkit-demo
-      TEMPORAL_TASK_QUEUE: flowkit-demo
+      TEMPORAL_NAMESPACE: flowkitform
+      TEMPORAL_TASK_QUEUE: flowkitform
     depends_on: { seed: { condition: service_completed_successfully }, temporal-namespace: { condition: service_completed_successfully } }
     ports: ["${FLOWKITFORM_API_PORT:-3011}:3011"]
     command: ["bun", "run", "apps/api/src/main.ts"]
@@ -81,9 +81,9 @@ services:
       FLOWKITFORM_PERSISTENCE: "true"
       DATABASE_URL: postgresql://flowkitform:flowkitform@postgres:5432/flowkitform
       TEMPORAL_ADDRESS: temporal:7233
-      TEMPORAL_NAMESPACE: flowkit-demo
-      TEMPORAL_TASK_QUEUE: flowkit-demo
-      BETTER_AUTH_SECRET: flowkit-demo-compose-secret-change-me-32chars
+      TEMPORAL_NAMESPACE: flowkitform
+      TEMPORAL_TASK_QUEUE: flowkitform
+      BETTER_AUTH_SECRET: flowkitform-compose-secret-change-me-32chars
     depends_on: { seed: { condition: service_completed_successfully }, temporal-namespace: { condition: service_completed_successfully } }
     command: ["bun", "run", "apps/worker/src/main.ts"]
   notify:
@@ -94,7 +94,7 @@ services:
       NODE_ENV: development
       FLOWKITFORM_PERSISTENCE: "true"
       DATABASE_URL: postgresql://flowkitform:flowkitform@postgres:5432/flowkitform
-      BETTER_AUTH_SECRET: flowkit-demo-compose-secret-change-me-32chars
+      BETTER_AUTH_SECRET: flowkitform-compose-secret-change-me-32chars
       SMTP_HOST: mailpit
       SMTP_PORT: "1025"
     depends_on: { seed: { condition: service_completed_successfully }, api: { condition: service_started }, mailpit: { condition: service_started } }

@@ -16,7 +16,7 @@ fi
 : "${OPS_USER:?Set OPS_USER for Mailpit/Temporal basic auth}"
 : "${OPS_PASSWORD:?Set OPS_PASSWORD for Mailpit/Temporal basic auth}"
 
-namespace="${FLOWKIT_K3S_NAMESPACE:-flowkit-demo-dev}"
+namespace="${FLOWKIT_K3S_NAMESPACE:-flowkitform-dev}"
 database_url="${DATABASE_URL:-postgresql://flowkitform:flowkitform@postgres:5432/flowkitform}"
 migration_approved="${FLOWKITFORM_MIGRATION_APPROVED:-false}"
 
@@ -27,29 +27,29 @@ fi
 
 if ! command -v htpasswd >/dev/null 2>&1; then
   echo "htpasswd is required to create the basic-auth secret." >&2
-  echo "Install apache2-utils/httpd-tools, or create flowkit-demo-basic-auth manually." >&2
+  echo "Install apache2-utils/httpd-tools, or create flowkitform-basic-auth manually." >&2
   exit 1
 fi
 
 kubectl apply --validate=false -f deploy/k8s/bootstrap/namespace.yaml
 
-kubectl -n "${namespace}" create secret docker-registry flowkit-demo-registry \
+kubectl -n "${namespace}" create secret docker-registry flowkitform-registry \
   --docker-server=docker.pigstycoders.com \
   --docker-username="${REGISTRY_USERNAME}" \
   --docker-password="${REGISTRY_PASSWORD}" \
   --dry-run=client -o yaml | kubectl apply --validate=false -f -
 
-kubectl -n "${namespace}" create secret generic flowkit-demo-runtime \
+kubectl -n "${namespace}" create secret generic flowkitform-runtime \
   --from-literal=DATABASE_URL="${database_url}" \
   --from-literal=BETTER_AUTH_SECRET="${BETTER_AUTH_SECRET}" \
   --from-literal=FLOWKITFORM_MIGRATION_APPROVED="${migration_approved}" \
   --dry-run=client -o yaml | kubectl apply --validate=false -f -
 
 htpasswd -nbB "${OPS_USER}" "${OPS_PASSWORD}" \
-  | kubectl -n "${namespace}" create secret generic flowkit-demo-basic-auth \
+  | kubectl -n "${namespace}" create secret generic flowkitform-basic-auth \
       --from-file=users=/dev/stdin \
       --dry-run=client -o yaml \
   | kubectl apply --validate=false -f -
 
 echo "FlowKit k3s bootstrap complete for namespace ${namespace}."
-echo "Created/updated: flowkit-demo-registry, flowkit-demo-runtime, flowkit-demo-basic-auth."
+echo "Created/updated: flowkitform-registry, flowkitform-runtime, flowkitform-basic-auth."

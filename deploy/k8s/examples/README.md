@@ -9,7 +9,7 @@ cp deploy/k8s/examples/secrets.env.example deploy/k8s/examples/secrets.env
 ```
 
 It loads `deploy/k8s/examples/secrets.env` automatically when present and
-creates the namespace plus these secrets in `flowkit-demo-dev` before starting
+creates the namespace plus these secrets in `flowkitform-dev` before starting
 `TILT_MODE=flowkit-k3s tilt up`. The manual commands below are kept for
 debugging and recovery.
 
@@ -30,16 +30,16 @@ export ACME_EMAIL=ops@example.com
 ```
 
 ```sh
-kubectl -n flowkit-demo-dev create secret docker-registry flowkit-demo-registry \
+kubectl -n flowkitform-dev create secret docker-registry flowkitform-registry \
   --docker-server=docker.pigstycoders.com \
   --docker-username="$REGISTRY_USERNAME" --docker-password="$REGISTRY_PASSWORD"
 
-kubectl -n flowkit-demo-dev create secret generic flowkit-demo-runtime \
+kubectl -n flowkitform-dev create secret generic flowkitform-runtime \
   --from-literal=DATABASE_URL="$DATABASE_URL" \
   --from-literal=BETTER_AUTH_SECRET="$BETTER_AUTH_SECRET" \
   --from-literal=FLOWKITFORM_MIGRATION_APPROVED="$FLOWKITFORM_MIGRATION_APPROVED"
 
-htpasswd -nbB "$OPS_USER" "$OPS_PASSWORD" | kubectl -n flowkit-demo-dev create secret generic flowkit-demo-basic-auth \
+htpasswd -nbB "$OPS_USER" "$OPS_PASSWORD" | kubectl -n flowkitform-dev create secret generic flowkitform-basic-auth \
   --from-file=users=/dev/stdin
 ```
 

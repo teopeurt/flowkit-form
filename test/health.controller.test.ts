@@ -4,7 +4,7 @@ import { liveHealth, readyHealth, type ReadinessProbe } from '../apps/api/src/he
 
 describe('health responses', () => {
   it('reports liveness without opening dependencies', () => {
-    expect(liveHealth()).toEqual({ status: 'ok', service: 'flowkit-demo' });
+    expect(liveHealth()).toEqual({ status: 'ok', service: 'flowkitform' });
   });
 
   it('reports readiness when the database responds', async () => {

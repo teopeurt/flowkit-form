@@ -2,14 +2,14 @@
 
 **Status:** definition, registries, and subject schema landed and validated; runtime integration not started
 **Definition id:** `worker-enrolment-demo`, version 1
-**Owner:** flowkit-demo maintainers
+**Owner:** flowkitform maintainers
 **Source:** `packages/domain/src/enrolment/`, verified by `test/enrolment-definition.test.ts`
 
 ---
 
 ## 1. Summary
 
-`flowkit-demo` now carries two reference workflows. Leave approval is a linear approval with one
+`flowkitform` now carries two reference workflows. Leave approval is a linear approval with one
 review gate — the shape FlowKit was extracted from. The ride hail is a fast, adversarial,
 money-moving process that proved the interpreter generalizes beyond approvals
 (`docs/ride-hail-spec.md`).

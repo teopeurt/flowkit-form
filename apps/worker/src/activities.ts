@@ -57,7 +57,7 @@ export function createLeaveActivities(dependencies: LeaveActivityDependencies = 
       const actor = await actorResolver.resolve(input.command.actorId ?? '');
       const task = input.state.stage === 'manager_review'
         ? await repository.tasks.find(scope, {
-          namespace: 'flowkit-demo', flowId: workflowId, subjectType: 'leave', subjectId: input.subject.id,
+          namespace: 'flowkitform', flowId: workflowId, subjectType: 'leave', subjectId: input.subject.id,
           stage: 'manager_review', role: 'manager',
         })
         : null;

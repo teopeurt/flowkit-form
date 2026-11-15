@@ -52,7 +52,7 @@ export function createAuth(overrides: { database?: DB } = {}) {
       }),
     ],
     advanced: {
-      cookiePrefix: 'flowkit-demo',
+      cookiePrefix: 'flowkitform',
       useSecureCookies: config.NODE_ENV === 'production',
     },
   });

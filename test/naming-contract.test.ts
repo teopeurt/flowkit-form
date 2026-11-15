@@ -28,11 +28,23 @@ function isHistoricalRecord(path: string): boolean {
   return path.startsWith('docs/superpowers/') || path === 'bun.lock';
 }
 
+/**
+ * Files that must name the retired identity in order to reject or migrate away
+ * from it. Each is a deliberate negative reference, not a missed rename.
+ */
+const deliberateReferences = new Set([
+  // Documents the ALTER DATABASE/ROLE/TABLE path off the old names.
+  'deploy/README.md',
+  // Asserts the old database name and cluster marker are now refused.
+  'scripts/lib/local-database-guard.test.ts',
+]);
+
 function isExempt(path: string): boolean {
   return (
     path === relative(repositoryRoot, import.meta.path) ||
     frozenMigrations.test(path) ||
-    isHistoricalRecord(path)
+    isHistoricalRecord(path) ||
+    deliberateReferences.has(path)
   );
 }
 

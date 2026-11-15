@@ -22,7 +22,7 @@ if (import.meta.main) {
   process.once('SIGTERM', stop);
   process.once('SIGINT', stop);
   try {
-    process.stdout.write('flowkit-demo Flowkit runtime ready\n');
+    process.stdout.write('flowkitform Flowkit runtime ready\n');
     await worker.run();
   } finally {
     clearInterval(interval);

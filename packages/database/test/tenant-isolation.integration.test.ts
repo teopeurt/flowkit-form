@@ -59,7 +59,7 @@ beforeAll(async () => {
       )
     `;
     const payload = {
-      namespace: 'flowkit-demo', sourceKey: `${suffix}-notification`, aggregate: { type: 'leave', id: `${suffix}-leave` },
+      namespace: 'flowkitform', sourceKey: `${suffix}-notification`, aggregate: { type: 'leave', id: `${suffix}-leave` },
       templateKey: 'leave.accepted', channel: 'inbox',
       recipient: { channel: 'inbox', canonicalKey: `${suffix}-employee`, address: `${suffix}-employee` },
       rendered: { subject: `${suffix} notification`, body: 'Tenant-only', severity: 'success' },

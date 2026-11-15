@@ -109,7 +109,7 @@ export class LeaveFlowRepository {
         ON CONFLICT (organization_id, operation_key) DO NOTHING
       `;
       const plan = planTaskProjection({
-        namespace: 'flowkit-demo', flowId: input.flowId, subject: { type: 'leave', id: input.id },
+        namespace: 'flowkitform', flowId: input.flowId, subject: { type: 'leave', id: input.id },
         definition: this.definition, operationId: operationKey, transitionSequence: 0,
         action: 'open', actorId: input.request.employeeId, previousState: state, nextState: state, metadata: {},
       }, null);
@@ -233,11 +233,11 @@ export class LeaveFlowRepository {
       `;
       const previousRole = input.previousState.pendingRole;
       const current = previousRole ? await this.tasks.findInTransaction(scope, tx, {
-        namespace: 'flowkit-demo', flowId: input.workflowId, subjectType: 'leave', subjectId: input.subject.id,
+        namespace: 'flowkitform', flowId: input.workflowId, subjectType: 'leave', subjectId: input.subject.id,
         stage: input.previousState.stage, role: previousRole,
       }) : null;
       const taskPlan = planTaskProjection({
-        namespace: 'flowkit-demo', flowId: input.workflowId, subject: { type: 'leave', id: input.subject.id },
+        namespace: 'flowkitform', flowId: input.workflowId, subject: { type: 'leave', id: input.subject.id },
         definition: this.definition, operationId: operationKey, transitionSequence: input.sequence,
         action: input.command.action, actorId: input.command.actorId ?? null,
         previousState: input.previousState, nextState: input.nextState, metadata: {},
@@ -297,7 +297,7 @@ export class LeaveFlowRepository {
       if (recipientIds.length === 0) continue;
 
       const plan = await planNotification({
-        namespace: 'flowkit-demo',
+        namespace: 'flowkitform',
         sourceKey: `flowkit:${input.workflowId}:${input.operationId}${index > 0 ? `:${index}` : ''}`,
         aggregate: { type: 'leave', id: input.subject.id }, templateKey: notification.template,
         data: { requestId: input.subject.id, stage: input.nextState.stage, employeeName: request.employee_id },

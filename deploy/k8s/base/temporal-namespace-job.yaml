@@ -20,4 +20,4 @@ spec:
               value: temporal-frontend:7233
           command: ["/bin/sh", "-c"]
           args:
-            - until temporal operator namespace describe --namespace flowkit-demo >/dev/null 2>&1; do temporal operator namespace create --namespace flowkit-demo >/dev/null 2>&1 || true; sleep 2; done
+            - until temporal operator namespace describe --namespace flowkitform >/dev/null 2>&1; do temporal operator namespace create --namespace flowkitform >/dev/null 2>&1 || true; sleep 2; done

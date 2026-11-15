@@ -4,7 +4,7 @@ import { TestWorkflowEnvironment } from '@temporalio/testing';
 import { Worker } from '@temporalio/worker';
 
 import { LeaveFlowRepository } from '@flowkitform/demo-database';
-import { createFlowkitDemoConsumer, publishedLeaveDefinition } from '../apps/api/src/flow/flowkit-demo.consumer';
+import { createFlowkitDemoConsumer, publishedLeaveDefinition } from '../apps/api/src/flow/flowkitform.consumer';
 import { createLeaveActivities } from '../apps/worker/src/activities';
 import { leaveWorkflowType } from '@flowkitform/demo-domain';
 import { clearDurableLeaveServiceData, durableLeaveServiceDatabase } from './durable-test-database';
@@ -51,7 +51,7 @@ durableTests('Flowkit demo consumer', () => {
   it('persists the published definition hash, routes multi-day leave to a manager task, and rejects a decision by another manager', async () => {
     const environment = await TestWorkflowEnvironment.createLocal();
     const repository = new LeaveFlowRepository({ sql: sql! });
-    const taskQueue = 'flowkit-demo';
+    const taskQueue = 'flowkitform';
     const worker = await Worker.create({
       connection: environment.nativeConnection,
       taskQueue,

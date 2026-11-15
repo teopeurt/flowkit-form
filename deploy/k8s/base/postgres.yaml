@@ -25,7 +25,7 @@ spec:
       labels:
         app.kubernetes.io/name: postgres
     spec:
-      serviceAccountName: flowkit-demo
+      serviceAccountName: flowkitform
       containers:
         - name: postgres
           image: postgres:16.4

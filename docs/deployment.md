@@ -26,8 +26,8 @@ The default `Tiltfile` uses local Compose. Select k3s explicitly with:
 
 ```sh
 export TILT_MODE=flowkit-k3s
-export FLOWKIT_K3S_NAMESPACE=flowkit-demo-dev
-export FLOWKIT_K3S_REGISTRY=registry.example.invalid/flowkit-demo-dev
+export FLOWKIT_K3S_NAMESPACE=flowkitform-dev
+export FLOWKIT_K3S_REGISTRY=registry.example.invalid/flowkitform-dev
 tilt up
 ```
 

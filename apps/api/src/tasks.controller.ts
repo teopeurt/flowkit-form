@@ -5,7 +5,7 @@ import { BadRequestException, Body, Controller, Get, NotFoundException, Param, P
 import type { AuthenticatedPrincipal } from '@teopeurt/flowkit-auth';
 
 import { OrganizationContextGuard } from './auth/auth.module';
-import { FlowkitDemoConsumer } from './flow/flowkit-demo.consumer';
+import { FlowkitDemoConsumer } from './flow/flowkitform.consumer';
 import { asFlowkitHttpException } from './flowkit-http.errors';
 import type { OrganizationContext } from './auth/organization-context';
 

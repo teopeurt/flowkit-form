@@ -103,7 +103,7 @@ describe('BetterAuth HTTP boundary', () => {
       await app.listen(port, '127.0.0.1');
       const config = loadConfig();
       const cookie = await serializeSignedCookie(
-        'flowkit-demo.session_token',
+        'flowkitform.session_token',
         sessionToken,
         config.BETTER_AUTH_SECRET,
       );

@@ -10,9 +10,9 @@ spec:
         app.kubernetes.io/name: flowkit-migration
     spec:
       restartPolicy: Never
-      serviceAccountName: flowkit-demo
+      serviceAccountName: flowkitform
       imagePullSecrets:
-        - name: flowkit-demo-registry
+        - name: flowkitform-registry
       initContainers:
         - name: wait-for-postgres
           image: postgres:16.4
@@ -26,11 +26,11 @@ spec:
               done
       containers:
         - name: flowkit-migration
-          image: docker.pigstycoders.com/flowkit-demo-dev/flowkit-demo
+          image: docker.pigstycoders.com/flowkitform-dev/flowkitform
           imagePullPolicy: Always
           command: ["bun", "run", "db:migrate"]
           envFrom:
             - configMapRef:
-                name: flowkit-demo-config
+                name: flowkitform-config
             - secretRef:
-                name: flowkit-demo-runtime
+                name: flowkitform-runtime

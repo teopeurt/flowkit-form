@@ -335,7 +335,7 @@ export class PostgresTaskStore {
       LIMIT 1
     `;
     const row = rows[0];
-    return row ? this.event(row, this.task(row, 'flowkit-demo', input.subjectType)) : null;
+    return row ? this.event(row, this.task(row, 'flowkitform', input.subjectType)) : null;
   }
 
   async createInvitation(scope: TenantScope, input: Omit<TaskInvitation, 'id' | 'status' | 'acceptedIdentityId' | 'acceptedAt'>): Promise<TaskInvitation> {
@@ -380,7 +380,7 @@ export class PostgresTaskStore {
           ${input.now}::timestamptz AS claimed_at, NULL::timestamptz AS completed_at
       `;
       if (!row) throw new Error('Task invitation could not claim an open task.');
-      const task = this.task(row, 'flowkit-demo', invitation.subject_type);
+      const task = this.task(row, 'flowkitform', invitation.subject_type);
       await this.appendLifecycleEvent(scope, tx, task, 'invitation_accepted', input.operationId, input.identityId, input.now);
       return { invitation: this.invitation(invitation), task };
     });
@@ -410,7 +410,7 @@ export class PostgresTaskStore {
     `;
   }
 
-  private task(row: TaskRow, namespace = 'flowkit-demo', subjectType = 'leave'): FlowTask {
+  private task(row: TaskRow, namespace = 'flowkitform', subjectType = 'leave'): FlowTask {
     return {
       id: row.id, namespace, flowId: row.flow_id, subjectType, subjectId: row.subject_id,
       stage: row.stage, role: row.role_key, status: row.status, assigneeId: row.assignee_id,

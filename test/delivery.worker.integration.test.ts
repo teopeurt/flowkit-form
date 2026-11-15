@@ -10,14 +10,14 @@ import { durableTestDatabase } from './durable-test-database';
 
 const approvedLeaveEnvelopes: NotificationDeliveryEnvelope[] = [
   {
-    namespace: 'flowkit-demo', sourceKey: 'leave-1:approved', aggregate: { type: 'leave', id: 'leave-1' },
+    namespace: 'flowkitform', sourceKey: 'leave-1:approved', aggregate: { type: 'leave', id: 'leave-1' },
     templateKey: 'leave.accepted', channel: 'inbox', recipient: { channel: 'inbox', canonicalKey: 'employee-1', address: 'employee-1' },
     rendered: { subject: 'Leave approved', body: 'Approved', severity: 'success' }, dedupeKey: 'leave-1:approved:inbox',
     payloadFingerprint: 'payload-inbox', requestFingerprint: 'request-approved',
     retryPolicy: { maxAttempts: 3, initialDelayMs: 1_000, multiplier: 2, maxDelayMs: 10_000 }, metadata: {},
   },
   {
-    namespace: 'flowkit-demo', sourceKey: 'leave-1:approved', aggregate: { type: 'leave', id: 'leave-1' },
+    namespace: 'flowkitform', sourceKey: 'leave-1:approved', aggregate: { type: 'leave', id: 'leave-1' },
     templateKey: 'leave.accepted', channel: 'email', recipient: { channel: 'email', canonicalKey: 'employee-1', address: 'employee-1@example.test' },
     rendered: { subject: 'Leave approved', body: 'Approved', severity: 'success' }, dedupeKey: 'leave-1:approved:email',
     payloadFingerprint: 'payload-email', requestFingerprint: 'request-approved',

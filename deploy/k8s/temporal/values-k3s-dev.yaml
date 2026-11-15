@@ -32,7 +32,7 @@ server:
     namespaces:
       create: true
       namespace:
-        - name: flowkit-demo
+        - name: flowkitform
           retention: 7d
     metrics:
       prometheus:

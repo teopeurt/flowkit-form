@@ -4,19 +4,19 @@ metadata:
   name: ops-ingress-auth
 spec:
   basicAuth:
-    secret: flowkit-demo-basic-auth
+    secret: flowkitform-basic-auth
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: flowkit-demo
+  name: flowkitform
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   ingressClassName: traefik
   tls:
-    - secretName: flowkit-demo-k3s-tls
+    - secretName: flowkitform-k3s-tls
       hosts:
         - flowkit.k3s.naakwu.app
   rules:
@@ -34,15 +34,15 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: flowkit-demo-ops
+  name: flowkitform-ops
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.middlewares: flowkit-demo-dev-ops-ingress-auth@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: flowkitform-dev-ops-ingress-auth@kubernetescrd
 spec:
   ingressClassName: traefik
   tls:
-    - secretName: flowkit-demo-k3s-tls
+    - secretName: flowkitform-k3s-tls
       hosts:
         - mail.flowkit.k3s.naakwu.app
         - temporal.flowkit.k3s.naakwu.app

@@ -1,9 +1,9 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: flowkit-demo-k3s-tls
+  name: flowkitform-k3s-tls
 spec:
-  secretName: flowkit-demo-k3s-tls
+  secretName: flowkitform-k3s-tls
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer

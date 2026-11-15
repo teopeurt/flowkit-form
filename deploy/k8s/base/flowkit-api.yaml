@@ -25,14 +25,14 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: flowkit-api
-        app.kubernetes.io/part-of: flowkit-demo
+        app.kubernetes.io/part-of: flowkitform
     spec:
-      serviceAccountName: flowkit-demo
+      serviceAccountName: flowkitform
       imagePullSecrets:
-        - name: flowkit-demo-registry
+        - name: flowkitform-registry
       containers:
         - name: flowkit-api
-          image: docker.pigstycoders.com/flowkit-demo-dev/flowkit-demo
+          image: docker.pigstycoders.com/flowkitform-dev/flowkitform
           imagePullPolicy: Always
           command: ["bun", "run", "apps/api/src/main.ts"]
           ports:
@@ -40,9 +40,9 @@ spec:
               containerPort: 3011
           envFrom:
             - configMapRef:
-                name: flowkit-demo-config
+                name: flowkitform-config
             - secretRef:
-                name: flowkit-demo-runtime
+                name: flowkitform-runtime
           readinessProbe:
             httpGet:
               path: /health/ready

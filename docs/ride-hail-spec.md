@@ -2,14 +2,14 @@
 
 **Status:** definition, registries, and subject schema landed and validated; runtime integration not started
 **Definition id:** `ride-hail-demo`, version 1
-**Owner:** flowkit-demo maintainers
+**Owner:** flowkitform maintainers
 **Source:** `packages/domain/src/ride/`, verified by `test/ride-definition.test.ts`
 
 ---
 
 ## 1. Summary
 
-`flowkit-demo` ships one reference workflow: leave approval. It is a good first proof — a linear
+`flowkitform` ships one reference workflow: leave approval. It is a good first proof — a linear
 approval with one review gate — and it is precisely the shape FlowKit was extracted from. That
 makes it a weak second data point. A framework proven only against the process it was designed for
 has not been proven to generalize; it has been proven to still work.

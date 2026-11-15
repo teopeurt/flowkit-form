@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'bun:test';
 import type { FlowRuntime } from '@teopeurt/flowkit-consumer';
 
-import { FlowkitDemoConsumer } from '../apps/api/src/flow/flowkit-demo.consumer';
+import { FlowkitDemoConsumer } from '../apps/api/src/flow/flowkitform.consumer';
 
 const state = { state: { stage: 'draft', status: 'pending', pendingRole: null, tracks: {} }, sequence: 0, stepResults: {}, completed: false, nextActions: [] };
 

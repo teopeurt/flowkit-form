@@ -166,7 +166,7 @@ describe('deployment contract', () => {
     const localCompose = yaml<ComposeFile>(await text('docker-compose.yml'));
     const compose = yaml<ComposeFile>(await text('deploy/compose/docker-compose.yml'));
     const deployReadme = await text('deploy/README.md');
-    expect(localCompose.name).toBe('flowkit-demo');
+    expect(localCompose.name).toBe('flowkitform');
     expect(Object.keys(localCompose.services)).toEqual(['postgres', 'temporal', 'temporal-namespace', 'mailpit']);
     expect(compose.secrets).toBeUndefined();
     expect(deployReadme).not.toMatch(/npmrc/i);
@@ -205,7 +205,7 @@ describe('deployment contract', () => {
   it('renders tenant-neutral FlowKit workload identities with probes and ingress intact', async () => {
     const manifests = await filesBelow('deploy/k8s');
     const rendered = (await Promise.all(manifests.map((path) => readFile(path, 'utf8')))).join('\n---\n');
-    expect(rendered).not.toMatch(/FAAN|AVSEC|faan-avsec|packages\/flowkit-demo/i);
+    expect(rendered).not.toMatch(/FAAN|AVSEC|faan-avsec|packages\/flowkitform/i);
 
     const api = (await text('deploy/k8s/base/flowkit-api.yaml'))
       .split(/^---$/m)
@@ -273,6 +273,6 @@ describe('deployment contract', () => {
     const source = (await Promise.all(deploymentFiles.map((path) =>
       typeof path === 'string' && path.startsWith(root) ? readFile(path, 'utf8') : text(path),
     ))).join('\n');
-    expect(source).not.toMatch(/packages\/flowkit-demo|packages\/faan|faan-avsec-backend|public-web|internal-web|ministack/i);
+    expect(source).not.toMatch(/packages\/flowkitform|packages\/faan|faan-avsec-backend|public-web|internal-web|ministack/i);
   });
 });

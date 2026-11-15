@@ -1,7 +1,7 @@
 export type ReadinessProbe = { ping: () => Promise<void> };
 
 export function liveHealth() {
-  return { status: 'ok', service: 'flowkit-demo' };
+  return { status: 'ok', service: 'flowkitform' };
 }
 
 export async function readyHealth(readiness: ReadinessProbe) {
