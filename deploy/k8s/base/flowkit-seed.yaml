@@ -20,7 +20,7 @@ spec:
             - sh
             - -ec
             - |
-              until pg_isready -h postgres -p 5432 -U flowkit_demo -d flowkit_demo; do
+              until pg_isready -h postgres -p 5432 -U flowkitform -d flowkitform; do
                 echo "waiting for postgres:5432"
                 sleep 2
               done

@@ -147,14 +147,14 @@ describe('superviseProcesses', () => {
         name: 'api',
         command: ['bun', 'api.ts'],
         env: {
-          DATABASE_URL: 'postgresql://flowkit:db-password@localhost:5441/flowkit_demo',
+          DATABASE_URL: 'postgresql://flowkit:db-password@localhost:5441/flowkitform',
           NODE_AUTH_TOKEN: 'registry-token',
           SESSION_COOKIE: 'cookie-value',
           PUBLIC_SETTING: 'visible-value',
         },
       }],
       spawn: () => {
-        throw new Error('failed postgresql://flowkit:db-password@localhost:5441/flowkit_demo registry-token cookie-value');
+        throw new Error('failed postgresql://flowkit:db-password@localhost:5441/flowkitform registry-token cookie-value');
       },
       log: (message) => messages.push(message),
     });

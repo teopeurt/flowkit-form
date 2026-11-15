@@ -34,11 +34,11 @@ spec:
               containerPort: 5432
           env:
             - name: POSTGRES_USER
-              value: flowkit_demo
+              value: flowkitform
             - name: POSTGRES_PASSWORD
-              value: flowkit_demo
+              value: flowkitform
             - name: POSTGRES_DB
-              value: flowkit_demo
+              value: flowkitform
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
           volumeMounts:

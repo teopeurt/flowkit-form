@@ -17,7 +17,7 @@ fi
 : "${OPS_PASSWORD:?Set OPS_PASSWORD for Mailpit/Temporal basic auth}"
 
 namespace="${FLOWKIT_K3S_NAMESPACE:-flowkit-demo-dev}"
-database_url="${DATABASE_URL:-postgresql://flowkit_demo:flowkit_demo@postgres:5432/flowkit_demo}"
+database_url="${DATABASE_URL:-postgresql://flowkitform:flowkitform@postgres:5432/flowkitform}"
 migration_approved="${FLOWKITFORM_MIGRATION_APPROVED:-false}"
 
 if [[ "${#BETTER_AUTH_SECRET}" -lt 32 ]]; then

@@ -66,8 +66,8 @@ only, the seed command prints the demo credentials after it completes; test runs
 ### Migration safety
 
 The checked-in SQL is only for the recognized disposable database. The guard permits only
-`flowkit_demo` on `localhost`, loopback, or the Compose `postgres` service; it requires the
-`flowkit_starter_identity` marker and rejects TLS. Remote databases never qualify for automatic
+`flowkitform` on `localhost`, loopback, or the Compose `postgres` service; it requires the
+`flowkitform_identity` marker and rejects TLS. Remote databases never qualify for automatic
 migration or seed operations. Do not run a migration manually unless you have explicit approval:
 
 ```sh

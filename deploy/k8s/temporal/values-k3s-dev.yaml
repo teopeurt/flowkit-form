@@ -17,8 +17,8 @@ server:
             databaseName: temporal
             connectAddr: postgres:5432
             connectProtocol: tcp
-            user: flowkit_demo
-            password: flowkit_demo
+            user: flowkitform
+            password: flowkitform
         visibility:
           sql:
             createDatabase: true
@@ -27,8 +27,8 @@ server:
             databaseName: temporal_visibility
             connectAddr: postgres:5432
             connectProtocol: tcp
-            user: flowkit_demo
-            password: flowkit_demo
+            user: flowkitform
+            password: flowkitform
     namespaces:
       create: true
       namespace:

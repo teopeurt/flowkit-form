@@ -142,5 +142,5 @@ whether an old Postgres PVC was initialized with a different user/password or a
 role that cannot create databases:
 
 ```sh
-kubectl -n flowkit-demo-dev exec statefulset/postgres -- sh -lc 'PGPASSWORD=flowkit_demo psql -h 127.0.0.1 -U flowkit_demo -d flowkit_demo -c "select current_user, rolsuper, rolcreatedb from pg_roles where rolname=current_user;"'
+kubectl -n flowkit-demo-dev exec statefulset/postgres -- sh -lc 'PGPASSWORD=flowkitform psql -h 127.0.0.1 -U flowkitform -d flowkitform -c "select current_user, rolsuper, rolcreatedb from pg_roles where rolname=current_user;"'
 ```

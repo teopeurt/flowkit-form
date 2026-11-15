@@ -9,7 +9,7 @@ import {
 } from './lib/process-supervisor';
 
 const ROOT = resolve(import.meta.dir, '..');
-const DEFAULT_DATABASE_URL = 'postgresql://flowkit_demo:flowkit_demo@localhost:5441/flowkit_demo';
+const DEFAULT_DATABASE_URL = 'postgresql://flowkitform:flowkitform@localhost:5441/flowkitform';
 
 async function runRequired(command: readonly string[], environment: Record<string, string | undefined>): Promise<void> {
   const child = spawnRedactedChild({
@@ -65,7 +65,7 @@ async function main(): Promise<number> {
   if (!Bun.which('docker')) throw new Error('Docker is required for the local dependency stack.');
 
   await runRequired(
-    ['docker', 'compose', '-p', 'flowkit_demo', '-f', 'docker-compose.yml', 'up', '-d', '--wait'],
+    ['docker', 'compose', '-p', 'flowkitform', '-f', 'docker-compose.yml', 'up', '-d', '--wait'],
     runtimeEnvironment,
   );
   await assertDisposableLocalDatabase({ databaseUrl: runtimeEnvironment.DATABASE_URL });

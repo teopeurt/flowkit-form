@@ -9,7 +9,7 @@ import {
 } from './lib/process-supervisor';
 
 const ROOT = resolve(import.meta.dir, '..');
-const CI_DATABASE_URL = 'postgresql://flowkit_demo:flowkit_demo@127.0.0.1:5441/flowkit_demo';
+const CI_DATABASE_URL = 'postgresql://flowkitform:flowkitform@127.0.0.1:5441/flowkitform';
 
 interface CommandStep { command: readonly string[] }
 type CancelTimer = () => void;
@@ -29,7 +29,7 @@ function assertStaticCiTarget(databaseUrl: string): void {
   const tls = target.searchParams.get('sslmode');
   if (!['postgres:', 'postgresql:'].includes(target.protocol)
     || !['localhost', '127.0.0.1', '[::1]', '::1'].includes(target.hostname)
-    || database !== 'flowkit_demo'
+    || database !== 'flowkitform'
     || (tls !== null && tls !== 'disable')) {
     throw new Error('CI requires a disposable loopback PostgreSQL target.');
   }
@@ -65,7 +65,7 @@ export function createCiStackPlan(source: Record<string, string | undefined>): C
   return {
     environment,
     setup: [
-      command(['docker', 'compose', '-p', 'flowkit_demo_ci', '-f', 'docker-compose.yml', 'up', '-d', '--wait']),
+      command(['docker', 'compose', '-p', 'flowkitform_ci', '-f', 'docker-compose.yml', 'up', '-d', '--wait']),
       command(['bun', 'run', 'db:migrate']),
       command(['bun', 'run', 'db:seed']),
     ],
@@ -76,7 +76,7 @@ export function createCiStackPlan(source: Record<string, string | undefined>): C
       { name: 'web', command: ['bun', 'run', 'dev:web'], cwd: ROOT, env: environment },
     ],
     verify: command(['bun', 'run', 'test:browser']),
-    cleanup: command(['docker', 'compose', '-p', 'flowkit_demo_ci', '-f', 'docker-compose.yml', 'down', '-v']),
+    cleanup: command(['docker', 'compose', '-p', 'flowkitform_ci', '-f', 'docker-compose.yml', 'down', '-v']),
   };
 }
 

@@ -50,7 +50,7 @@ cross-organization read. Test SQL scoping in `packages/database/test/tenant-sql-
 isolation in `packages/database/test/tenant-isolation.integration.test.ts`.
 
 Never point the starter migration runner at a shared or remote database. The automatic guard accepts
-only the marked disposable `flowkit_demo` database. Obtain explicit approval before running a
+only the marked disposable `flowkitform` database. Obtain explicit approval before running a
 migration or seed command.
 
 ## 6. API routes and browser forms

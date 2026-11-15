@@ -23,17 +23,17 @@ describe('createCiStackPlan', () => {
       CI: 'true',
       NODE_ENV: 'test',
       FLOWKITFORM_CI_APPROVED: 'true',
-      DATABASE_URL: 'postgresql://flowkit_demo:flowkit_demo@127.0.0.1:5441/flowkit_demo',
+      DATABASE_URL: 'postgresql://flowkitform:flowkitform@127.0.0.1:5441/flowkitform',
     });
 
     expect(plan.setup.map((step) => step.command.join(' '))).toEqual([
-      'docker compose -p flowkit_demo_ci -f docker-compose.yml up -d --wait',
+      'docker compose -p flowkitform_ci -f docker-compose.yml up -d --wait',
       'bun run db:migrate',
       'bun run db:seed',
     ]);
     expect(plan.children.map((child) => child.name)).toEqual(['api', 'worker', 'notify', 'web']);
     expect(plan.verify.command.join(' ')).toBe('bun run test:browser');
-    expect(plan.cleanup.command.join(' ')).toBe('docker compose -p flowkit_demo_ci -f docker-compose.yml down -v');
+    expect(plan.cleanup.command.join(' ')).toBe('docker compose -p flowkitform_ci -f docker-compose.yml down -v');
     expect(plan.environment.FLOWKITFORM_MIGRATION_APPROVED).toBe('true');
     expect(plan.environment.FLOWKITFORM_URL).toBe('http://localhost:5173');
     expect(plan.environment.BETTER_AUTH_URL).toBe('http://localhost:5173');
@@ -48,7 +48,7 @@ describe('createCiStackPlan', () => {
   it.each([
     [{ CI: 'false', NODE_ENV: 'test', FLOWKITFORM_CI_APPROVED: 'true' }, 'CI=true'],
     [{ CI: 'true', NODE_ENV: 'development', FLOWKITFORM_CI_APPROVED: 'true' }, 'NODE_ENV=test'],
-    [{ CI: 'true', NODE_ENV: 'test', FLOWKITFORM_CI_APPROVED: 'true', DATABASE_URL: 'postgresql://x:x@db.example.com/flowkit_demo' }, 'disposable loopback'],
+    [{ CI: 'true', NODE_ENV: 'test', FLOWKITFORM_CI_APPROVED: 'true', DATABASE_URL: 'postgresql://x:x@db.example.com/flowkitform' }, 'disposable loopback'],
   ] as const)('rejects an unsafe CI invocation', (environment, message) => {
     expect(() => createCiStackPlan(environment)).toThrow(message);
   });

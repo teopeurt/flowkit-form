@@ -1,7 +1,7 @@
 import postgres from 'postgres';
 
-export const DISPOSABLE_DATABASE_NAME = 'flowkit_demo';
-export const DISPOSABLE_DATABASE_MARKER = 'flowkit_starter_identity';
+export const DISPOSABLE_DATABASE_NAME = 'flowkitform';
+export const DISPOSABLE_DATABASE_MARKER = 'flowkitform_identity';
 
 const ALLOWED_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]', '::1', 'postgres']);
 const TLS_MODES = new Set(['require', 'verify-ca', 'verify-full', 'prefer', 'allow']);
@@ -60,10 +60,10 @@ function parseTarget(databaseUrl: string): URL {
   try {
     database = decodeURIComponent(target.pathname.slice(1));
   } catch {
-    throw new Error('DATABASE_URL must name the exact flowkit_demo database.');
+    throw new Error('DATABASE_URL must name the exact flowkitform database.');
   }
   if (database !== DISPOSABLE_DATABASE_NAME) {
-    throw new Error('DATABASE_URL must name the exact flowkit_demo database.');
+    throw new Error('DATABASE_URL must name the exact flowkitform database.');
   }
 
   const sslMode = target.searchParams.get('sslmode')?.toLowerCase();
