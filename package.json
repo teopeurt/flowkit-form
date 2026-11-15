@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@flowkit-demo/database": "workspace:*",
+    "@flowkit-demo/document": "workspace:*",
     "@flowkit-demo/domain": "workspace:*",
     "@teopeurt/flowkit-auth": "1.2.0",
     "@teopeurt/flowkit-consumer": "1.2.0",

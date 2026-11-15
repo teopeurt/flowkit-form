@@ -6,6 +6,7 @@
       "name": "@flowkit-demo/workspace",
       "dependencies": {
         "@flowkit-demo/database": "workspace:*",
+        "@flowkit-demo/document": "workspace:*",
         "@flowkit-demo/domain": "workspace:*",
         "@nestjs/common": "11.1.9",
         "@nestjs/core": "11.1.9",
@@ -72,6 +73,10 @@
     },
     "packages/database": {
       "name": "@flowkit-demo/database",
+      "version": "0.2.0",
+    },
+    "packages/document": {
+      "name": "@flowkit-demo/document",
       "version": "0.2.0",
     },
     "packages/domain": {
@@ -204,6 +209,8 @@
     "@flowkit-demo/api": ["@flowkit-demo/api@workspace:apps/api"],
 
     "@flowkit-demo/database": ["@flowkit-demo/database@workspace:packages/database"],
+
+    "@flowkit-demo/document": ["@flowkit-demo/document@workspace:packages/document"],
 
     "@flowkit-demo/domain": ["@flowkit-demo/domain@workspace:packages/domain"],
 
