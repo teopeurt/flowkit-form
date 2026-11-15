@@ -30,6 +30,10 @@ describe('starter documentation contract', () => {
     expect(readme).toContain('Globex Demo');
     expect(readme).toContain('FLOWKITFORM_MIGRATION_APPROVED');
     expect(readme).toMatch(/never.*remote|remote.*never/i);
+    // Both targets are discoverable: the product suite and the quarantined demo.
+    expect(readme).toContain('bun run test');
+    expect(readme).toContain('bun run test:examples');
+    expect(readme).toContain('bun run build:examples');
   });
 
   it('documents the public package install without a credential', async () => {

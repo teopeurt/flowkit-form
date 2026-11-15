@@ -197,7 +197,9 @@ a worker deploy.
 Today definitions are TypeScript constants (`packages/domain/src/leave/leave.definition.ts`) with
 registries in `packages/domain/src/leave/leave.registries.ts`, bound into the workflow bundle in
 `apps/worker/src/workflows.ts`. The leave, ride, and enrolment examples stay until the
-document-approval definition replaces them in phase 2.
+document-approval definition replaces them in phase 2. Since the 2026-11-15 rename they are
+quarantined behind `@flowkitform/demo-*` package names and the `test:examples` target, which keeps
+their FlowKit integration coverage running without placing them in the product build.
 
 ## 7. API surface (Target, phase 2 and 3)
 

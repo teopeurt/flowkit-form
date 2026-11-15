@@ -87,7 +87,18 @@ bun run test
 bun run build
 ```
 
-The durable and browser suites require an explicitly approved disposable stack; they never create
-or migrate one by themselves. Start with the ordered guide in
+`bun run test` is the product suite: the document package plus the repository-wide structural
+gates. It needs no Docker stack and finishes in seconds.
+
+The demo application is quarantined, not removed. Its packages carry `@flowkitform/demo-*` names,
+its suites live under `test/demo/`, and both run from explicit targets:
+
+```sh
+bun run test:examples
+bun run build:examples
+```
+
+CI runs both. The durable and browser suites require an explicitly approved disposable stack; they
+never create or migrate one by themselves. Start with the ordered guide in
 [customizing](docs/customizing.md), then consult the [architecture](docs/architecture.md),
 [deployment](docs/deployment.md), and [local package overrides](docs/local-package-overrides.md).

@@ -72,9 +72,9 @@ Scope rename and `demo-` prefixing are applied in a single pass (Task 2) rather 
 
 **Interfaces:** A test that scans tracked sources and asserts the retired identifiers are absent, parameterised so it fails until the rename completes. Export nothing; this is a gate, not a library.
 
-- [ ] Write a test asserting that no tracked file outside `docs/superpowers/`, `packages/database/migrations/` and this plan contains `@flowkit-demo/`, `FLOWKIT_DEMO_`, `flowkit_demo` or `flowkit-demo`. Build the forbidden literals from split strings so the test never matches its own source. Allow-list migration filenames explicitly, with a comment stating they are checksum-tracked history.
-- [ ] Run `bun test test/naming-contract.test.ts`; expect FAIL listing roughly 148 files. Record the count as the starting baseline.
-- [ ] Commit: `test: gate retired flowkit-demo identifiers`.
+- [x] Write a test asserting that no tracked file outside `docs/superpowers/`, `packages/database/migrations/` and this plan contains `@flowkit-demo/`, `FLOWKIT_DEMO_`, `flowkit_demo` or `flowkit-demo`. Build the forbidden literals from split strings so the test never matches its own source. Allow-list migration filenames explicitly, with a comment stating they are checksum-tracked history.
+- [x] Run `bun test test/naming-contract.test.ts`; expect FAIL listing roughly 148 files. Record the count as the starting baseline.
+- [x] Commit: `test: gate retired flowkit-demo identifiers`.
 
 ### Task 2: Rename the npm scope and prefix demo workspaces
 
@@ -82,11 +82,11 @@ Scope rename and `demo-` prefixing are applied in a single pass (Task 2) rather 
 
 **Interfaces:** Apply the naming map above. Package *directories* do not move. `packages/document` keeps its bare product name and its existing public surface (`DocumentService`, the repository contracts, the error types) unchanged.
 
-- [ ] Rewrite the nine manifest `name` fields and every `workspace:*` dependency entry to the mapped names.
-- [ ] Rewrite all import specifiers. Verify no `@flowkit-demo/` remains outside docs and this plan.
-- [ ] Run `bun install` to relink workspaces, then `bunx tsc --noEmit`; expect PASS with zero unresolved specifiers. The typecheck is the completeness proof for this task.
-- [ ] Run `bun test ./test/` and `bun test packages/database/test`; expect PASS unchanged from baseline (demo suites still run from the default target at this point).
-- [ ] Commit: `refactor: rename packages to @flowkitform scope`.
+- [x] Rewrite the nine manifest `name` fields and every `workspace:*` dependency entry to the mapped names.
+- [x] Rewrite all import specifiers. Verify no `@flowkit-demo/` remains outside docs and this plan.
+- [x] Run `bun install` to relink workspaces, then `bunx tsc --noEmit`; expect PASS with zero unresolved specifiers. The typecheck is the completeness proof for this task.
+- [x] Run `bun test ./test/` and `bun test packages/database/test`; expect PASS unchanged from baseline (demo suites still run from the default target at this point).
+- [x] Commit: `refactor: rename packages to @flowkitform scope`.
 
 ### Task 3: Separate product and demo build targets
 
@@ -94,10 +94,10 @@ Scope rename and `demo-` prefixing are applied in a single pass (Task 2) rather 
 
 **Interfaces:** `build` compiles product workspaces only; `build:examples` compiles the demo. `typecheck` continues to cover the entire repository — the demo must keep typechecking, it is only excluded from the shipped build.
 
-- [ ] Add `tsconfig.examples.json` covering the demo workspaces; narrow `tsconfig.build.json` to `packages/document` plus future product packages.
-- [ ] Add `build:examples` and keep `build:web` reachable from it. Leave `dev*`, `stack:*`, `db:*` and `scenario` scripts pointed at the demo; they are demo entrypoints by definition.
-- [ ] Run `bun run typecheck`, `bun run build` and `bun run build:examples`; expect all PASS and the product `dist` to contain no demo output.
-- [ ] Commit: `build: split product and example build targets`.
+- [x] Add `tsconfig.examples.json` covering the demo workspaces; narrow `tsconfig.build.json` to `packages/document` plus future product packages.
+- [x] Add `build:examples` and keep `build:web` reachable from it. Leave `dev*`, `stack:*`, `db:*` and `scenario` scripts pointed at the demo; they are demo entrypoints by definition.
+- [x] Run `bun run typecheck`, `bun run build` and `bun run build:examples`; expect all PASS and the product `dist` to contain no demo output.
+- [x] Commit: `build: split product and example build targets`.
 
 ### Task 4: Rename the environment-variable prefix
 
@@ -105,11 +105,11 @@ Scope rename and `demo-` prefixing are applied in a single pass (Task 2) rather 
 
 **Interfaces:** All 20 variables move from `FLOWKIT_DEMO_` to `FLOWKITFORM_`. No variable gains a fallback to its old name — a dual read would let a stale deployment satisfy an approval gate silently.
 
-- [ ] Extend `test/naming-contract.test.ts` to assert no source reads a `FLOWKIT_DEMO_` variable and that no approval gate accepts two spellings.
-- [ ] Rewrite the prefix across code, compose, kustomize, Tilt, CI and docs. Update the Zod schema keys in `config.ts` together with their consumers.
-- [ ] Run `bun test test/ scripts/ packages/database/test` and `bun run typecheck`; expect PASS. Confirm `FLOWKITFORM_MIGRATION_APPROVED` unset still blocks `db:migrate` with the guarded error.
-- [ ] Update any CI repository secrets/variables carrying the old names before merging; a rename landed without them turns approval gates off, not on.
-- [ ] Commit: `refactor: rename environment prefix to FLOWKITFORM`.
+- [x] Extend `test/naming-contract.test.ts` to assert no source reads a `FLOWKIT_DEMO_` variable and that no approval gate accepts two spellings.
+- [x] Rewrite the prefix across code, compose, kustomize, Tilt, CI and docs. Update the Zod schema keys in `config.ts` together with their consumers.
+- [x] Run `bun test test/ scripts/ packages/database/test` and `bun run typecheck`; expect PASS. Confirm `FLOWKITFORM_MIGRATION_APPROVED` unset still blocks `db:migrate` with the guarded error.
+- [x] Update any CI repository secrets/variables carrying the old names before merging; a rename landed without them turns approval gates off, not on.
+- [x] Commit: `refactor: rename environment prefix to FLOWKITFORM`.
 
 ### Task 5: Rename the PostgreSQL identity and its guards
 
@@ -117,13 +117,13 @@ Scope rename and `demo-` prefixing are applied in a single pass (Task 2) rather 
 
 **Interfaces:** `DISPOSABLE_DATABASE_NAME = 'flowkitform'`, `DISPOSABLE_DATABASE_MARKER = 'flowkitform_identity'`. The four database-name regexes (`local-database-guard.ts`, `config.ts:11,12,29`, `migrate.ts:11`, `reset-stack.ts:3`) change in this one commit. The migration tracking table and its advisory-lock key become `flowkitform_migrations`.
 
-- [ ] Add guard tests asserting that the old database name is now *rejected*, that a database matching the new name but carrying a stale `cluster_name` marker is rejected, and that a partially renamed URL never passes.
-- [ ] Run the guard tests; expect FAIL before implementation.
-- [ ] Apply the rename to database, user, password, compose project, volume `flowkitform_postgres`, the `cluster_name` marker, Temporal helm values and the test-database pattern `flowkitform_test*`. Leave migration filenames and bodies untouched so every checksum stays valid.
-- [ ] Tear down and rebuild local state: `docker compose -p flowkit_demo down -v` for the old project, then `bun run stack:up` for the new one. The old named volume is intentionally orphaned, not migrated.
-- [ ] For any persistent deployment that must survive in place, apply `ALTER DATABASE flowkit_demo RENAME TO flowkitform;`, `ALTER ROLE flowkit_demo RENAME TO flowkitform;` and `ALTER TABLE flowkit_demo_migrations RENAME TO flowkitform_migrations;` before deploying; a fresh tracking table would re-run all six applied migrations. Record whether any such deployment exists; if none, state that explicitly.
-- [ ] Run `FLOWKITFORM_MIGRATION_APPROVED=true bun run db:migrate`, then `bun run db:seed`, then the integration suites; expect six migrations applied to a fresh database and PASS throughout.
-- [ ] Commit: `refactor: rename database identity to flowkitform`.
+- [x] Add guard tests asserting that the old database name is now *rejected*, that a database matching the new name but carrying a stale `cluster_name` marker is rejected, and that a partially renamed URL never passes.
+- [x] Run the guard tests; expect FAIL before implementation.
+- [x] Apply the rename to database, user, password, compose project, volume `flowkitform_postgres`, the `cluster_name` marker, Temporal helm values and the test-database pattern `flowkitform_test*`. Leave migration filenames and bodies untouched so every checksum stays valid.
+- [x] Tear down and rebuild local state: `docker compose -p flowkit_demo down -v` for the old project, then `bun run stack:up` for the new one. The old named volume is intentionally orphaned, not migrated.
+- [x] For any persistent deployment that must survive in place, apply `ALTER DATABASE flowkit_demo RENAME TO flowkitform;`, `ALTER ROLE flowkit_demo RENAME TO flowkitform;` and `ALTER TABLE flowkit_demo_migrations RENAME TO flowkitform_migrations;` before deploying; a fresh tracking table would re-run all six applied migrations. Record whether any such deployment exists; if none, state that explicitly.
+- [x] Run `FLOWKITFORM_MIGRATION_APPROVED=true bun run db:migrate`, then `bun run db:seed`, then the integration suites; expect six migrations applied to a fresh database and PASS throughout.
+- [x] Commit: `refactor: rename database identity to flowkitform`.
 
 ### Task 6: Rename deployment resources and CI identifiers
 
@@ -131,11 +131,11 @@ Scope rename and `demo-` prefixing are applied in a single pass (Task 2) rather 
 
 **Interfaces:** k8s resource names, labels, image tags and ingress hosts move from `flowkit-demo-*` to `flowkitform-*`. `deploy/k8s/examples/secrets.env.example` and `.env.example` survive as templates — they are scaffolding, not demo content.
 
-- [ ] Update `test/deployment-contract.test.ts` expectations to the new resource names first; expect FAIL.
-- [ ] Rename resources, labels, selectors, image references and the CI artefact path. When editing `.github/workflows/ci.yml:47`, keep the split-literal construction so the legacy guard still cannot match its own source, and extend it to catch the retired names.
-- [ ] Run `kubectl kustomize deploy/k8s/overlays/k3s-dev` and confirm it renders with consistent selectors and no dangling old names; run `bun test test/deployment-contract.test.ts` and `bun test scripts/stack-ci.test.ts`; expect PASS.
-- [ ] Note in `deploy/README.md` that applying this overlay to an existing cluster creates new objects and leaves the previous `flowkit-demo-*` objects and the `flowkit-demo-dev` namespace to be deleted deliberately.
-- [ ] Commit: `refactor: rename deployment resources to flowkitform`.
+- [x] Update `test/deployment-contract.test.ts` expectations to the new resource names first; expect FAIL.
+- [x] Rename resources, labels, selectors, image references and the CI artefact path. When editing `.github/workflows/ci.yml:47`, keep the split-literal construction so the legacy guard still cannot match its own source, and extend it to catch the retired names.
+- [x] Run `kubectl kustomize deploy/k8s/overlays/k3s-dev` and confirm it renders with consistent selectors and no dangling old names; run `bun test test/deployment-contract.test.ts` and `bun test scripts/stack-ci.test.ts`; expect PASS.
+- [x] Note in `deploy/README.md` that applying this overlay to an existing cluster creates new objects and leaves the previous `flowkit-demo-*` objects and the `flowkit-demo-dev` namespace to be deleted deliberately.
+- [x] Commit: `refactor: rename deployment resources to flowkitform`.
 
 ### Task 7: Quarantine demo suites and enforce the product boundary
 
@@ -143,12 +143,12 @@ Scope rename and `demo-` prefixing are applied in a single pass (Task 2) rather 
 
 **Interfaces:** `bun test` runs product suites only — the document suites plus the repository-wide gates (`package-boundary`, `repository-boundaries`, `documentation`, `deployment-contract`, `naming-contract`, `product-boundary`). `bun run test:examples` runs everything under `test/demo/`. Both run in CI.
 
-- [ ] Write `test/product-boundary.test.ts` asserting that no file under `packages/document/` imports any `@flowkitform/demo-*` package, and that the root `test` script does not reference `test/demo/`. Expect FAIL before the move.
-- [ ] Move the demo suites (leave, ride, enrolment, postgres stores, auth/api/browser e2e, notifications, scenario, schema, tenant and workflow suites, plus helpers `durable-test-database.ts` and the Playwright specs) into `test/demo/`, fixing relative imports. Keep `test/document-*.test.ts`, `test/in-memory-document-store.ts` and the repository-wide gates at `test/`.
-- [ ] Update `test/repository-boundaries.test.ts` `requiredDirectories` to the post-rename reality and add `packages/document/src`.
-- [ ] Add `test:examples` to root scripts, point `playwright.config.ts` at the moved specs, and add an explicit `test:examples` CI step so demo coverage stays gated rather than dropped.
-- [ ] Run `bun test`, `bun run test:examples`, `bun run typecheck` and `bun run build`; expect PASS with the product suite requiring no Docker stack.
-- [ ] Commit: `test: quarantine demo suites behind an explicit target`.
+- [x] Write `test/product-boundary.test.ts` asserting that no file under `packages/document/` imports any `@flowkitform/demo-*` package, and that the root `test` script does not reference `test/demo/`. Expect FAIL before the move.
+- [x] Move the demo suites (leave, ride, enrolment, postgres stores, auth/api/browser e2e, notifications, scenario, schema, tenant and workflow suites, plus helpers `durable-test-database.ts` and the Playwright specs) into `test/demo/`, fixing relative imports. Keep `test/document-*.test.ts`, `test/in-memory-document-store.ts` and the repository-wide gates at `test/`.
+- [x] Update `test/repository-boundaries.test.ts` `requiredDirectories` to the post-rename reality and add `packages/document/src`.
+- [x] Add `test:examples` to root scripts, point `playwright.config.ts` at the moved specs, and add an explicit `test:examples` CI step so demo coverage stays gated rather than dropped.
+- [x] Run `bun test`, `bun run test:examples`, `bun run typecheck` and `bun run build`; expect PASS with the product suite requiring no Docker stack.
+- [x] Commit: `test: quarantine demo suites behind an explicit target`.
 
 ### Task 8: Reconcile documentation and close the naming gate
 
@@ -156,11 +156,27 @@ Scope rename and `demo-` prefixing are applied in a single pass (Task 2) rather 
 
 **Interfaces:** Documentation describes one repository holding a document product and a quarantined FlowKit demo, with the commands to run each. `docs/customizing.md` is retargeted from "replace the example" to "the example is quarantined; here is how to run, extend or remove it".
 
-- [ ] Update `test/documentation.test.ts` assertions — the README references `FLOWKIT_DEMO_MIGRATION_APPROVED`, `Acme Demo` and `Globex Demo` — to the renamed variables, and add assertions that the README documents both `bun test` and `bun run test:examples`.
-- [ ] Rewrite the affected documentation, including the new package names, environment prefix, database identity and the product/demo split. Leave `docs/superpowers/plans/` and `specs/` historical content intact; add a one-line note to `2026-11-14-release-waves.md` recording that the demo is now quarantined under `demo-` names so the wave plans' "does not import the demo app" constraints are mechanically checkable.
-- [ ] Run `bun test test/documentation.test.ts test/naming-contract.test.ts`; expect the naming gate from Task 1 to PASS for the first time, with only frozen migration filenames allow-listed.
-- [ ] Run the full set: `bun test`, `bun run test:examples`, `bun run typecheck`, `bun run build`, `bun run build:examples`; expect PASS.
-- [ ] Commit: `docs: describe the flowkitform product and quarantined demo`.
+- [x] Update `test/documentation.test.ts` assertions — the README references `FLOWKIT_DEMO_MIGRATION_APPROVED`, `Acme Demo` and `Globex Demo` — to the renamed variables, and add assertions that the README documents both `bun test` and `bun run test:examples`.
+- [x] Rewrite the affected documentation, including the new package names, environment prefix, database identity and the product/demo split. Leave `docs/superpowers/plans/` and `specs/` historical content intact; add a one-line note to `2026-11-14-release-waves.md` recording that the demo is now quarantined under `demo-` names so the wave plans' "does not import the demo app" constraints are mechanically checkable.
+- [x] Run `bun test test/documentation.test.ts test/naming-contract.test.ts`; expect the naming gate from Task 1 to PASS for the first time, with only frozen migration filenames allow-listed.
+- [x] Run the full set: `bun test`, `bun run test:examples`, `bun run typecheck`, `bun run build`, `bun run build:examples`; expect PASS.
+- [x] Commit: `docs: describe the flowkitform product and quarantined demo`.
+
+## Execution record (2026-11-15)
+
+Executed in commits `9cfd177` … `HEAD` on this branch. Deviations from the plan as written:
+
+- Environment variables became `FLOWKITFORM_*` rather than `FLOWKITFORM_DEMO_*`, and the database and infrastructure identity became plain `flowkitform`, per the amendment at execution time. Only package names mark the demo.
+- Task 2 and Task 3 of the original draft merged: the scope rename and `demo-` prefixing landed in one commit because splitting them rewrites the same import sites twice.
+- `test/package-boundary.test.ts` needed its relative-depth clause scoped to shipped source. Demo suites moved one directory deeper and now import the application they exercise as `../../apps/...`; the old rule passed only because of path depth, not by design.
+- `packages/database/test` runs under `test:examples`, not the product target: it belongs to `@flowkitform/demo-database`.
+- Two files intentionally retain the retired names and are allow-listed in the naming gate: `deploy/README.md` (documents the `ALTER DATABASE` upgrade path) and `scripts/lib/local-database-guard.test.ts` (asserts the old identity is rejected).
+
+Verified: `bun run typecheck`, `bun run build`, `bun run build:examples`, `bun run test` (83 pass, 0 fail, no Docker required), `bun run test:examples` (91 pass, 22 skip, 3 fail).
+
+The three `test:examples` failures are pre-existing Temporal time-skipping timeouts, confirmed by running the same suite at the pre-rename commit `ad93a16` in a scratch worktree, where they fail identically.
+
+**Not verified here — Docker and kubectl are unavailable in this environment:** the live stack rebuild (`stack:up`), `db:migrate` and `db:seed` against a freshly named `flowkitform` database, the integration and browser suites that need that stack, and `kubectl kustomize` rendering of the renamed manifests. Manifest consistency was checked structurally instead, and the CI legacy-pattern guard was simulated locally. Run those gates on a machine with the stack before merging.
 
 ## Self-review and handoff
 

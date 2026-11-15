@@ -1,7 +1,15 @@
 # Customizing the starter
 
-Keep the example runnable as you customize it. Make the following replacements in this exact
-order; each step changes starter-owned files and retains the installed FlowKit package contracts.
+The demo application is quarantined rather than deleted: its packages carry `@flowkitform/demo-*`
+names, its suites live under `test/demo/`, and it builds and tests from the explicit
+`build:examples` and `test:examples` targets. It stays runnable because it is currently the only
+executable evidence that the installed FlowKit packages integrate end to end. The document product
+lives beside it in `packages/document` and never imports it.
+
+Use this guide either to adapt the demo into your own domain, or to understand what a later removal
+would have to account for. Keep the example runnable as you customize it. Make the following
+replacements in this exact order; each step changes starter-owned files and retains the installed
+FlowKit package contracts.
 
 1. Rename product metadata and neutral theme tokens.
 2. Replace seeded organizations, roles, and memberships.

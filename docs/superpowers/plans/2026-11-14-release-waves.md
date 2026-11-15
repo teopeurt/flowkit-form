@@ -10,6 +10,8 @@
 
 **Spec:** [Approved base design](../specs/2026-11-14-flowkitform-design.md) and [approved Cloudflare amendment](../specs/2026-11-14-cloudflare-alternative-design.md).
 
+**Naming note (2026-11-15):** packages now use the `@flowkitform/*` scope and the demo application is quarantined behind `@flowkitform/demo-*` names, with its suites under `test/demo/` and its own `test:examples` / `build:examples` targets. Constraints in these wave plans of the form "does not import the demo app" are therefore mechanically checkable: `test/product-boundary.test.ts` fails if a product package imports a `@flowkitform/demo-*` package. Environment variables use the `FLOWKITFORM_` prefix and the PostgreSQL/deployment identity is `flowkitform`; see [the rename plan](2026-11-15-flowkitform-rename-and-demo-quarantine.md).
+
 ## Global Constraints
 
 - “AWS and Cloudflare are first-release targets, each independently runnable against the same portable document core and behavioral contracts.”
