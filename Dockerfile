@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 
-FROM oven/bun:1.3.14 AS workspace
+FROM oven/bun:1.4.5 AS workspace
 WORKDIR /app
 
 COPY package.json bun.lock bunfig.toml tsconfig.json tsconfig.build.json ./
@@ -22,7 +22,7 @@ RUN bun run build
 FROM workspace AS production-dependencies
 RUN bun install --frozen-lockfile --production --ignore-scripts
 
-FROM oven/bun:1.3.14 AS production
+FROM oven/bun:1.4.5 AS production
 ENV NODE_ENV=production
 WORKDIR /app
 
